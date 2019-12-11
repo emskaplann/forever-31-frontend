@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css';
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import StripeCheckout from './main-components/StripeCheckout.js';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,11 +13,15 @@ const mapStateToProps = (state, ownProps) => {
 
 function App(props) {
   // debugger
-  const products = props.products.flat().map(product => <img key={product.id} src={product.images[0].front_url}/>)
+  // const products = props.products.flat().map(product => <img key={product.id} src={product.images[0].front_url}/>)
   return (
-    <div>
-      {products}
-    </div>
+      <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
+        <div>
+          <Elements>
+            <StripeCheckout />
+          </Elements>
+        </div>
+      </StripeProvider>
   );
 }
 

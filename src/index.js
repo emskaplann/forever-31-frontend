@@ -19,7 +19,6 @@ fetch('http://localhost:3000/products?limit=10')
 .then(r => r.json())
 .then(products => {
   store.dispatch(actionCreators.productActionCreator(products))
-
   ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('root'));
 })
 
