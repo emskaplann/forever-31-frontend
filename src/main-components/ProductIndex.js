@@ -27,7 +27,7 @@ class ProductIndex extends React.Component {
 
   render(){
     return(
-      <Grid container>
+      <Grid container style={{marginTop: 25}}>
         {renderCards(this.props.products.flat())}
       </Grid>
     )

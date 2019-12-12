@@ -1,8 +1,10 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Checkout from './main-components/Checkout.js';
 import ProductCardComponent from './sub-components/ProductCardComponent.js';
 import ProductIndex from './main-components/ProductIndex.js';
-import Navbar from './sub-components/Navbar.js';
+import NavbarView from './sub-components/NavbarView.js';
+import { Container } from 'react-bootstrap';
 import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import { Grid, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
@@ -22,7 +24,7 @@ const RouteContainer = posed.div({
 
 class App extends React.Component {
   state = {
-    visible: true
+    visible: false
   }
   setVisible = bool => this.setState({visible: bool})
   render(){
@@ -40,7 +42,7 @@ class App extends React.Component {
               onHide={() => this.setVisible(false)}
               vertical
               visible={visible}
-              width='thin'
+              width='very wide'
             >
               <Menu.Item>
                 <Icon name='home' />
@@ -56,22 +58,22 @@ class App extends React.Component {
               </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
-              <Segment basic>
-                <Navbar />
-                <PoseGroup>
-                  <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
-                    <Switch location={location}>
-                      <Route exact path='/' component={ProductIndex} key='index' />
-                      {/* Stripe Route */}
-                      <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
-                        <Elements>
-                          <Route path='/checkout' component={Checkout} key='checkout' />
-                        </Elements>
-                      </StripeProvider>
-                    </Switch>
-                  </RouteContainer>
-                </PoseGroup>
-              </Segment>
+              <NavbarView openModal={this.setVisible} />
+                <Segment basic>
+                  <PoseGroup>
+                    <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
+                      <Switch location={location}>
+                        <Route exact path='/' component={ProductIndex} key='index' />
+                        {/* Stripe Route */}
+                        <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
+                          <Elements>
+                            <Route path='/checkout' component={Checkout} key='checkout' />
+                          </Elements>
+                        </StripeProvider>
+                      </Switch>
+                    </RouteContainer>
+                  </PoseGroup>
+                </Segment>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         )}
