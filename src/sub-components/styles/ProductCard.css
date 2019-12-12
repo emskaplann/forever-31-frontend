@@ -1,0 +1,7 @@
+.productCard{
+ transition: height 0.3s, box-shadow 0.3s;
+}
+.productCard:hover{
+  height: 5000px;
+  box-shadow: 20px 20px 40px 0px rgba(0,0,0,0.5);
+}

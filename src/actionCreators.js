@@ -1,6 +1,6 @@
 const productActionCreator = (newProducts) => {
   return {
-    type: "ADD_PRODUCTS",
+    type: "POPULATE_PRODUCTS",
     products: newProducts
   }
 }

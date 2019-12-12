@@ -1,6 +1,7 @@
 import React from 'react';
-import {Elements, StripeProvider} from 'react-stripe-elements';
 import StripeCheckout from './main-components/StripeCheckout.js';
+import ProductCardComponent from './sub-components/ProductCardComponent.js';
+import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,15 +14,14 @@ const mapStateToProps = (state, ownProps) => {
 
 function App(props) {
   // debugger
-  // const products = props.products.flat().map(product => <img key={product.id} src={product.images[0].front_url}/>)
+  const products = props.products.flat().map(product => <ProductCardComponent key={product.id} displayName={product.display_name} imgUrl={product.images[0].front_url} />)
   return (
-      <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
-        <div>
-          <Elements>
-            <StripeCheckout />
-          </Elements>
-        </div>
-      </StripeProvider>
+    <Grid>
+      <Grid.Row>
+        {products}
+      </Grid.Row>
+    </Grid>
+
   );
 }
 
