@@ -1,7 +1,8 @@
 import React from 'react';
 import Checkout from './main-components/Checkout.js';
 import ProductCardComponent from './sub-components/ProductCardComponent.js';
-import ProductIndex from './main-components/ProductIndex.js'
+import ProductIndex from './main-components/ProductIndex.js';
+import Navbar from './sub-components/Navbar.js';
 import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import { Grid, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
@@ -56,10 +57,12 @@ class App extends React.Component {
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
               <Segment basic>
+                <Navbar />
                 <PoseGroup>
                   <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
                     <Switch location={location}>
                       <Route exact path='/' component={ProductIndex} key='index' />
+                      {/* Stripe Route */}
                       <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
                         <Elements>
                           <Route path='/checkout' component={Checkout} key='checkout' />
