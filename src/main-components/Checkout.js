@@ -1,7 +1,7 @@
 import React from 'react';
-import {CardElement, injectStripe, Elements, StripeProvider} from 'react-stripe-elements';
+import {CardElement, injectStripe} from 'react-stripe-elements';
 
-class StripeCheckout extends React.Component {
+class Checkout extends React.Component {
   constructor(props){
     super(props);
     this.submit = this.submit.bind(this)
@@ -10,7 +10,7 @@ class StripeCheckout extends React.Component {
     }
   }
 
-  async submit(ev) {
+  async submit() {
     let { token } = await this.props.stripe.createToken({name: "Name"});
     let response = await fetch("http://localhost:3000/charge", {
       method: "POST",
@@ -22,19 +22,16 @@ class StripeCheckout extends React.Component {
     if (response.ok) console.log("Purchase Complete!")
   }
 
+
   render(){
     return(
-      <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
-        <div>
-          <Elements>
-            <p>Would you like to complete the purchase?</p>
-              <CardElement />
-            <button onClick={this.submit}>Purchase</button>
-          </Elements>
-        </div>
-      </StripeProvider>
+      <div>
+        <p>Would you like to complete the purchase?</p>
+          <CardElement />
+          <button onClick={this.submit}>Purchase</button>
+      </div>
     )
   }
 }
 
-export default injectStripe(StripeCheckout);
+export default injectStripe(Checkout);

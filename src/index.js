@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './App.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -19,7 +19,7 @@ fetch('http://localhost:3000/products?limit=10')
 .then(r => r.json())
 .then(products => {
   store.dispatch(actionCreators.productActionCreator(products))
-  ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('root'));
+  ReactDOM.render(<Router><Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
 })
 
 // If you want your app to work offline and load faster, you can change
