@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 function App(props) {
   // debugger
-  const products = props.products.flat().map(product => <ProductCardComponent key={product.id} displayName={product.display_name} imgUrl={product.images[0].front_url} />)
+  const products = props.products.flat().map(product => <ProductCardComponent key={product.id} i={1} displayName={product.display_name} imgUrl={product.images[0].front_url} />)
   return (
     <Grid>
       <Grid.Row>
