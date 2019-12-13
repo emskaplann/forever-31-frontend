@@ -21,6 +21,7 @@ class UserService {
         localStorage.token = token
         localStorage.userId = user_id
         this.component.props.addUserAuth({token: token, userId: user_id})
+        this.component.setState({error: ''})
         this.component.props.closeSideBar(false)
       } else {
         this.component.setState({error: error})
