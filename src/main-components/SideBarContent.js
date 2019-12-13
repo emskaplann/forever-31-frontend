@@ -1,4 +1,6 @@
 import React from 'react';
+import RenderSign from '../sub-components/sidebar/RenderSign.js';
+import RenderProduct from '../sub-components/sidebar/RenderProduct.js';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap';
@@ -18,52 +20,22 @@ class SideBarContent extends React.Component {
     }
   }
 
-  renderProducts = () => {
-    return this.props.products.map(product => (
-      <Row style={{marginTop: 5}}>
-        <Col>
-          <Card fluid image={product.images[0].front_url}/>
-        </Col>
-        <Col>
-        </Col>
-        <Col>
-          <Card fluid style={{backgroundColor: '#212529'}}>
-            <Card.Header style={{color: '#fff'}}>
-              $12.99
-            </Card.Header>
-          </Card>
-        </Col>
-      </Row>
-    ))
+  renderProducts = () => this.props.products.map(product => <RenderProduct product={product} />)
+
+// this function renders sidebar content based on given props
+  renderContent = () => {
+    if (this.props.contentId === 0 ) {
+      return( <RenderSign /> )
+    } else if (this.props.contentId === 1) {
+      return( this.renderProducts() )
+    }
   }
-
-  renderCart = () => {
-
-  }
-
-  renderWishList = () => {
-
-  }
-
-  // this function means rendering sign up or sign in
-  renderSign = () => (
-    <>
-    <Header as='h2' style={{color: '#fff'}}>
-      Sign In
-    </Header>
-    <Row className='justify-content-center'>
-      <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
-        <Icon name='at' />
-        <input />
-      </Input>
-    </Row>
-    </>
-  )
 
   render () {
     return(
       <Container>
-        {this.renderSign()}
+        <Icon name='close' size='large' onClick={() => this.props.closeSideBar(false)} style={{color: '#fff', marginTop: 5}}></Icon>
+        {this.renderContent()}
         {this.renderProducts()}
       </Container>
     )

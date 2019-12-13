@@ -46,7 +46,7 @@ class App extends React.Component {
               width='very wide'
             >
             {/* Sidebar Content */}
-              <SideBarContent />
+              <SideBarContent contentId={0} closeSideBar={this.setVisible}/>
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
               <NavbarView openModal={this.setVisible} />
