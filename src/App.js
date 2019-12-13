@@ -24,11 +24,17 @@ const RouteContainer = posed.div({
 
 class App extends React.Component {
   state = {
-    visible: true
+    visible: true,
+    windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
   }
+
   setVisible = bool => this.setState({visible: bool})
   render(){
+    const sideBarWidth = 400
     const { visible } = this.state
+    if(this.state.windowWidth < 400){
+      sideBarWidth = this.state.windowWidth
+    }
     return (
       <Route
         render={({ location }) => (
@@ -43,7 +49,7 @@ class App extends React.Component {
               onHide={() => this.setVisible(false)}
               vertical
               visible={visible}
-              width='very wide'
+              style={{width: sideBarWidth}}
             >
             {/* Sidebar Content */}
               <SideBarContent contentId={0} closeSideBar={this.setVisible}/>

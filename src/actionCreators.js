@@ -5,8 +5,16 @@ const productActionCreator = (newProducts) => {
   }
 }
 
+const userAuthActionCreator = (user) => {
+  return {
+    type: 'ADD_USER_AUTH',
+    user: user
+  }
+}
+
 const actionCreators = {
-  productActionCreator //: cakeActionCreator
+  productActionCreator,
+  userAuthActionCreator
 }
 
 export default actionCreators

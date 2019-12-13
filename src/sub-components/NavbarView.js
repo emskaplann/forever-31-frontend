@@ -21,10 +21,10 @@ class NavbarView extends Component {
               <Nav.Item>
                 <span onClick={() => this.props.openModal(true)}><i className="fa fa-fw fa-heart" style={{ fontSize: '1.2em', marginLeft: 10 }} /> (0)</span>
               </Nav.Item>
-              <Nav.Item style={{marginLeft: 10 }}>
-                Sign In
+              <Nav.Item onClick={() => this.props.openModal(true)} style={{marginLeft: 10, fontWeight: 'bold' }}>
+                Sign In or
               </Nav.Item>
-              <Nav.Item style={{marginLeft: 10, marginRight: 10 }}>
+              <Nav.Item onClick={() => this.props.openModal(true)} style={{marginLeft: 3, marginRight: 10, fontWeight: 'bold'  }}>
                 Sign Up
               </Nav.Item>
             </Row>

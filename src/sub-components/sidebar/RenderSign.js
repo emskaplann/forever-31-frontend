@@ -8,7 +8,20 @@ class RenderSign extends React.Component {
   constructor () {
     super();
     this.state = {
+      signUp: false
+    }
+  }
 
+  renderPasswordConfirmation = () => {
+    if(this.state.signUp){
+      return (
+        <Row className='justify-content-center' style={{marginTop: 5}}>
+          <Input style={{width: '65%'}} iconPosition='left' type='password' placeholder='Password Confirmation'>
+            <Icon name='key' />
+            <input />
+          </Input>
+        </Row>
+      )
     }
   }
 
@@ -16,7 +29,7 @@ class RenderSign extends React.Component {
     return (
       <>
       <Header as='h2' style={{color: '#fff', marginTop: 5}}>
-        Sign In or <span>Sign Up</span>
+        {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</span>
       </Header>
       <Row className='justify-content-center'>
         <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
@@ -30,12 +43,13 @@ class RenderSign extends React.Component {
           <input />
         </Input>
       </Row>
+      {this.renderPasswordConfirmation()}
       <Row style={{marginTop: 5}}>
         <Col sm={7}>
         </Col>
         <Col sm={4}>
         <Button basic inverted>
-          Sign In!
+          {this.state.signUp ? 'Sign Up!' : 'Sign In!'}
         </Button>
         </Col>
         <Col sm={1}>

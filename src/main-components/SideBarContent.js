@@ -36,7 +36,7 @@ class SideBarContent extends React.Component {
       <Container>
         <Icon name='close' size='large' onClick={() => this.props.closeSideBar(false)} style={{color: '#fff', marginTop: 5}}></Icon>
         {this.renderContent()}
-        {this.renderProducts()}
+        {/* this.renderProducts() */}
       </Container>
     )
   }
