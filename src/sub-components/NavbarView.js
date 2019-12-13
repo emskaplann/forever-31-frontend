@@ -10,9 +10,20 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 class NavbarView extends Component {
+
+  logOut = () => {
+    this.props.clearUserAuth()
+    localStorage.token = ""
+    localStorage.userId = ""
+  }
+
   renderSigns = () => {
     if(this.props.user.token){
-      return;
+      return (
+        <Nav.Item onClick={() => this.logOut()} style={{marginLeft: 10, marginRight: 10, fontWeight: 'bold' }}>
+          Log Out
+        </Nav.Item>
+      )
     } else {
       return (
         <>
@@ -57,4 +68,14 @@ class NavbarView extends Component {
   }
 }
 
-export default connect(mapStateToProps)(NavbarView);
+const mapDispatchToProps = (dispatch, mergeProps) => {
+    return {
+      clearUserAuth: () => {
+        dispatch({
+          type: 'CLEAR_USER_AUTH'
+        })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarView);

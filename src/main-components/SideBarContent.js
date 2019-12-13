@@ -21,7 +21,7 @@ class SideBarContent extends React.Component {
     }
   }
 
-  renderProducts = () => this.props.products.map(product => <RenderProduct product={product} />)
+  renderProducts = () => this.props.products.map(product => <RenderProduct key={product.id} product={product} />)
 
 // this function renders sidebar content based on given props
   renderContent = () => {

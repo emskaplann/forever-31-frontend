@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Alert } from 'react-bootstrap';
 import { Card, Icon, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
 import actionCreators from '../../actionCreators.js';
@@ -13,7 +13,8 @@ class RenderSign extends React.Component {
       signUp: false,
       username: "",
       password: "",
-      passwordConfirmation: ""
+      passwordConfirmation: "",
+      error: ""
     }
     this.userService = new UserService(this)
   }
@@ -30,7 +31,7 @@ class RenderSign extends React.Component {
       )
     }
   }
-
+// signing in or signing up => more details in src/services/UserService.js
   handleSubmit = () => {
     const state = this.state
     if(!state.signUp){
@@ -39,6 +40,13 @@ class RenderSign extends React.Component {
         password: state.password
       }
       this.userService.login(user)
+    } else {
+      const user = {
+        username: state.username,
+        password: state.password,
+        password_confirmation: state.passwordConfirmation
+      }
+      this.userService.signUp(user)
     }
   }
 
@@ -48,6 +56,7 @@ class RenderSign extends React.Component {
       <Header as='h2' style={{color: '#fff', marginTop: 5}}>
         {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</span>
       </Header>
+        {this.state.error !== "" ? <Alert key={1} variant='danger'>{this.state.error}</Alert> : null }
       <Row className='justify-content-center'>
         <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
           <Icon name='at' />

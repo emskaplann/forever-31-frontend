@@ -30,6 +30,12 @@ class App extends React.Component {
     contentId: 0,
   }
 
+  componentDidMount () {
+    if(localStorage.userId){
+      this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId})
+    }
+  }
+
   generateContentId = () => {
     if(this.props.user.token){
       return 1
@@ -40,7 +46,7 @@ class App extends React.Component {
 
   setVisible = bool => this.setState({visible: bool})
   render(){
-    const sideBarWidth = 400
+    let sideBarWidth = 400
     const { visible } = this.state
     if(this.state.windowWidth < 400){
       sideBarWidth = this.state.windowWidth
@@ -90,7 +96,18 @@ class App extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch, mergeProps) => {
+    return {
+      addUserAuth: (user) => {
+        dispatch({
+          type: 'ADD_USER_AUTH',
+          user: user
+        })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
   // {renderCards(props.products.flat())} => products render .flat()
 
