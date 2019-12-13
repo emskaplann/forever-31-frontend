@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Checkout from './main-components/Checkout.js';
-import ProductCardComponent from './sub-components/ProductCardComponent.js';
 import ProductIndex from './main-components/ProductIndex.js';
+import ProductShow from './main-components/ProductShow.js';
+import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
-import { Container } from 'react-bootstrap';
 import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
-import { Grid, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import { connect } from 'react-redux';
 
@@ -24,7 +24,7 @@ const RouteContainer = posed.div({
 
 class App extends React.Component {
   state = {
-    visible: false
+    visible: true
   }
   setVisible = bool => this.setState({visible: bool})
   render(){
@@ -33,6 +33,7 @@ class App extends React.Component {
       <Route
         render={({ location }) => (
           <Sidebar.Pushable as={Segment}>
+            {/* sidebar animation is editable */}
             <Sidebar
               as={Menu}
               animation='overlay'
@@ -44,18 +45,8 @@ class App extends React.Component {
               visible={visible}
               width='very wide'
             >
-              <Menu.Item>
-                <Icon name='home' />
-                <Link to='/checkout'>Checkout!</Link>
-              </Menu.Item>
-              <Menu.Item as='a'>
-                <Icon name='gamepad' />
-                Games
-              </Menu.Item>
-              <Menu.Item as='a'>
-                <Icon name='camera' />
-                Channels
-              </Menu.Item>
+            {/* Sidebar Content */}
+              <SideBarContent />
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
               <NavbarView openModal={this.setVisible} />
@@ -64,6 +55,7 @@ class App extends React.Component {
                     <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
                       <Switch location={location}>
                         <Route exact path='/' component={ProductIndex} key='index' />
+                        <Route exact path='/products/:id' component={ProductShow} key='show' />
                         {/* Stripe Route */}
                         <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
                           <Elements>
@@ -85,3 +77,17 @@ class App extends React.Component {
 export default connect(mapStateToProps)(App);
 
   // {renderCards(props.products.flat())} => products render .flat()
+
+  // Old Sidebar Content
+    // <Menu.Item>
+    //   <Icon name='home' />
+    //   <Link to='/checkout'>Checkout!</Link>
+    // </Menu.Item>
+    // <Menu.Item as='a'>
+    //   <Icon name='gamepad' />
+    //   Games
+    // </Menu.Item>
+    // <Menu.Item as='a'>
+    //   <Icon name='camera' />
+    //   Channels
+    // </Menu.Item>
