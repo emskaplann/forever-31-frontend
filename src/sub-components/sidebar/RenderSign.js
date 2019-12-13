@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header } from 'semantic-ui-react';
-import { Row, Col, Container, Alert } from 'react-bootstrap';
+import { Header, Message } from 'semantic-ui-react';
+import { Row, Col, Container } from 'react-bootstrap';
 import { Card, Icon, Loader, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
 import actionCreators from '../../actionCreators.js';
@@ -14,7 +14,7 @@ class RenderSign extends React.Component {
       username: "",
       password: "",
       passwordConfirmation: "",
-      error: "",
+      errors: [],
       loading: false,
     }
     this.userService = new UserService(this)
@@ -60,8 +60,8 @@ class RenderSign extends React.Component {
         {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</span>
         {this.state.loading ? <Loader active inline style={{marginLeft: 10}} /> : null}
       </Header>
-        {this.state.error !== "" ? <Alert key={1} variant='danger'>{this.state.error}</Alert> : null }
       <Row className='justify-content-center'>
+        {this.state.errors.length !== 0 ? <Message color='red' list={this.state.errors} header='oops, something went wrong!'/> : null }
         <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
           <Icon name='at' />
           <input onChange={text => this.setState({username: text.target.value})} />

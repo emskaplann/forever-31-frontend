@@ -21,10 +21,10 @@ class UserService {
         localStorage.token = token
         localStorage.userId = user_id
         this.component.props.addUserAuth({token: token, userId: user_id})
-        this.component.setState({error: '', loading: false})
+        this.component.setState({errors: [], loading: false})
         this.component.props.closeSideBar(false)
       } else {
-        this.component.setState({error: error, loading: false})
+        this.component.setState({errors: [...this.component.state.errors, error], loading: false})
       }
     })
   }
@@ -48,14 +48,8 @@ class UserService {
         this.component.setState({error: '', loading: false})
         this.component.props.closeSideBar(false)
       } else {
-        // debugger
-        let error = ""
-        if(errors["password_confirmation"] !== undefined){
-          error = errors["password_confirmation"][0]
-        } else {
-          error = errors["username"][0]
-        }
-        this.component.setState({error: 'username ' + error, loading: false})
+        debugger
+        this.component.setState({errors: Object.values(errors).flat().map(er => er), loading: false})
       }
     })
   }
