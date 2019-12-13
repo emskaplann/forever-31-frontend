@@ -6,20 +6,26 @@ class UserService {
   }
 
   login = (user) => {
-    fetch(`${this.workingURL}`, {
+    fetch(`${this.workingURL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
-      }, body: JSON.stringify(user)
+      }, body: JSON.stringify({
+        user
+      })
     })
     .then(r => r.json())
-    .then((token, user_id, errors) => {
-      if (errors.length === 0) {
+    .then(({token, user_id, errors}) => {
+      if (errors === undefined) {
+        debugger
         localStorage.token = token
         localStorage.userId = user_id
-        // redux connect
+        this.component.props.addUserAuth({token: token, userId: user_id})
+        this.component.props.closeSideBar(false)
       }
-
     })
   }
+}
+
+export default UserService;

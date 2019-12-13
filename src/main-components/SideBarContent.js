@@ -8,7 +8,8 @@ import { Card, Icon, Input } from 'semantic-ui-react'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
@@ -24,8 +25,9 @@ class SideBarContent extends React.Component {
 
 // this function renders sidebar content based on given props
   renderContent = () => {
+    console.log(this.props.contentId)
     if (this.props.contentId === 0 ) {
-      return( <RenderSign /> )
+      return( <RenderSign closeSideBar={this.props.closeSideBar}/> )
     } else if (this.props.contentId === 1) {
       return( this.renderProducts() )
     }

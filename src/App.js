@@ -13,7 +13,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
@@ -25,7 +26,16 @@ const RouteContainer = posed.div({
 class App extends React.Component {
   state = {
     visible: true,
-    windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+    windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+    contentId: 0,
+  }
+
+  generateContentId = () => {
+    if(this.props.user.token){
+      return 1
+    } else {
+      return 0
+    }
   }
 
   setVisible = bool => this.setState({visible: bool})
@@ -52,7 +62,7 @@ class App extends React.Component {
               style={{width: sideBarWidth}}
             >
             {/* Sidebar Content */}
-              <SideBarContent contentId={0} closeSideBar={this.setVisible}/>
+              <SideBarContent contentId={this.generateContentId()} closeSideBar={this.setVisible}/>
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
               <NavbarView openModal={this.setVisible} />

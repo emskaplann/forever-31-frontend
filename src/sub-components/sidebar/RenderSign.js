@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Card, Icon, Input, Button } from 'semantic-ui-react';
+import UserService from '../../services/UserService.js';
+import actionCreators from '../../actionCreators.js';
 
 class RenderSign extends React.Component {
   constructor () {
     super();
     this.state = {
-      signUp: false
+      signUp: false,
+      username: "",
+      password: "",
+      passwordConfirmation: ""
     }
+    this.userService = new UserService(this)
   }
 
   renderPasswordConfirmation = () => {
@@ -18,10 +24,21 @@ class RenderSign extends React.Component {
         <Row className='justify-content-center' style={{marginTop: 5}}>
           <Input style={{width: '65%'}} iconPosition='left' type='password' placeholder='Password Confirmation'>
             <Icon name='key' />
-            <input />
+            <input onChange={text => this.setState({passwordConfirmation: text.target.value})}/>
           </Input>
         </Row>
       )
+    }
+  }
+
+  handleSubmit = () => {
+    const state = this.state
+    if(!state.signUp){
+      const user = {
+        username: state.username,
+        password: state.password
+      }
+      this.userService.login(user)
     }
   }
 
@@ -34,13 +51,13 @@ class RenderSign extends React.Component {
       <Row className='justify-content-center'>
         <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
           <Icon name='at' />
-          <input />
+          <input onChange={text => this.setState({username: text.target.value})} />
         </Input>
       </Row>
       <Row className='justify-content-center' style={{marginTop: 5}}>
         <Input style={{width: '65%'}} iconPosition='left' type='password' placeholder='Password'>
           <Icon name='key' />
-          <input />
+          <input onChange={text => this.setState({password: text.target.value})} />
         </Input>
       </Row>
       {this.renderPasswordConfirmation()}
@@ -48,7 +65,7 @@ class RenderSign extends React.Component {
         <Col sm={7}>
         </Col>
         <Col sm={4}>
-        <Button basic inverted>
+        <Button onClick={() => this.handleSubmit()} basic inverted>
           {this.state.signUp ? 'Sign Up!' : 'Sign In!'}
         </Button>
         </Col>
@@ -60,4 +77,15 @@ class RenderSign extends React.Component {
   }
 }
 
-export default RenderSign;
+const mapDispatchToProps = (dispatch, mergeProps) => {
+    return {
+      addUserAuth: (user) => {
+        dispatch({
+          type: 'ADD_USER_AUTH',
+          user: user
+        })
+    }
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(RenderSign);
