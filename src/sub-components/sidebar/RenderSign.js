@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
 import { Row, Col, Container, Alert } from 'react-bootstrap';
-import { Card, Icon, Input, Button } from 'semantic-ui-react';
+import { Card, Icon, Loader, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
 import actionCreators from '../../actionCreators.js';
 
@@ -14,7 +14,8 @@ class RenderSign extends React.Component {
       username: "",
       password: "",
       passwordConfirmation: "",
-      error: ""
+      error: "",
+      loading: false,
     }
     this.userService = new UserService(this)
   }
@@ -39,6 +40,7 @@ class RenderSign extends React.Component {
         username: state.username,
         password: state.password
       }
+      this.setState({loading: true})
       this.userService.login(user)
     } else {
       const user = {
@@ -46,6 +48,7 @@ class RenderSign extends React.Component {
         password: state.password,
         password_confirmation: state.passwordConfirmation
       }
+      this.setState({loading: true})
       this.userService.signUp(user)
     }
   }
@@ -55,6 +58,7 @@ class RenderSign extends React.Component {
       <>
       <Header as='h2' style={{color: '#fff', marginTop: 5}}>
         {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</span>
+        {this.state.loading ? <Loader active inline style={{marginLeft: 10}} /> : null}
       </Header>
         {this.state.error !== "" ? <Alert key={1} variant='danger'>{this.state.error}</Alert> : null }
       <Row className='justify-content-center'>
