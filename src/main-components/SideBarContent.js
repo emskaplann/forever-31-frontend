@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Header } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap';
-import { Card } from 'semantic-ui-react'
+import { Card, Icon, Input } from 'semantic-ui-react'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -36,9 +37,33 @@ class SideBarContent extends React.Component {
     ))
   }
 
+  renderCart = () => {
+
+  }
+
+  renderWishList = () => {
+
+  }
+
+  // this function means rendering sign up or sign in
+  renderSign = () => (
+    <>
+    <Header as='h2' style={{color: '#fff'}}>
+      Sign In
+    </Header>
+    <Row className='justify-content-center'>
+      <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
+        <Icon name='at' />
+        <input />
+      </Input>
+    </Row>
+    </>
+  )
+
   render () {
     return(
       <Container>
+        {this.renderSign()}
         {this.renderProducts()}
       </Container>
     )
