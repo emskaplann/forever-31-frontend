@@ -24,7 +24,7 @@ class UserService {
         this.component.setState({errors: [], loading: false})
         this.component.props.closeSideBar(false)
       } else {
-        this.component.setState({errors: [...this.component.state.errors, error], loading: false})
+        this.component.setState({errors: [ error ], loading: false})
       }
     })
   }
@@ -39,7 +39,7 @@ class UserService {
     })
     .then(r => r.json())
     .then(({token, user_id, errors}) => {
-      // server response for errors
+      // example of server response for multiple errors
       // {:username=>["has already been taken"], :password_confirmation=>["doesn't match Password"]}
       if (errors === undefined) {
         localStorage.token = token
@@ -48,11 +48,19 @@ class UserService {
         this.component.setState({error: '', loading: false})
         this.component.props.closeSideBar(false)
       } else {
-        debugger
-        this.component.setState({errors: Object.values(errors).flat().map(er => er), loading: false})
+        this.component.setState({errors: Object.values(errors).flat().map(er => er.includes('already') ? 'username ' + er.toLowerCase() : er.toLowerCase()), loading: false})
       }
     })
   }
+
+  getAllUserNames = () => {
+    fetch(`${this.workingURL}/users`)
+    .then(r => r.json())
+    .then(response => {
+      this.component.setState({usernames: response})
+    })
+  }
+
 }
 
 export default UserService;

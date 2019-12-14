@@ -16,22 +16,43 @@ class RenderSign extends React.Component {
       passwordConfirmation: "",
       errors: [],
       loading: false,
+      passwordMatch: false,
+      usernames: [],
+      uniqueUsername: true,
     }
     this.userService = new UserService(this)
+  }
+
+  componentDidMount () {
+    this.userService.getAllUserNames()
   }
 
   renderPasswordConfirmation = () => {
     if(this.state.signUp){
       return (
         <Row className='justify-content-center' style={{marginTop: 5}}>
-          <Input style={{width: '65%'}} iconPosition='left' type='password' placeholder='Password Confirmation'>
-            <Icon name='key' />
-            <input onChange={text => this.setState({passwordConfirmation: text.target.value})}/>
+          <Input style={{width: '65%'}} error={!this.state.passwordMatch} iconPosition='left' type='password' placeholder='Password Confirmation'>
+            <Icon name='key' loading={true}/>
+            <input onChange={text => this.handleChangeOnConfirmation(text)}/>
           </Input>
         </Row>
       )
     }
   }
+
+  handleChangeOnUsername = (text) => {
+    this.setState({username: text.target.value}, () => (
+      this.state.usernames.includes(this.state.username) ? this.setState({uniqueUsername: false}) : this.setState({uniqueUsername: true})
+    ))
+  }
+
+  handleChangeOnConfirmation = (text) => {
+    // checking if password and password confirmation does match
+    this.setState({passwordConfirmation: text.target.value}, () => (
+      this.state.password !== this.state.passwordConfirmation ? this.setState({passwordMatch: false}) : this.setState({passwordMatch: true})
+    ))
+  }
+
 // signing in or signing up => more details in src/services/UserService.js
   handleSubmit = () => {
     const state = this.state
@@ -62,12 +83,14 @@ class RenderSign extends React.Component {
       </Header>
       <Row className='justify-content-center'>
         {this.state.errors.length !== 0 ? <Message color='red' list={this.state.errors} header='oops, something went wrong!'/> : null }
-        <Input style={{width: '65%'}} iconPosition='left' placeholder='Email'>
+        {/* USERNAME FIELD */}
+        <Input style={{width: '65%'}} error={!this.state.uniqueUsername} iconPosition='left' placeholder='Email'>
           <Icon name='at' />
-          <input onChange={text => this.setState({username: text.target.value})} />
+          <input onChange={text => this.handleChangeOnUsername(text)} />
         </Input>
       </Row>
       <Row className='justify-content-center' style={{marginTop: 5}}>
+        {/* PASSWORD FIELD */}
         <Input style={{width: '65%'}} iconPosition='left' type='password' placeholder='Password'>
           <Icon name='key' />
           <input onChange={text => this.setState({password: text.target.value})} />
