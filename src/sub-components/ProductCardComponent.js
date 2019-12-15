@@ -65,10 +65,14 @@ class ProductCardComponent extends React.Component {
                           <Card.Header style={{borderTopLeftRadius: 4, borderTopRightRadius: 4, backgroundColor: '#000000'}}>
                             <Row>
                               <Col sm={3}>
-                                <span style={{color: '#fff'}}>$12.99</span>
+                                <span style={{color: '#fff'}}>
+                                  $12.99
+                                </span>
                               </Col>
                               <Col sm={19}>
-                                <span style={{color: '#fff' }}>Nice Good Clothe BLA bla Bla</span>
+                                <span style={{color: '#fff' }}>
+                                  Nice Good Clothe BLA bla Bla
+                                </span>
                               </Col>
                             </Row>
                           </Card.Header>
