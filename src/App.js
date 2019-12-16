@@ -49,7 +49,9 @@ class App extends React.Component {
     return this.setState({contentId: 0})
   }
 
-  setVisible = bool => this.setState({visible: bool})
+  setVisible = bool => this.setState({visible: bool}, function(){
+    bool ? console.log('s') : this.setState({contentId: ""})
+  })
   render(){
     let sideBarWidth = 400
     const { visible } = this.state

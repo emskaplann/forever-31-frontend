@@ -9,7 +9,9 @@ import { Card, Icon, Input } from 'semantic-ui-react'
 const mapStateToProps = (state, ownProps) => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    cart: state.cartAndWishlist.cart,
+    wishlist: state.cartAndWishlist.wishlist
   }
 }
 
@@ -22,7 +24,13 @@ class SideBarContent extends React.Component {
   }
 
 // render cart for logged in user
-  renderCart = () => this.props.products.map(product => <RenderProduct key={product.id} product={product} />)
+  renderCart = () => {
+    if(this.props.cart){
+      debugger
+      this.props.cart.map(object => <RenderProduct key={object.product.id} product={object.product} />)
+    }
+    debugger
+  }
 
 // this function renders sidebar content based on given props
   renderContent = () => {
