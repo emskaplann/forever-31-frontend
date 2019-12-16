@@ -1,7 +1,7 @@
 import React from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import { Card, Image } from 'semantic-ui-react';
-import { Col, Row } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 
 const Box = posed.div({
   hoverable: true,
@@ -60,23 +60,25 @@ class ProductCardComponent extends React.Component {
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
-                      <DetailsOnBox style={{position: 'absolute', width: '100%'}}>
-                        <Card.Content extra>
+                    {/* Product List Price Goes In This Section */}
+                    <DetailsOnBox style={{position: 'absolute', width: '100%'}}>
                           <Card.Header style={{borderTopLeftRadius: 4, borderTopRightRadius: 4, backgroundColor: '#000000'}}>
                             <Row>
-                              <Col sm={3}>
-                                <span style={{color: '#fff'}}>
-                                  $12.99
-                                </span>
-                              </Col>
-                              <Col sm={19}>
-                                <span style={{color: '#fff' }}>
-                                  Nice Good Clothe BLA bla Bla
-                                </span>
+                              <Col style={{color: '#fff', textAlign: 'center'}}>
+                                $12.99
                               </Col>
                             </Row>
                           </Card.Header>
-                        </Card.Content>
+                      </DetailsOnBox>
+                      {/* Product Title Goes In This Section */}
+                      <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
+                        <Card.Header style={{borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: '#000000'}}>
+                          <Row>
+                            <Col style={{color: '#fff', textAlign: 'center', fontSize: 12}}>
+                              Nice Good Clothe BLA bla Bla
+                            </Col>
+                          </Row>
+                        </Card.Header>
                       </DetailsOnBox>
                   </Card>
                 </Box>
