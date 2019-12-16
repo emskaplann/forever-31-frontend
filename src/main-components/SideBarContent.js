@@ -21,15 +21,16 @@ class SideBarContent extends React.Component {
     }
   }
 
-  renderProducts = () => this.props.products.map(product => <RenderProduct key={product.id} product={product} />)
+// render cart for logged in user
+  renderCart = () => this.props.products.map(product => <RenderProduct key={product.id} product={product} />)
 
 // this function renders sidebar content based on given props
   renderContent = () => {
     console.log(this.props.contentId)
     if (this.props.contentId === 0 ) {
       return( <RenderSign closeSideBar={this.props.closeSideBar}/> )
-    } else if (this.props.contentId === 1) {
-      return( this.renderProducts() )
+    } else if (this.props.contentId === 1 && this.props.user.token) {
+      return( this.renderCart() )
     }
   }
 

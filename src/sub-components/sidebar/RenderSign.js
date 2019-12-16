@@ -4,6 +4,7 @@ import { Header, Message } from 'semantic-ui-react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Card, Icon, Loader, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
+import CartAndWishlistService from '../../services/CartAndWishlistService.js';
 import actionCreators from '../../actionCreators.js';
 
 class RenderSign extends React.Component {
@@ -21,6 +22,7 @@ class RenderSign extends React.Component {
       uniqueUsername: true,
     }
     this.userService = new UserService(this)
+    this.cartAndWishlistService = new CartAndWishlistService(this)
   }
 
   componentDidMount () {
@@ -120,6 +122,11 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
           type: 'ADD_USER_AUTH',
           user: user
         })
+    }, addCartAndWishlist: (cartAndWishlist) => {
+      dispatch({
+        type: 'ADD_CART_AND_WISHLIST',
+        cartAndWishlist: cartAndWishlist
+      })
     }
   }
 }

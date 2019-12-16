@@ -13,6 +13,7 @@ class NavbarView extends Component {
 
   logOut = () => {
     this.props.clearUserAuth()
+    this.props.clearCartAndWishlist()
     localStorage.token = ""
     localStorage.userId = ""
   }
@@ -74,6 +75,10 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
         dispatch({
           type: 'CLEAR_USER_AUTH'
         })
+    }, clearCartAndWishlist: () => {
+      dispatch({
+        type: 'CLEAN_CART_AND_WISHLIST'
+      })
     }
   }
 }

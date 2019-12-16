@@ -21,6 +21,7 @@ class UserService {
         localStorage.token = token
         localStorage.userId = user_id
         this.component.props.addUserAuth({token: token, userId: user_id})
+        this.component.cartAndWishlistService.fetchCartAndWishlist(token)
         this.component.setState({errors: [], loading: false})
         this.component.props.closeSideBar(false)
       } else {

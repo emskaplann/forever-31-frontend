@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Checkout from './main-components/Checkout.js';
 import ProductIndex from './main-components/ProductIndex.js';
 import ProductShow from './main-components/ProductShow.js';
+import CartAndWishlistService from './services/CartAndWishlistService.js';
 import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
 import { Route, Link, Switch } from 'react-router-dom';
@@ -24,15 +25,20 @@ const RouteContainer = posed.div({
 });
 
 class App extends React.Component {
-  state = {
-    visible: false,
-    windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-    contentId: 0,
+  constructor () {
+    super();
+    this.state = {
+      visible: false,
+      windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+      contentId: 0,
+    }
+    this.cartAndWishlistService = new CartAndWishlistService(this)
   }
 
   componentDidMount () {
     if(localStorage.userId){
       this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId})
+      this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
     }
   }
 
@@ -103,6 +109,11 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
           type: 'ADD_USER_AUTH',
           user: user
         })
+    }, addCartAndWishlist: (cartAndWishlist) => {
+      dispatch({
+        type: 'ADD_CART_AND_WISHLIST',
+        cartAndWishlist: cartAndWishlist
+      })
     }
   }
 }
