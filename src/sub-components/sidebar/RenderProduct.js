@@ -16,7 +16,7 @@ class RenderProduct extends React.Component {
     return (
       <Row style={{marginTop: 5}}>
         <Col>
-          <Card fluid image={this.props.product.images[0].front_url}/>
+          <Card fluid image={this.props.productImages.front_url}/>
         </Col>
         <Col>
         </Col>

@@ -4,7 +4,7 @@ import RenderProduct from '../sub-components/sidebar/RenderProduct.js';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap';
-import { Card, Icon, Input } from 'semantic-ui-react'
+import { Card, Icon, Input, Divider } from 'semantic-ui-react';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -26,10 +26,22 @@ class SideBarContent extends React.Component {
 // render cart for logged in user
   renderCart = () => {
     if(this.props.cart){
-      debugger
-      this.props.cart.map(object => <RenderProduct key={object.product.id} product={object.product} />)
+      return(
+        <Container>
+            <Divider style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}} horizontal>My F31 Cart</Divider>
+            <Row>
+              <Col>
+                <Header as='h4' style={{color: '#fff'}}>Total: $105.99</Header>
+              </Col>
+              <Col>
+                <Header as='h4' style={{color: '#fff'}}>Item Count: 5</Header>
+              </Col>
+            </Row>
+            <br />
+            {this.props.cart.map(object => <RenderProduct key={object.product.id} product={object.product} productImages={object.product_images[0]} />)}
+        </Container>
+      )
     }
-    debugger
   }
 
 // this function renders sidebar content based on given props

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.cartAndWishlist.cart,
+    wishlist: state.cartAndWishlist.wishlist
   }
 }
 
@@ -28,10 +30,10 @@ class NavbarView extends Component {
     } else {
       return (
         <>
-        <Nav.Item onClick={() => this.props.openModal(true)} style={{marginLeft: 10, fontWeight: 'bold' }}>
+        <Nav.Item onClick={() => this.handleModal(0)} style={{marginLeft: 10, fontWeight: 'bold' }}>
           Sign In or
         </Nav.Item>
-        <Nav.Item onClick={() => this.props.openModal(true)} style={{marginLeft: 3, marginRight: 10, fontWeight: 'bold'  }}>
+        <Nav.Item onClick={() => this.handleModal(0)} style={{marginLeft: 3, marginRight: 10, fontWeight: 'bold'  }}>
           Sign Up
         </Nav.Item>
         </>
@@ -57,10 +59,10 @@ class NavbarView extends Component {
           <Nav className='justify-content-center'>
             <Row>
               <Nav.Item>
-                <span style={{ marginLeft: 5 }} onClick={() => this.handleModal(1)}><Icon style={{fontSize: '1.1em'}} name='shopping cart'/> (0)</span>
+                <span style={{ marginLeft: 5 }} onClick={() => this.handleModal(1)}><Icon style={{fontSize: '1.1em'}} name='shopping cart'/>{this.props.cart ? `(${this.props.cart.length})` : '(0)'}</span>
               </Nav.Item>
               <Nav.Item>
-                <span style={{ marginLeft: 8, marginRight: 5 }} onClick={() => this.handleModal(2)}><Icon style={{fontSize: '1.1em'}} name='heart'/>(0)</span>
+                <span style={{ marginLeft: 8, marginRight: 5 }} onClick={() => this.handleModal(2)}><Icon style={{fontSize: '1.1em'}} name='heart'/>{this.props.wishlist ? `(${this.props.wishlist.length})` : '(0)'}</span>
               </Nav.Item>
               {this.renderSigns()}
             </Row>
