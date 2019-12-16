@@ -25,13 +25,14 @@ class SideBarContent extends React.Component {
 
 // render cart for logged in user
   renderCart = () => {
+    const reducer = (accumulator, currentValue) => accumulator + parseInt(currentValue.product.list_price.replace('$', ''));
     if(this.props.cart){
       return(
         <Container>
             <Divider style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}} horizontal>My F31 Cart</Divider>
             <Row>
               <Col>
-                <Header as='h4' style={{color: '#fff'}}>Total: $105.99</Header>
+                <Header as='h4' style={{color: '#fff'}}>Total: ${this.props.cart.reduce(reducer, 0)}</Header>
               </Col>
               <Col>
                 <Header as='h4' style={{color: '#fff'}}>Item Count: 5</Header>
