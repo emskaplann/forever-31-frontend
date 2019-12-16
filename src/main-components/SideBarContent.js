@@ -35,7 +35,7 @@ class SideBarContent extends React.Component {
                 <Header as='h4' style={{color: '#fff'}}>Total: ${this.props.cart.reduce(reducer, 0)}</Header>
               </Col>
               <Col>
-                <Header as='h4' style={{color: '#fff'}}>Item Count: 5</Header>
+                <Header as='h4' style={{color: '#fff'}}>Item Count: {this.props.cart.length}</Header>
               </Col>
             </Row>
             <br />

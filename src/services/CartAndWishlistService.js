@@ -30,6 +30,22 @@ class CartAndWishlistService {
       })
     })
   }
+
+  discardProductFromCard = (token, productId) => {
+    fetch(`${this.workingURL}/carts/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(r => r.json())
+    .then(response => {
+      this.component.props.discardProductFromCard(response)
+    })
+  }
+
 }
+
+
 
 export default CartAndWishlistService;

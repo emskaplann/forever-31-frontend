@@ -1,4 +1,5 @@
 import React from 'react';
+import CartAndWishlistService from '../../services/CartAndWishlistService.js';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
@@ -10,6 +11,7 @@ class RenderProduct extends React.Component {
     super ();
     this.state = {
     }
+    this.cartAndWishlistService = new CartAndWishlistService(this)
   }
 
   // renderDesc = () => {
@@ -20,6 +22,8 @@ class RenderProduct extends React.Component {
   //   const desc3 = desc2.replace('h3', 'h5')
   //   return (<div>{ ReactHtmlParser(desc2) }</div>);
   // }
+
+  discardProductFromCard = (productId) => this.cartAndWishlistService.discardProductFromCard(this.props.user.token, productId)
 
   render () {
     const product = this.props.product
@@ -39,7 +43,7 @@ class RenderProduct extends React.Component {
                     <Row>
                       <Col sm={6}>
                         <Icon style={{color: '#fff'}} size='small' name='tag' />
-                        <span style={{color: '#fff'}}>On Sale!</span>
+                        {product.on_sale ? (<span style={{color: '#fff'}}>On Sale!</span>) : null}
                       </Col>
                       <Col sm={5}>
                         <p style={{color: '#fff'}}>{product.list_price}</p>
@@ -50,7 +54,7 @@ class RenderProduct extends React.Component {
               </Card>
             </Col>
             <Col sm={1}>
-              <Icon style={{color: '#fff'}} name='close' />
+              <Icon onClick={() => this.discardProductFromCard(product.id)} style={{color: '#fff'}} name='close' />
             </Col>
           </Row>
         <br />
@@ -59,4 +63,21 @@ class RenderProduct extends React.Component {
   }
 }
 
-export default RenderProduct;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch, mergeProps) => {
+    return {
+      discardProductFromCard: (newCart) => {
+        dispatch({
+          type: 'DISCARD_PRODUCT_FROM_CARD',
+          newCart: newCart
+        })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RenderProduct);
