@@ -43,7 +43,10 @@ class App extends React.Component {
   }
 
   getContentId = (contentId) => {
-    this.setState({contentId: contentId})
+    if(this.props.user.token !== undefined){
+      return this.setState({contentId: contentId})
+    }
+    return this.setState({contentId: 0})
   }
 
   setVisible = bool => this.setState({visible: bool})
