@@ -39,6 +39,11 @@ class NavbarView extends Component {
     }
   }
 
+  handleModal = (contentId) => {
+    this.props.sendContentId(contentId)
+    this.props.openModal(true)
+  }
+
   render() {
     return (
       <>
@@ -52,10 +57,10 @@ class NavbarView extends Component {
           <Nav className='justify-content-center'>
             <Row>
               <Nav.Item>
-                <span style={{ marginLeft: 5 }} onClick={() => this.props.openModal(true)}><Icon style={{fontSize: '1.1em'}} name='shopping cart'/> (0)</span>
+                <span style={{ marginLeft: 5 }} onClick={() => this.handleModal(1)}><Icon style={{fontSize: '1.1em'}} name='shopping cart'/> (0)</span>
               </Nav.Item>
               <Nav.Item>
-                <span style={{ marginLeft: 8, marginRight: 5 }} onClick={() => this.props.openModal(true)}><Icon style={{fontSize: '1.1em'}} name='heart'/>(0)</span>
+                <span style={{ marginLeft: 8, marginRight: 5 }} onClick={() => this.handleModal(2)}><Icon style={{fontSize: '1.1em'}} name='heart'/>(0)</span>
               </Nav.Item>
               {this.renderSigns()}
             </Row>

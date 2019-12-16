@@ -42,12 +42,8 @@ class App extends React.Component {
     }
   }
 
-  generateContentId = () => {
-    if(this.props.user.token){
-      return 1
-    } else {
-      return 0
-    }
+  getContentId = (contentId) => {
+    this.setState({contentId: contentId})
   }
 
   setVisible = bool => this.setState({visible: bool})
@@ -74,10 +70,10 @@ class App extends React.Component {
               style={{width: sideBarWidth}}
             >
             {/* Sidebar Content */}
-              <SideBarContent contentId={this.generateContentId()} closeSideBar={this.setVisible}/>
+              <SideBarContent contentId={this.state.contentId} closeSideBar={this.setVisible}/>
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
-              <NavbarView openModal={this.setVisible} />
+              <NavbarView sendContentId={this.getContentId} openModal={this.setVisible} />
                 <Segment basic>
                   <PoseGroup>
                     <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}

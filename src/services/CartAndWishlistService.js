@@ -25,6 +25,7 @@ class CartAndWishlistService {
       .then(r => r.json())
       .then(responseWishlist => {
         let cartAndWishlist = {cart: responseCart, wishlist: responseWishlist}
+        this.component.setState({contentId: 1})
         this.component.props.addCartAndWishlist(cartAndWishlist)
       })
     })
