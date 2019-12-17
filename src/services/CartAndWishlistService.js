@@ -41,6 +41,7 @@ class CartAndWishlistService {
     .then(r => r.json())
     .then(response => {
       this.component.props.discardProductFromCard(response)
+      this.component.setState({loading: false})
     })
   }
 

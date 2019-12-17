@@ -30,10 +30,10 @@ class RenderProduct extends React.Component {
     return (
         <>
           <Row>
-            <Col xs={2} md={3}>
+            <Col xs={3} sm={3} md={3}>
               <Card style={{width: '60px', height: '90px', marginRight: 5}} fluid image={this.props.productImages.front_url}/>
             </Col>
-            <Col xs={8} md={8}>
+            <Col xs={8} sm={7} md={7}>
               <Card style={{backgroundColor: '#212529'}}>
                 <Card.Content>
                   <Card.Header style={{color: '#fff', fontSize: '90%'}}>
@@ -53,7 +53,7 @@ class RenderProduct extends React.Component {
                 </Card.Content>
               </Card>
             </Col>
-            <Col xs={2} md={1}>
+            <Col xs={1} sm={2} md={2}>
               <Icon onClick={() => this.discardProductFromCard(product.id)} style={{color: '#fff'}} name='close' />
             </Col>
           </Row>
