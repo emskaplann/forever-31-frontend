@@ -34,24 +34,18 @@ class RenderProduct extends React.Component {
               <Card style={{width: '60px', height: '90px', marginRight: 5}} fluid image={this.props.productImages.front_url}/>
             </Col>
             <Col xs={8} sm={7} md={7}>
-              <Card style={{backgroundColor: '#212529'}}>
-                <Card.Content>
-                  <Card.Header style={{color: '#fff', fontSize: '90%'}}>
-                    {product.display_name}
-                  </Card.Header>
-                  <Card.Meta>
-                    <Row>
-                      <Col sm={6}>
-                        <Icon style={{color: '#fff'}} size='small' name='tag' />
-                        {product.on_sale ? (<span style={{color: '#fff'}}>On Sale!</span>) : null}
-                      </Col>
-                      <Col sm={5}>
-                        <p style={{color: '#fff'}}>{product.list_price}</p>
-                      </Col>
-                    </Row>
-                  </Card.Meta>
-                </Card.Content>
-              </Card>
+              <Row>
+                <Col sm={12} lg={12}>
+                  <h7 style={{color: '#fff'}}>{product.display_name}</h7>
+                </Col>
+                <Col sm={6} lg={6}>
+                  <Icon style={{color: '#fff'}} size='small' name='tag' />
+                  {product.on_sale ? (<span style={{color: '#fff'}}>On Sale!</span>) : null}
+                </Col>
+                <Col sm={6} lg={6}>
+                  <p style={{color: '#fff'}}>{product.list_price}</p>
+                </Col>
+              </Row>
             </Col>
             <Col xs={1} sm={2} md={2}>
               <Icon onClick={() => this.discardProductFromCard(product.id)} style={{color: '#fff'}} name='close' />
