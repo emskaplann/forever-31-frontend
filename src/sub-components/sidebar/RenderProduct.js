@@ -22,7 +22,7 @@ class RenderProduct extends React.Component {
 
   handleDecreasingQuantity = (product, token, minus) => {
     if(this.state.quantity === 1){
-      return this.discardProductFromCard(product.id)
+      return this.discardProductFromCart(product.id)
     }
     return this.cartService.changeQuantityOnCart(product, token, minus)
   }

@@ -28,10 +28,10 @@ const Box = posed.div({
     boxShadow: '0px 0px 0px rgba(0,0,0,0)'
   }, hover: {
     opacity: 1,
-    scale: 1.05,
+    scale: 1.02,
     boxShadow: '0px 5px 10px rgba(0,0,0,0.2)'
   }, press: {
-    scale: 1.02,
+    scale: 1.01,
     boxShadow: '0px 2px 5px rgba(0,0,0,0.1)'
   }
 });
