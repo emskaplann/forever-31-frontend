@@ -25,7 +25,8 @@ class SideBarContent extends React.Component {
 
 // render cart for logged in user
   renderCart = () => {
-    const reducer = (accumulator, currentValue) => accumulator + parseInt(currentValue.product.list_price.replace('$', ''));
+    const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
+    const reducer2 = (accumulator, currentValue) => accumulator + (currentValue.quantity)
     if(this.props.cart){
       return(
         <Container>
@@ -35,11 +36,11 @@ class SideBarContent extends React.Component {
                 <Header as='h4' style={{color: '#fff'}}>Total: ${this.props.cart.reduce(reducer, 0)}</Header>
               </Col>
               <Col>
-                <Header as='h4' style={{color: '#fff'}}>Item Count: {this.props.cart.length}</Header>
+                <Header as='h4' style={{color: '#fff'}}>Item Count: {this.props.cart.reduce(reducer2, 0)}</Header>
               </Col>
             </Row>
             <br />
-            {this.props.cart.map(object => <RenderProduct key={object.product.id} product={object.product} quantity={object.quantity} productImages={object.product_images[0]} />)}
+            {this.props.cart.map(object => <RenderProduct key={object.product.id} product={object.product} productImages={object.product_images[0]} />)}
         </Container>
       )
     }

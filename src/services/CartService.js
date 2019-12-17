@@ -22,7 +22,7 @@ class CartService {
     })
   }
 
-  changeQuantityOnCart = (product, token) => {
+  changeQuantityOnCart = (product, token, minus) => {
     fetch(`${this.workingURL}/carts/${product.id}`, {
       method: 'PATCH',
       headers: {
@@ -30,13 +30,15 @@ class CartService {
         Authorization: token,
         Accept: 'application/json'
       }, body: JSON.stringify({
-          asd: "backend handles by itself :)"
+          asd: minus
       })
     })
     .then(r => r.json())
     .then(response => {
-      console.log(response)
       this.component.props.changeQuantityOnCart(response[0])
+      if(this.component.state.quantity){
+        this.component.setState({quantity: response[0].quantity})
+      }
     })
   }
 
