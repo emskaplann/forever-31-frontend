@@ -1,7 +1,9 @@
 import React from 'react';
+import WishlistService from '../services/WishlistService.js';
 import posed, { PoseGroup } from 'react-pose';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 import { Container, Col, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const Box = posed.div({
   hoverable: true,
@@ -41,16 +43,24 @@ const DetailsOnBox = posed.div({
     opacity: 0.86,
     scale: 1,
   }, press: {
-    scale: 1,
+    scale: 1.05,
   }
 });
 
 class ProductCardComponent extends React.Component {
-  state = { isVisible: false }
+  constructor () {
+    super();
+    this.state = {
+      isVisible: false
+    }
+    this.wishlistService = new WishlistService(this)
+  }
 
   componentDidMount(){
     this.setState({isVisible: !this.state.isVisible})
   }
+
+  handleWishlistClick = (id) => this.wishlistService.addProductToWishlist(id, this.props.user.token)
 
   render(){
     const { isVisible } = this.state
@@ -74,8 +84,11 @@ class ProductCardComponent extends React.Component {
                       <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
                         <Card.Header style={{borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: '#000000'}}>
                           <Row>
-                            <Col style={{color: '#fff', textAlign: 'center', fontSize: 12}}>
-                              Nice Good Clothe BLA bla Bla
+                            <Col onClick={() => this.handleWishlistClick(this.props.product.id)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12}}>
+                              <Icon style={{fontSize: '1.1em'}} name='heart'/>
+                            </Col>
+                            <Col style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12, borderLeft: '1px solid gray'}}>
+                              <Icon style={{fontSize: '1.1em'}} name='shopping cart'/>
                             </Col>
                           </Row>
                         </Card.Header>
@@ -88,4 +101,21 @@ class ProductCardComponent extends React.Component {
     }
   }
 
-export default ProductCardComponent
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      user: state.user
+    }
+  }
+
+  const mapDispatchToProps = (dispatch, mergeProps) => {
+      return {
+        clearUserAuth: (newProduct) => {
+          dispatch({
+            type: 'ADD_PRODUCT_TO_WISHLIST',
+            newProduct: newProduct
+          })
+      }
+    }
+  }
+
+export default connect(mapStateToProps)(ProductCardComponent);

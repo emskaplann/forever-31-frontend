@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const renderCards = products => (
       products.map(product => (
-      <Col xs={8} className='mx-auto' lg={3} style={{ marginBottom: 23 }}>
-        <ProductCardComponent key={product.id} displayName={product.display_name} imgUrl={product.images[0].front_url} />
+      <Col xs={6} md={4} lg={3} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 23 }}>
+        <ProductCardComponent key={product.id} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
       </Col>
     ))
 )
