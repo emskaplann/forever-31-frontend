@@ -95,7 +95,7 @@ class ProductCardComponent extends React.Component {
                       <Label corner='right' icon='shopping cart' color='black' onClick={() => this.handleCartClick(this.props.product)} />
                     </DetailsOnBox>
                     <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
-                        <Card.Header style={{borderTopLeftRadius: 4, borderTopRightRadius: 4, backgroundColor: '#000000'}}>
+                        <Card.Header style={{borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: '#000000'}}>
                           <Row>
                             <Col style={{color: '#fff', fontWeight: 'bold', textAlign: 'center'}}>
                               $12.99
