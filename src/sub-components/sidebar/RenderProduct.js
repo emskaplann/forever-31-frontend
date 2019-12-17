@@ -18,7 +18,7 @@ class RenderProduct extends React.Component {
   }
 
 
-  discardProductFromCard = (productId) => this.cartAndWishlistService.discardProductFromCard(this.props.user.token, productId)
+  discardProductFromCart = (productId) => this.cartAndWishlistService.discardProductFromCart(this.props.user.token, productId)
 
   handleDecreasingQuantity = (product, token, minus) => {
     if(this.state.quantity === 1){
