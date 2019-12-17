@@ -45,6 +45,20 @@ class CartAndWishlistService {
     })
   }
 
+  discardProductFromWishlist = (token, productId) => {
+    fetch(`${this.workingURL}/wish_lists/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(r => r.json())
+    .then(response => {
+      this.component.props.discardProductFromWishlist(response)
+      this.component.state.loading ? this.component.setState({loading: false}) : console.log()
+    })
+  }
+
 }
 
 

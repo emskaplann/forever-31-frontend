@@ -7,6 +7,8 @@ const CartAndWishlistReducer = (oldState = initialState, action) => {
       return action.cartAndWishlist;
     case 'DISCARD_PRODUCT_FROM_CARD':
       return {...oldState, cart: action.newCart}
+    case 'DISCARD_PRODUCT_FROM_WISHLIST':
+      return {...oldState, wishlist: action.newWishlist}
     case 'ADD_PRODUCT_TO_WISHLIST':
       return {...oldState, wishlist: [...oldState.wishlist, action.newProduct]}
     case 'ADD_PRODUCT_TO_CART':

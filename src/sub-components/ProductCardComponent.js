@@ -71,7 +71,7 @@ class ProductCardComponent extends React.Component {
   handleWishlistClick = (product) => {
     const wishlistProductIds = this.props.wishlist.map(object => object.product.id)
     if(wishlistProductIds.includes(product.id)){
-      // this.wishlistService.changeQuantityOnWishlist(product, this.props.user.token)
+      this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, product.id)
     } else {
       this.wishlistService.addProductToWishlist(product.id, this.props.user.token)
     }
@@ -89,8 +89,8 @@ class ProductCardComponent extends React.Component {
   }
 
   render(){
-    this.props.cart ? cartProductIds2 = this.props.cart.map(object => object.product.id) : cartProductIds2 = []
-    this.props.wishlist ? wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : wishlistProductIds2 = []
+    this.props.cart !== [] && this.props.cart ? cartProductIds2 = this.props.cart.map(object => object.product.id) : cartProductIds2 = []
+    this.props.wishlist !== [] && this.props.wishlist ? wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : wishlistProductIds2 = []
     const { isVisible } = this.state
       return(
           <PoseGroup>
@@ -101,10 +101,10 @@ class ProductCardComponent extends React.Component {
                     {/* Product List Price Goes In This Section */}
                     <DetailsOnBox>
                       <Label corner='left' color='black' onClick={() => this.handleWishlistClick(this.props.product)}>
-                        <Icon name='heart' color={wishlistProductIds2.includes(this.props.product.id) ? 'red' : 'white'}/>
+                        <Icon name='heart' color={wishlistProductIds2.includes(this.props.product.id) ? 'red' : null}/>
                       </Label>
-                      <Label corner='right' icon='shopping cart' color='black' onClick={() => this.handleCartClick(this.props.product)}>
-                        <Icon name='shopping cart' color={cartProductIds2.includes(this.props.product.id) ? 'yellow' : 'white'}/>
+                      <Label corner='right' color='black' onClick={() => this.handleCartClick(this.props.product)}>
+                        <Icon name='shopping cart' color={cartProductIds2.includes(this.props.product.id) ? 'yellow' : null}/>
                       </Label>
                     </DetailsOnBox>
                     <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
@@ -153,6 +153,11 @@ class ProductCardComponent extends React.Component {
         dispatch({
           type: 'DISCARD_PRODUCT_FROM_CARD',
           newCart: newCart
+        })
+      }, discardProductFromWishlist: (newWishlist) => {
+        dispatch({
+          type: 'DISCARD_PRODUCT_FROM_WISHLIST',
+          newWishlist: newWishlist
         })
       }
     }
