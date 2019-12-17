@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js'
 import { Grid } from 'semantic-ui-react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,9 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const renderCards = products => (
       products.map(product => (
-      <Grid.Column width={4} key={`grid${product.id}`}>
+      <Col xs={8} className='mx-auto' lg={3} style={{ marginBottom: 23 }}>
         <ProductCardComponent key={product.id} displayName={product.display_name} imgUrl={product.images[0].front_url} />
-      </Grid.Column>
+      </Col>
     ))
 )
 
@@ -27,9 +28,11 @@ class ProductIndex extends React.Component {
 
   render(){
     return(
-      <Grid container style={{marginTop: 25}}>
-        {renderCards(this.props.products.flat())}
-      </Grid>
+      <Container style={{marginTop: 50}}>
+        <Row>
+          {renderCards(this.props.products.flat())}
+        </Row>
+      </Container>
     )
   }
 }
