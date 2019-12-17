@@ -20,6 +20,13 @@ class RenderProduct extends React.Component {
 
   discardProductFromCard = (productId) => this.cartAndWishlistService.discardProductFromCard(this.props.user.token, productId)
 
+  handleDecreasingQuantity = (product, token, minus) => {
+    if(this.state.quantity === 1){
+      return this.discardProductFromCard(product.id)
+    }
+    return this.cartService.changeQuantityOnCart(product, token, minus)
+  }
+
   render () {
     const product = this.props.product
     return (
@@ -34,8 +41,7 @@ class RenderProduct extends React.Component {
                   <span style={{color: '#fff'}}>{product.display_name}</span>
                 </Col>
                 <Col sm={6} lg={6}>
-                  <Icon style={{color: '#fff'}} size='small' name='tag' />
-                  {product.on_sale ? (<span style={{color: '#fff'}}>On Sale!</span>) : null}
+                  {product.on_sale ? (<><Icon style={{color: '#fff'}} size='small' name='tag' /><span style={{color: '#fff'}}>On Sale!</span></>) : null}
                 </Col>
                 <Col sm={6} lg={6}>
                   <p style={{color: '#fff'}}>{product.list_price}</p>
@@ -55,7 +61,7 @@ class RenderProduct extends React.Component {
                 <Icon onClick={() => this.cartService.changeQuantityOnCart(product, this.props.user.token, 'not minus')} style={{color: '#fff'}} name='plus' />
               </Row>
               <Row style={{height: '20%'}}>
-                <Icon onClick={() => this.cartService.changeQuantityOnCart(product, this.props.user.token, "minus")} style={{color: '#fff'}} name='minus' />
+                <Icon onClick={() => this.handleDecreasingQuantity(product, this.props.user.token, "minus")} style={{color: '#fff'}} name='minus' />
               </Row>
             </Col>
           </Row>

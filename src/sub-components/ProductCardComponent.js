@@ -44,7 +44,7 @@ const DetailsOnBox = posed.div({
     opacity: 0.86,
     scale: 1,
   }, press: {
-    scale: 1.05,
+    scale: 1,
   }
 });
 
@@ -89,9 +89,11 @@ class ProductCardComponent extends React.Component {
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
-                      <Label corner='left' icon='heart' color='black' style={{opacity: 0.95}} onClick={() => this.handleWishlistClick(this.props.product)} />
-                      <Label corner='right' icon='shopping cart' color='black' onClick={() => this.handleCartClick(this.props.product)} />
                     {/* Product List Price Goes In This Section */}
+                    <DetailsOnBox>
+                      <Label corner='left' icon='heart' color='black' onClick={() => this.handleWishlistClick(this.props.product)} />
+                      <Label corner='right' icon='shopping cart' color='black' onClick={() => this.handleCartClick(this.props.product)} />
+                    </DetailsOnBox>
                     <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
                         <Card.Header style={{borderTopLeftRadius: 4, borderTopRightRadius: 4, backgroundColor: '#000000'}}>
                           <Row>

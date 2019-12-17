@@ -15,6 +15,9 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
+const reducer2 = (accumulator, currentValue) => accumulator + (currentValue.quantity)
+
 class SideBarContent extends React.Component {
   constructor () {
     super();
@@ -25,8 +28,6 @@ class SideBarContent extends React.Component {
 
 // render cart for logged in user
   renderCart = () => {
-    const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
-    const reducer2 = (accumulator, currentValue) => accumulator + (currentValue.quantity)
     if(this.props.cart){
       return(
         <Container>
