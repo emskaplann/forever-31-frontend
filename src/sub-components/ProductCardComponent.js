@@ -26,7 +26,7 @@ const Box = posed.div({
     scale: 1,
     boxShadow: '0px 0px 0px rgba(0,0,0,0)'
   }, hover: {
-    opacity: 0.95,
+    opacity: 1,
     scale: 1.05,
     boxShadow: '0px 5px 10px rgba(0,0,0,0.2)'
   }, press: {
@@ -41,7 +41,7 @@ const DetailsOnBox = posed.div({
     scale: 1,
     opacity: 0,
   }, hover: {
-    opacity: 0.86,
+    opacity: 0.89,
     scale: 1,
   }, press: {
     scale: 1,

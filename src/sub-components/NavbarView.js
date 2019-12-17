@@ -56,8 +56,8 @@ class NavbarView extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className='mr-auto'>
           </Nav>
-          <Nav className='justify-content-center'>
-            <Row>
+          <Nav>
+            <Row className='mx-auto'>
               <Nav.Item>
                 <span style={{ marginLeft: 5 }} onClick={() => this.handleModal(1)}><Icon style={{fontSize: '1.1em'}} name='shopping cart'/>{this.props.cart ? `(${this.props.cart.length})` : '(0)'}</span>
               </Nav.Item>
