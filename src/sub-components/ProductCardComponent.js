@@ -63,9 +63,23 @@ class ProductCardComponent extends React.Component {
     this.setState({isVisible: !this.state.isVisible})
   }
 
-  handleWishlistClick = (id) => this.wishlistService.addProductToWishlist(id, this.props.user.token)
-  handleCartClick = (id) => this.cartService.addProductToCart(id, this.props.user.token)
+  handleWishlistClick = (product) => {
+    const wishlistProductIds = this.props.wishlist.map(object => object.product.id)
+    if(wishlistProductIds.includes(product.id)){
+      this.cartService.changeQuantityOnWishlist(product, this.props.user.token)
+    } else {
+      this.cartService.addProductToWishlist(product.id, this.props.user.token)
+    }
+  }
 
+  handleCartClick = (product) => {
+    const cartProductIds = this.props.cart.map(object => object.product.id)
+    if(cartProductIds.includes(product.id)){
+      this.cartService.changeQuantityOnCart(product, this.props.user.token)
+    } else {
+      this.cartService.addProductToCart(product.id, this.props.user.token)
+    }
+  }
 
   render(){
     const { isVisible } = this.state
@@ -89,10 +103,10 @@ class ProductCardComponent extends React.Component {
                       <DetailsOnBox style={{position: 'absolute', bottom: 0, width: '100%'}}>
                         <Card.Header style={{borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: '#000000'}}>
                           <Row>
-                            <Col onClick={() => this.handleWishlistClick(this.props.product.id)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12}}>
+                            <Col onClick={() => this.handleWishlistClick(this.props.product)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12}}>
                               <Icon style={{fontSize: '1.1em'}} name='heart'/>
                             </Col>
-                            <Col onClick={() => this.handleCartClick(this.props.product.id)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12, borderLeft: '1px solid gray'}}>
+                            <Col onClick={() => this.handleCartClick(this.props.product)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12, borderLeft: '1px solid gray'}}>
                               <Icon style={{fontSize: '1.1em'}} name='shopping cart'/>
                             </Col>
                           </Row>
@@ -108,7 +122,9 @@ class ProductCardComponent extends React.Component {
 
   const mapStateToProps = (state, ownProps) => {
     return {
-      user: state.user
+      user: state.user,
+      cart: state.cartAndWishlist.cart,
+      wishlist: state.cartAndWishlist.wishlist
     }
   }
 
@@ -124,7 +140,12 @@ class ProductCardComponent extends React.Component {
           type: 'ADD_PRODUCT_TO_CART',
           newProduct: newProduct
         })
-    }
+      }, changeQuantityOnCart: (newProduct) => {
+        dispatch({
+          type: 'CHANGE_QUANTITY_ON_CART',
+          newProduct: newProduct
+        })
+      }
     }
   }
 

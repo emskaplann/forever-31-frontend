@@ -1,8 +1,7 @@
 const initialState = []
 
 const CartAndWishlistReducer = (oldState = initialState, action) => {
-  // console.log(oldState)
-  // console.log(action)
+  // debugger
   switch (action.type) {
     case 'ADD_CART_AND_WISHLIST': // initializing page with users cart and wishlist
       return action.cartAndWishlist;
@@ -11,7 +10,10 @@ const CartAndWishlistReducer = (oldState = initialState, action) => {
     case 'ADD_PRODUCT_TO_WISHLIST':
       return {...oldState, wishlist: [...oldState.wishlist, action.newProduct]}
     case 'ADD_PRODUCT_TO_CART':
-      return {...oldState, cart: [...oldState.cart, {product: action.newProduct, product_images: action.newProduct.images}]}
+      return {...oldState, cart: [...oldState.cart, action.newProduct]}
+    case 'CHANGE_QUANTITY_ON_CART':
+      oldState.cart.find(object => object.product.id === action.newProduct.product.id).quantity = action.newProduct.quantity
+      return {...oldState}
     case 'CLEAN_CART_AND_WISHLIST': // cleaning cart and wishlist
       return {};
     default:

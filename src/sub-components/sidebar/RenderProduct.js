@@ -36,7 +36,7 @@ class RenderProduct extends React.Component {
             <Col xs={8} sm={7} md={7}>
               <Row>
                 <Col sm={12} lg={12}>
-                  <h7 style={{color: '#fff'}}>{product.display_name}</h7>
+                  <span style={{color: '#fff'}}>{product.display_name}</span>
                 </Col>
                 <Col sm={6} lg={6}>
                   <Icon style={{color: '#fff'}} size='small' name='tag' />
