@@ -31,7 +31,7 @@ class CartAndWishlistService {
     })
   }
 
-  discardProductFromCard = (token, productId) => {
+  discardProductFromCart = (token, productId) => {
     fetch(`${this.workingURL}/carts/${productId}`, {
       method: 'DELETE',
       headers: {
@@ -40,8 +40,8 @@ class CartAndWishlistService {
     })
     .then(r => r.json())
     .then(response => {
-      this.component.props.discardProductFromCard(response)
-      this.component.setState({loading: false})
+      this.component.props.discardProductFromCart(response)
+      this.component.state.loading ? this.component.setState({loading: false}) : console.log()
     })
   }
 

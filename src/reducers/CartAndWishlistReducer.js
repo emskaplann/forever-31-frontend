@@ -10,10 +10,10 @@ const CartAndWishlistReducer = (oldState = initialState, action) => {
     case 'ADD_PRODUCT_TO_WISHLIST':
       return {...oldState, wishlist: [...oldState.wishlist, action.newProduct]}
     case 'ADD_PRODUCT_TO_CART':
-      return {...oldState, cart: [...oldState.cart, action.newProduct]}
+      return {...oldState, cart: [ action.newProduct, ...oldState.cart]}
     case 'CHANGE_QUANTITY_ON_CART':
-      const newCart = oldState.cart.filter(object => object.product.id !== action.newProduct.product.id)
-      return {...oldState, cart: [...newCart, action.newProduct]}
+      const newCart = oldState.cart.map(object => object.product.id === action.newProduct.product.id ? action.newProduct : object)
+      return {...oldState, cart: [...newCart]}
     case 'CLEAN_CART_AND_WISHLIST': // cleaning cart and wishlist
       return {};
     default:

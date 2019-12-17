@@ -55,7 +55,7 @@ class RenderProduct extends React.Component {
             </Col>
             <Col xs={1} sm={1} md={1}>
               <Row style={{height: '36%'}}>
-                <Icon onClick={() => this.discardProductFromCard(product.id)} style={{color: '#fff'}} name='close' />
+                <Icon onClick={() => this.discardProductFromCart(product.id)} style={{color: '#fff'}} name='close' />
               </Row>
               <Row style={{height: '20%'}}>
                 <Icon onClick={() => this.cartService.changeQuantityOnCart(product, this.props.user.token, 'not minus')} style={{color: '#fff'}} name='plus' />
@@ -80,7 +80,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, mergeProps) => {
     return {
-      discardProductFromCard: (newCart) => {
+      discardProductFromCart: (newCart) => {
         dispatch({
           type: 'DISCARD_PRODUCT_FROM_CARD',
           newCart: newCart
