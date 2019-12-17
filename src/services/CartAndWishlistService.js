@@ -42,6 +42,7 @@ class CartAndWishlistService {
     .then(response => {
       this.component.props.discardProductFromCart(response)
       this.component.state.loading ? this.component.setState({loading: false}) : console.log()
+      this.component.state.added ? this.component.setState({added: {visible: true, type: 'cart', action: 'removed from'}}) : console.log()
     })
   }
 
@@ -56,6 +57,7 @@ class CartAndWishlistService {
     .then(response => {
       this.component.props.discardProductFromWishlist(response)
       this.component.state.loading ? this.component.setState({loading: false}) : console.log()
+      this.component.state.added ? this.component.setState({added: {visible: true, type: 'wishlist', action: 'removed from'}}) : console.log()
     })
   }
 

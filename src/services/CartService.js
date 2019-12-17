@@ -19,6 +19,7 @@ class CartService {
     .then(r => r.json())
     .then(response => {
       this.component.props.addProductToCart(response)
+      this.component.state.added ? this.component.setState({added: {visible: true, type: 'cart', action: 'added to'}}) : console.log()
     })
   }
 

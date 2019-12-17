@@ -19,6 +19,7 @@ class WishlistService {
     .then(r => r.json())
     .then(response => {
       this.component.props.addProductToWishlist(response)
+      this.component.state.added ? this.component.setState({added: {visible: true, type: 'wishlist', action: 'added to'}}) : console.log()
     })
   }
 

@@ -3,6 +3,7 @@ import CartAndWishlistService from '../services/CartAndWishlistService.js';
 import WishlistService from '../services/WishlistService.js';
 import CartService from '../services/CartService.js';
 import posed, { PoseGroup } from 'react-pose';
+import Alert from './Alert.js'
 import { Card, Image, Icon, Label } from 'semantic-ui-react';
 import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -56,7 +57,9 @@ class ProductCardComponent extends React.Component {
   constructor () {
     super();
     this.state = {
-      isVisible: false
+      isVisible: false,
+      added: {visible: false, type: 'cart', action: 'added'},
+      timer: 2
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
     this.wishlistService = new WishlistService(this)
@@ -88,6 +91,10 @@ class ProductCardComponent extends React.Component {
     }
   }
 
+  closeAlert = () => {
+    this.setState({added: {...this.state.added, visible: false}})
+  }
+
   render(){
     this.props.cart !== [] && this.props.cart ? cartProductIds2 = this.props.cart.map(object => object.product.id) : cartProductIds2 = []
     this.props.wishlist !== [] && this.props.wishlist ? wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : wishlistProductIds2 = []
@@ -95,6 +102,9 @@ class ProductCardComponent extends React.Component {
       return(
           <PoseGroup>
             {isVisible && (
+              <div key='aaa'>
+                { this.state.added.visible ? <Alert key='alert' added={this.state.added} closeAlert={this.closeAlert}/> : null}
+                <br />
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
@@ -118,6 +128,7 @@ class ProductCardComponent extends React.Component {
                     </DetailsOnBox>
                   </Card>
                 </Box>
+              </div>
             )}
           </PoseGroup>
       )
