@@ -1,12 +1,12 @@
-class WishlistService {
+class CartService {
   constructor(component) {
     this.component = component
     // this.workingURL = 'https://arcane-sands-50858.herokuapp.com'
     this.workingURL = 'http://localhost:3000'
   }
 
-  addProductToWishlist = (productId, token) => {
-    fetch(`${this.workingURL}/wish_lists`, {
+  addProductToCart = (productId, token) => {
+    fetch(`${this.workingURL}/carts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,10 +18,11 @@ class WishlistService {
     })
     .then(r => r.json())
     .then(response => {
-      this.component.props.addProductToWishlist(response)
+      // debugger
+      this.component.props.addProductToCart(response)
     })
   }
 
 }
 
-export default WishlistService;
+export default CartService;

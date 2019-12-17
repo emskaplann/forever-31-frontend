@@ -1,5 +1,6 @@
 import React from 'react';
 import WishlistService from '../services/WishlistService.js';
+import CartService from '../services/CartService.js';
 import posed, { PoseGroup } from 'react-pose';
 import { Card, Image, Icon } from 'semantic-ui-react';
 import { Container, Col, Row } from 'react-bootstrap';
@@ -13,7 +14,7 @@ const Box = posed.div({
     opacity: 1,
     delay: 300,
     transition: {
-      y: { type: 'spring', stiffness: 1000, damping: 15 },
+      y: { type: 'spring', stiffness: 500, damping: 15 },
       default: { duration: 300 }
     }
   },
@@ -54,6 +55,8 @@ class ProductCardComponent extends React.Component {
       isVisible: false
     }
     this.wishlistService = new WishlistService(this)
+    this.cartService = new CartService(this)
+
   }
 
   componentDidMount(){
@@ -61,6 +64,8 @@ class ProductCardComponent extends React.Component {
   }
 
   handleWishlistClick = (id) => this.wishlistService.addProductToWishlist(id, this.props.user.token)
+  handleCartClick = (id) => this.cartService.addProductToCart(id, this.props.user.token)
+
 
   render(){
     const { isVisible } = this.state
@@ -87,7 +92,7 @@ class ProductCardComponent extends React.Component {
                             <Col onClick={() => this.handleWishlistClick(this.props.product.id)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12}}>
                               <Icon style={{fontSize: '1.1em'}} name='heart'/>
                             </Col>
-                            <Col style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12, borderLeft: '1px solid gray'}}>
+                            <Col onClick={() => this.handleCartClick(this.props.product.id)} style={{color: '#fff', textAlign: 'center', width: '50%', fontSize: 12, borderLeft: '1px solid gray'}}>
                               <Icon style={{fontSize: '1.1em'}} name='shopping cart'/>
                             </Col>
                           </Row>
@@ -109,13 +114,18 @@ class ProductCardComponent extends React.Component {
 
   const mapDispatchToProps = (dispatch, mergeProps) => {
       return {
-        clearUserAuth: (newProduct) => {
+        addProductToWishlist: (newProduct) => {
           dispatch({
             type: 'ADD_PRODUCT_TO_WISHLIST',
             newProduct: newProduct
           })
-      }
+      }, addProductToCart: (newProduct) => {
+        dispatch({
+          type: 'ADD_PRODUCT_TO_CART',
+          newProduct: newProduct
+        })
+    }
     }
   }
 
-export default connect(mapStateToProps)(ProductCardComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCardComponent);
