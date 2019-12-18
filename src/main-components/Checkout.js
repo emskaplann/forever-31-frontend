@@ -1,4 +1,5 @@
 import React from 'react';
+import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -39,21 +40,24 @@ class Checkout extends React.Component {
 
   render(){
     return(
-      <Container style={{height: '98vh', marginTop: 50}} key='checkoutContainer'>
-        <Row>
-          <Col sm={4}>
-            <p>Would you like to complete the purchase?</p>
-          </Col>
-          <Col sm={4}>
-            <CardElement onChange={(e) => this.handleChange(e)}/>
-          </Col>
-          <Col sm={4}>
-            <button onClick={this.submit}>Purchase</button>
-          </Col>
-        </Row>
+      <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
+        <RenderProductsForCheckout />
       </Container>
     )
   }
 }
 
 export default injectStripe(Checkout);
+
+// card form
+// <Row>
+//   <Col sm={4}>
+//     <p>Would you like to complete the purchase?</p>
+//   </Col>
+//   <Col sm={4}>
+//     <CardElement onChange={(e) => this.handleChange(e)}/>
+//   </Col>
+//   <Col sm={4}>
+//     <button onClick={this.submit}>Purchase</button>
+//   </Col>
+// </Row>
