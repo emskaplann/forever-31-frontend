@@ -40,10 +40,15 @@ export default class Alert extends React.Component {
   }
 
   componentWillUnmount () {
+    this.props.added.needToLogin ? this.props.changeNeedToLogin() : console.log()
     clearInterval(this.interval)
   }
 
   render () {
-    return (<Message.Header style={{textAlign: 'center', backgroundColor: '#000000', color: '#fff'}}>{this.props.added.action} your {this.props.added.type}!</Message.Header>)
+    if(this.props.added.needToLogin){
+      return (<Message.Header style={{textAlign: 'center', backgroundColor: '#000000', color: '#fff'}}>you need to sign in or sign up :)</Message.Header>)
+    } else {
+      return (<Message.Header style={{textAlign: 'center', backgroundColor: '#000000', color: '#fff'}}>{this.props.added.action} your {this.props.added.type}!</Message.Header>)
+    }
   }
 }

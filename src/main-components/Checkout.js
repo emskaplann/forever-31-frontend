@@ -3,6 +3,8 @@ import RenderProductsForCheckout from '../sub-components/RenderProductsForChecko
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Header } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 // reducers for cart's total and item count
 const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
@@ -18,7 +20,6 @@ class Checkout extends React.Component {
     this.state = {
       complete: false,
       isFormCompleted: false,
-      cart: []
     }
   }
 
@@ -50,19 +51,22 @@ class Checkout extends React.Component {
 
 
   render(){
-    if(this.state.cart){
+    if(localStorage.token === "" || localStorage.token === undefined){
+      return(<Redirect to='/' />)
+    }
+    else if(this.props.cart){
       return(
         <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
           <Header as='h1' dividing>CheckOut</Header>
           <Row>
             <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
-              Total: ${this.state.cart.reduce(reducer, 0)}
+              Total: ${this.props.cart.reduce(reducer, 0)}
             </Col>
             <Col style={{textAlign: 'right', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
-              Item Count: {this.state.cart.reduce(reducer2, 0)}
+              Item Count: {this.props.cart.reduce(reducer2, 0)}
             </Col>
           </Row>
-          <RenderProductsForCheckout setCart={this.setCart}/>
+          <RenderProductsForCheckout/>
         </Container>
       )
     } else {
@@ -74,7 +78,14 @@ class Checkout extends React.Component {
   }
 }
 
-export default injectStripe(Checkout);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    cart: state.cartAndWishlist.cart,
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(injectStripe(Checkout));
 
 
 

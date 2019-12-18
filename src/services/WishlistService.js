@@ -5,6 +5,8 @@ class WishlistService {
     this.workingURL = 'http://localhost:3000'
   }
 
+  needToLogin = () => this.component.state.added ? this.component.setState({added: {visible: true, needToLogin: true}}) : console.log()
+
   addProductToWishlist = (productId, token) => {
     fetch(`${this.workingURL}/wish_lists`, {
       method: 'POST',

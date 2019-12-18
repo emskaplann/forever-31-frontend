@@ -5,6 +5,8 @@ class CartService {
     this.workingURL = 'http://localhost:3000'
   }
 
+  needToLogin = () => this.component.state.added ? this.component.setState({added: {visible: true, needToLogin: true}}) : console.log()
+
   addProductToCart = (productId, token) => {
     fetch(`${this.workingURL}/carts`, {
       method: 'POST',

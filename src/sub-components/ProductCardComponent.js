@@ -55,7 +55,7 @@ class ProductCardComponent extends React.Component {
     super();
     this.state = {
       isVisible: false,
-      added: {visible: false, type: 'cart', action: 'added'},
+      added: {visible: false, type: 'cart', action: 'added', needToLogin: false},
       timer: 2
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
@@ -69,28 +69,37 @@ class ProductCardComponent extends React.Component {
   }
 
   handleWishlistClick = (product) => {
-    const wishlistProductIds = this.props.wishlist.map(object => object.product.id)
-    if(wishlistProductIds.includes(product.id)){
-      this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, product.id)
+    let wishlistProductIds = []
+    if(this.props.wishlist){
+      wishlistProductIds = this.props.wishlist.map(object => object.product.id)
+      if(wishlistProductIds.includes(product.id)){
+        this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, product.id)
+      } else {
+        this.wishlistService.addProductToWishlist(product.id, this.props.user.token)
+      }
     } else {
-      this.wishlistService.addProductToWishlist(product.id, this.props.user.token)
+      this.wishlistService.needToLogin()
     }
   }
 
   handleCartClick = (product) => {
-    const cartProductIds = this.props.cart.map(object => object.product.id)
-    if(cartProductIds.includes(product.id)){
-      // discard the product from cart
-      this.cartAndWishlistService.discardProductFromCart(this.props.user.token, product.id)
+    let cartProductIds = []
+    if(this.props.cart){
+      cartProductIds = this.props.cart.map(object => object.product.id)
+      if(cartProductIds.includes(product.id)){
+        // discard the product from cart
+        this.cartAndWishlistService.discardProductFromCart(this.props.user.token, product.id)
+      } else {
+        // add product to cart
+        this.cartService.addProductToCart(product.id, this.props.user.token)
+      }
     } else {
-      // add product to cart
-      this.cartService.addProductToCart(product.id, this.props.user.token)
+      this.cartService.needToLogin()
     }
   }
 
-  closeAlert = () => {
-    this.setState({added: {...this.state.added, visible: false}})
-  }
+  changeNeedToLogin = () => this.setState({added: {...this.state.added, needToLogin: false}})
+  closeAlert = () => this.setState({added: {...this.state.added, visible: false}})
 
   render(){
     this.props.cart !== [] && this.props.cart ? cartProductIds2 = this.props.cart.map(object => object.product.id) : cartProductIds2 = []
@@ -104,7 +113,7 @@ class ProductCardComponent extends React.Component {
                     <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
                     {/* Product List Price Goes In This Section */}
                     <DetailsOnBox style={{position: 'absolute', top: '50%', width: '100%'}}>
-                      { this.state.added.visible ? <Alert added={this.state.added} closeAlert={this.closeAlert}/> : null}
+                      { this.state.added.visible ? <Alert added={this.state.added} changeNeedToLogin={this.changeNeedToLogin} closeAlert={this.closeAlert}/> : null}
                     </DetailsOnBox>
                     <DetailsOnBox>
                       <Label corner='left' color='black' onClick={() => this.handleWishlistClick(this.props.product)}>

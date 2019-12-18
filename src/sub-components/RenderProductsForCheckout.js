@@ -27,7 +27,6 @@ class RenderProductsForCheckout extends React.Component {
 
   render () {
     if(this.props.cart){
-      this.props.setCart(this.props.cart)
       return (
         <div style={{marginTop: 20}}>
           {this.props.cart.map(object => {
