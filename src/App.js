@@ -8,7 +8,7 @@ import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
 import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
-import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import { connect } from 'react-redux';
 

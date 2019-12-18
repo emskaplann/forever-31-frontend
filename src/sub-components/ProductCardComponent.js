@@ -5,7 +5,7 @@ import CartService from '../services/CartService.js';
 import posed, { PoseGroup } from 'react-pose';
 import Alert from './Alert.js'
 import { Card, Image, Icon, Label } from 'semantic-ui-react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 const Box = posed.div({
@@ -41,7 +41,6 @@ let cartProductIds2 = []
 let wishlistProductIds2 = []
 
 const DetailsOnBox = posed.div({
-  hoverable: true,
   init: {
     scale: 1,
     opacity: 0,
@@ -123,7 +122,7 @@ class ProductCardComponent extends React.Component {
                         <Card.Header style={{borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: '#000000'}}>
                           <Row>
                             <Col style={{color: '#fff', fontWeight: 'bold', textAlign: 'center'}}>
-                              $12.99
+                              {this.props.product.list_price}
                             </Col>
                           </Row>
                         </Card.Header>

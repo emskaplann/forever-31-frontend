@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Menu, Icon } from 'semantic-ui-react';
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react';
+import { Navbar, Nav, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {

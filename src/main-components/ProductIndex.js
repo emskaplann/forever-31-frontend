@@ -1,6 +1,5 @@
 import React from 'react';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js'
-import { Grid } from 'semantic-ui-react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 

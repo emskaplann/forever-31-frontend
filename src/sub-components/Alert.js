@@ -32,7 +32,11 @@ export default class Alert extends React.Component {
   }
 
   decreaseTimer = () => {
-    this.setState({timer: this.state.timer - 1})
+    if(this.state.timer !== 0){
+      this.setState({timer: this.state.timer - 1})
+    } else {
+      this.props.closeAlert()
+    }
   }
 
   componentWillUnmount () {
@@ -40,7 +44,6 @@ export default class Alert extends React.Component {
   }
 
   render () {
-    this.state.timer === 0 ? this.props.closeAlert() : console.log()
     return (<Message.Header style={{textAlign: 'center', backgroundColor: '#000000', color: '#fff'}}>{this.props.added.action} your {this.props.added.type}!</Message.Header>)
   }
 }

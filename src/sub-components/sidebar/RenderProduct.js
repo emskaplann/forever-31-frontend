@@ -1,17 +1,15 @@
 import React from 'react';
 import CartAndWishlistService from '../../services/CartAndWishlistService.js';
 import CartService from '../../services/CartService.js';
-import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
-import { Header } from 'semantic-ui-react';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Card, Icon, Input } from 'semantic-ui-react';
+import { Row, Col } from 'react-bootstrap';
+import { Card, Icon } from 'semantic-ui-react';
 
 class RenderProduct extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      quantity: props.cart.find(object => object.product.id == props.product.id).quantity
+      quantity: props.cart.find(object => object.product.id === props.product.id).quantity
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
     this.cartService = new CartService(this)

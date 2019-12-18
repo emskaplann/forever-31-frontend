@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Message } from 'semantic-ui-react';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Card, Icon, Loader, Input, Button } from 'semantic-ui-react';
+import { Row, Col } from 'react-bootstrap';
+import { Icon, Loader, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
 import CartAndWishlistService from '../../services/CartAndWishlistService.js';
-import actionCreators from '../../actionCreators.js';
 
 class RenderSign extends React.Component {
   constructor () {

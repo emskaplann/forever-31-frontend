@@ -5,7 +5,7 @@ import RenderProductForWishlist from '../sub-components/sidebar/RenderProductFor
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap';
-import { Card, Icon, Input, Divider } from 'semantic-ui-react';
+import { Icon, Divider } from 'semantic-ui-react';
 
 const mapStateToProps = (state, ownProps) => {
   return {
