@@ -2,22 +2,22 @@ import React from 'react';
 import { Message } from 'semantic-ui-react';
 import posed, { PoseGroup } from 'react-pose';
 
-const AlertCover = posed.div({
-  enter: {
-    y: 0,
-    opacity: 1,
-    delay: 300,
-    transition: {
-      opacity: { ease: 'easeOut', duration: 300 },
-      default: { ease: 'linear', duration: 500 }
-    }
-  },
-  exit: {
-    y: 50,
-    opacity: 0,
-    transition: { duration: 500 }
-  }
-});
+// const AlertCover = posed.div({
+//   enter: {
+//     y: 0,
+//     opacity: 1,
+//     delay: 300,
+//     transition: {
+//       opacity: { ease: 'easeOut', duration: 300 },
+//       default: { ease: 'linear', duration: 500 }
+//     }
+//   },
+//   exit: {
+//     y: 50,
+//     opacity: 0,
+//     transition: { duration: 500 }
+//   }
+// });
 
 export default class Alert extends React.Component {
   constructor () {
@@ -35,16 +35,12 @@ export default class Alert extends React.Component {
     this.setState({timer: this.state.timer - 1})
   }
 
+  componentWillUnmount () {
+    clearInterval(this.interval)
+  }
+
   render () {
     this.state.timer === 0 ? this.props.closeAlert() : console.log()
-    return (
-      <AlertCover>
-       <Message size='small' success={this.state.loading}>
-          <Message.Content>
-            <Message.Header style={{textAlign: 'center'}}>{this.props.added.action} your {this.props.added.type}!</Message.Header>
-          </Message.Content>
-        </Message>
-      </AlertCover>
-    )
+    return (<Message.Header style={{textAlign: 'center', backgroundColor: '#000000', color: '#fff'}}>{this.props.added.action} your {this.props.added.type}!</Message.Header>)
   }
 }

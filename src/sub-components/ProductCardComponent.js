@@ -32,7 +32,7 @@ const Box = posed.div({
     scale: 1.02,
     boxShadow: '0px 5px 10px rgba(0,0,0,0.2)'
   }, press: {
-    scale: 1.01,
+    scale: 1,
     boxShadow: '0px 2px 5px rgba(0,0,0,0.1)'
   }
 });
@@ -102,17 +102,19 @@ class ProductCardComponent extends React.Component {
       return(
           <PoseGroup>
             {isVisible && (
-              <div key='aaa'>
-                { this.state.added.visible ? <Alert key='alert' added={this.state.added} closeAlert={this.closeAlert}/> : null}
-                <br />
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
                     {/* Product List Price Goes In This Section */}
+                    <DetailsOnBox style={{position: 'absolute', top: '50%', width: '100%'}}>
+                      { this.state.added.visible ? <Alert added={this.state.added} closeAlert={this.closeAlert}/> : null}
+                    </DetailsOnBox>
                     <DetailsOnBox>
                       <Label corner='left' color='black' onClick={() => this.handleWishlistClick(this.props.product)}>
                         <Icon name='heart' color={wishlistProductIds2.includes(this.props.product.id) ? 'red' : null}/>
                       </Label>
+                    </DetailsOnBox>
+                    <DetailsOnBox>
                       <Label corner='right' color='black' onClick={() => this.handleCartClick(this.props.product)}>
                         <Icon name='shopping cart' color={cartProductIds2.includes(this.props.product.id) ? 'yellow' : null}/>
                       </Label>
@@ -128,7 +130,6 @@ class ProductCardComponent extends React.Component {
                     </DetailsOnBox>
                   </Card>
                 </Box>
-              </div>
             )}
           </PoseGroup>
       )
