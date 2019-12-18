@@ -38,10 +38,10 @@ class RenderProduct extends React.Component {
                 <Col sm={12} lg={12}>
                   <span style={{color: '#fff'}}>{product.display_name}</span>
                 </Col>
-                <Col sm={6} lg={6}>
+                <Col style={{textAlign: 'left'}} sm={6} lg={6}>
                   {product.on_sale ? (<><Icon style={{color: '#fff'}} size='small' name='tag' /><span style={{color: '#fff'}}>On Sale!</span></>) : null}
                 </Col>
-                <Col sm={6} lg={6}>
+                <Col style={{textAlign: 'right'}} sm={6} lg={6}>
                   <p style={{color: '#fff'}}>{product.list_price}</p>
                 </Col>
               </Row>
