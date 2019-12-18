@@ -2,6 +2,14 @@ import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Header } from 'semantic-ui-react';
+
+// reducers for cart's total and item count
+const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
+const reducer2 = (accumulator, currentValue) => accumulator + (currentValue.quantity)
+// reducer for wishlist's total
+const reducer3 = (accumulator, currentValue) => accumulator + parseInt(currentValue.product.list_price.replace('$', ''));
+
 
 class Checkout extends React.Component {
   constructor(props){
@@ -9,9 +17,12 @@ class Checkout extends React.Component {
     this.submit = this.submit.bind(this)
     this.state = {
       complete: false,
-      isFormCompleted: false
+      isFormCompleted: false,
+      cart: []
     }
   }
+
+  setCart = cart => this.setState({cart: cart})
 
   async submit() {
     if(this.state.isFormCompleted){
@@ -39,15 +50,34 @@ class Checkout extends React.Component {
 
 
   render(){
-    return(
-      <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
-        <RenderProductsForCheckout />
-      </Container>
-    )
+    if(this.state.cart){
+      return(
+        <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
+          <Header as='h1' dividing>CheckOut</Header>
+          <Row>
+            <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
+              Total: ${this.state.cart.reduce(reducer, 0)}
+            </Col>
+            <Col style={{textAlign: 'right', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
+              Item Count: {this.state.cart.reduce(reducer2, 0)}
+            </Col>
+          </Row>
+          <RenderProductsForCheckout setCart={this.setCart}/>
+        </Container>
+      )
+    } else {
+      return(
+        <>
+        </>
+      )
+    }
   }
 }
 
 export default injectStripe(Checkout);
+
+
+
 
 // card form
 // <Row>

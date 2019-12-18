@@ -9,7 +9,7 @@ class RenderProduct extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      quantity: props.cart.find(object => object.product.id === props.product.id).quantity
+
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
     this.cartService = new CartService(this)
@@ -19,7 +19,7 @@ class RenderProduct extends React.Component {
   discardProductFromCart = (productId) => this.cartAndWishlistService.discardProductFromCart(this.props.user.token, productId)
 
   handleDecreasingQuantity = (product, token, minus) => {
-    if(this.state.quantity === 1){
+    if(this.props.quantity === 1){
       return this.discardProductFromCart(product.id)
     }
     return this.cartService.changeQuantityOnCart(product, token, minus)
@@ -47,7 +47,7 @@ class RenderProduct extends React.Component {
               </Row>
               <Row>
                 <Col sm={12} lg={12} style={{color: '#fff', fontSize: 15}}>
-                  quantity: {this.state.quantity}
+                  quantity: {this.props.quantity}
                 </Col>
               </Row>
             </Col>
