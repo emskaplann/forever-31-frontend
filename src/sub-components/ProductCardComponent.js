@@ -47,8 +47,6 @@ const DetailsOnBox = posed.div({
   }, hover: {
     opacity: 0.89,
     scale: 1,
-  }, press: {
-    scale: 1,
   }
 });
 
