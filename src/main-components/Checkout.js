@@ -2,6 +2,7 @@ import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import CheckoutForm from '../sub-components/CheckoutForm.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Dimmer, Header, Divider, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -54,7 +55,7 @@ class Checkout extends React.Component {
             swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
           } else {
             this.setState({paymentLoading: false})
-            swal("OOPS! Something Went Wrong :/", 'Something Happened With The Request, Please Try Again Later.', "error");
+            swal("OOPS! Something Went Wrong :/", 'Something Causes Problem, Please Try Again Later.', "error");
           }
         } else {
           swal("You Cancelled Your Payment.");
@@ -95,6 +96,7 @@ class Checkout extends React.Component {
             </Col>
           </Row>
           <RenderProductsForCheckout/>
+          {this.props.cart.length === 0 ? <><br /><Header as='h1'>You don't have any item in your cart... <Link to='/' style={{color: '#000000'}}><u>Would you like to browse around limitless design?</u></Link></Header><br /></> : console.log()}
           <Divider />
           {/* Checkout Form */}
           <CheckoutForm isNameFormCompleted={this.state.isNameFormCompleted} isEmailFormCompleted={this.state.isEmailFormCompleted} handleChange={this.handleChange} handleName={this.handleNameInputChange} handleEmail={this.handleEmailInputChange} total={this.props.cart.reduce(reducer, 0)} itemCount={this.props.cart.reduce(reducer2, 0)} submit={this.submit}/>

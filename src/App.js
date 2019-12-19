@@ -79,7 +79,7 @@ class App extends React.Component {
             </Sidebar>
             <Sidebar.Pusher dimmed={visible}>
               <NavbarView sendContentId={this.getContentId} openModal={this.setVisible} />
-                <Segment basic>
+                <Segment style={{backgroundColor: '#fcfeff'}} basic>
                   <PoseGroup>
                     <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
                       <Switch location={location}>

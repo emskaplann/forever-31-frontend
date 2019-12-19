@@ -31,7 +31,15 @@ class RenderProductsForCheckout extends React.Component {
         <div style={{marginTop: 20}}>
           {this.props.cart.map(object => {
             // Content + CareSize + Fit sub-description was like this before replace() - now => Content + Care Size + Fit
-            const desc = object.product.description.replace('font-size: 12px;', "font-size: 12px; margin-left: 10px;")
+            const clearedDesc = object.product.description.replace('</div></section><section', '</div> </section> <section>')
+            const splittedDesc = clearedDesc.split(' ')
+            const idx = splittedDesc.indexOf("</section>")
+            const count = splittedDesc.length - idx
+            if (idx > -1) {
+              splittedDesc.splice(idx, count);
+            }
+            const newDesc = splittedDesc.join(' ')
+            debugger
             return(
               <Row key={`productCheckout-${object.product.id}`}style={{marginBottom: 20}}>
                 <Col xs={2} sm={2} md={2} lg={2}>
@@ -42,7 +50,7 @@ class RenderProductsForCheckout extends React.Component {
                 <Col style={{}} xs={7} sm={7} md={7} lg={7}>
                   <Row style={{ fontSize: '135%',fontWeight: 'bold'}}>{object.product.display_name}</Row>
                   <Divider style={{color: '#d3d3d3' }} />
-                  <Row>{ ReactHtmlParser(desc) }</Row>
+                  <Row>{ ReactHtmlParser(newDesc) }</Row>
                 </Col>
                 <Col xs={1} sm={1} md={1} lg={1}>
                   <Divider style={{color: '#d3d3d3' }} vertical>|</Divider>

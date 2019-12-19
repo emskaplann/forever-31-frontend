@@ -15,7 +15,7 @@ const createOptions = () => {
         letterSpacing: '0.025em',
         '::placeholder': {
           color: '#aab7c4',
-        },
+        }
       },
       invalid: {
         color: '#c23d4b',
