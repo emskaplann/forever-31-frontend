@@ -84,6 +84,24 @@ class UserService {
     })
   }
 
+  saveNewAddress = (lineOne, lineTwo) => {
+    fetch(`${this.workingURL}/addresses/${this.component.props.user.userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: this.component.props.user.token
+      }, body: JSON.stringify({address: { line_1: lineOne, line_2: lineTwo, user_id: this.component.props.user.userId }})
+    })
+    .then(r => r.json())
+    .then(response => {
+      localStorage.addressLineOne = response.line_1
+      localStorage.addressLineTwo = response.line_2
+      this.component.props.addAddress({line_1: response.line_1, line_2: response.line_2})
+      this.component.setState({changeShippingAddress: false})
+    })
+  }
+
 }
 
 export default UserService;

@@ -12,26 +12,31 @@ class CheckoutForm extends React.Component {
       changeShippingAddress: false,
       lineOne: "",
       lineTwo: "",
+      emptyForm: true,
     }
     this.userService = new UserService(this)
   }
 
   componentWillMount () {
     if(this.props.user.address.line_1 !== ""){
-      this.setState({changeShippingAddress: false})
+      this.setState({changeShippingAddress: false, lineOne: this.props.user.address.line_1, lineTwo: this.props.user.address.line_2, emptyForm: false})
     } else {
-      this.setState({changeShippingAddress: true})
+      this.setState({changeShippingAddress: true, emptyForm: true})
     }
   }
 
-  handleInputChangeLineOne = (event) => this.setState({lineOne: event.currentTarget.value})
+  handleInputChangeLineOne = (event) => this.setState({lineOne: event.currentTarget.value}, () => {this.state.lineOne !== "" ? this.setState({emptyForm: false}) : this.setState({emptyForm: true})})
   handleInputChangeLineTwo = (event) => this.setState({lineTwo: event.currentTarget.value})
-  openOrCloseShippingAdressForm = () => this.setState({changeShippingAddress: !this.state.changeShippingAddress})
+  openOrCloseShippingAdressForm = () => this.setState({changeShippingAddress: !this.state.changeShippingAddress}, () => this.props.user.address.line_1 !== "" ? this.setState({lineOne: this.props.user.address.line_1}, () => {this.setState({lineTwo: this.props.user.address.line_2})}) : console.log())
   saveNewAddress = () => {
-    if(this.props.user.address.line_1 !== ""){
-      this.userService.createAddress(this.state.lineOne, this.state.lineTwo)
+    if (this.state.lineOne !== "") {
+      if (this.props.user.address.line_1 !== ""){
+        this.userService.saveNewAddress(this.state.lineOne, this.state.lineTwo)
+      } else {
+        this.userService.createAddress(this.state.lineOne, this.state.lineTwo)
+      }
     } else {
-      this.userService.createAddress(this.state.lineOne, this.state.lineTwo)
+      this.setState({emptyForm: true})
     }
   }
 
@@ -46,12 +51,12 @@ class CheckoutForm extends React.Component {
           <Col xs={9} sm={9} md={9} lg={9}>
             <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
-                {this.state.changeShippingAddress ? <Input onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}
+                {this.state.changeShippingAddress ? <Input value={this.state.lineOne} error={this.state.emptyForm} onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}
               </Col>
             </Row>
             <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
-                {this.state.changeShippingAddress ? <Input onChange={this.handleInputChangeLineTwo} size='mini' style={{width: '100%', marginTop: 10}} placeholder='Adress Line 2...' /> : this.props.user.address.line_2}
+                {this.state.changeShippingAddress ? <Input value={this.state.lineTwo} onChange={this.handleInputChangeLineTwo} size='mini' style={{width: '100%', marginTop: 10}} placeholder='Adress Line 2...' /> : this.props.user.address.line_2}
               </Col>
             </Row>
           </Col>
