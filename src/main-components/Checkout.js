@@ -1,8 +1,9 @@
 import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
+import CheckoutForm from '../sub-components/CheckoutForm.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Header } from 'semantic-ui-react';
+import { Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -67,6 +68,9 @@ class Checkout extends React.Component {
             </Col>
           </Row>
           <RenderProductsForCheckout/>
+          <Divider />
+          {/* Checkout Form */}
+          <CheckoutForm handleChange={this.handleChange} submit={this.submit}/>
         </Container>
       )
     } else {
@@ -86,19 +90,3 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(mapStateToProps)(injectStripe(Checkout));
-
-
-
-
-// card form
-// <Row>
-//   <Col sm={4}>
-//     <p>Would you like to complete the purchase?</p>
-//   </Col>
-//   <Col sm={4}>
-//     <CardElement onChange={(e) => this.handleChange(e)}/>
-//   </Col>
-//   <Col sm={4}>
-//     <button onClick={this.submit}>Purchase</button>
-//   </Col>
-// </Row>
