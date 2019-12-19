@@ -1,7 +1,7 @@
 import React from 'react';
 import UserService from '../services/UserService.js';
 import { connect } from 'react-redux';
-import { Header, Divider, Input } from 'semantic-ui-react';
+import { Header, Divider, Input, Image } from 'semantic-ui-react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
@@ -65,7 +65,7 @@ class CheckoutForm extends React.Component {
           </Col>
         </Row>
         <Divider />
-        <Row style={{textAlign: 'center', marginTop: 20}}>
+        <Row style={{textAlign: 'center', marginTop: 20, marginBottom: 20}}>
           <Col sm={4}>
             <p>Would you like to complete the purchase?</p>
           </Col>
@@ -76,6 +76,19 @@ class CheckoutForm extends React.Component {
             <button onClick={this.props.submit}>Purchase</button>
           </Col>
         </Row>
+        <Row>
+          <Col xs={6} sm={6} md={6} lg={6}>
+            <Row>
+              Total: ${this.props.total}
+            </Row>
+            <Row>
+              Item Count: {this.props.itemCount}
+            </Row>
+          </Col>
+          <Col xs={6} sm={6} md={6} lg={6}>
+            <Image src='/images/stripe-secure-badge.png'></Image>
+          </Col>
+        </Row>
       </>
     )
   }
@@ -83,7 +96,7 @@ class CheckoutForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 

@@ -70,7 +70,7 @@ class Checkout extends React.Component {
           <RenderProductsForCheckout/>
           <Divider />
           {/* Checkout Form */}
-          <CheckoutForm handleChange={this.handleChange} submit={this.submit}/>
+          <CheckoutForm handleChange={this.handleChange} total={this.props.cart.reduce(reducer, 0)} itemCount={this.props.cart.reduce(reducer2, 0)} submit={this.submit}/>
         </Container>
       )
     } else {

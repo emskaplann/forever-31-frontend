@@ -38,7 +38,6 @@ class CartService {
     })
     .then(r => r.json())
     .then(response => {
-      console.log(response)
       this.component.props.changeQuantityOnCart(response[0])
     })
   }
