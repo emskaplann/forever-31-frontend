@@ -38,10 +38,8 @@ class CartService {
     })
     .then(r => r.json())
     .then(response => {
+      console.log(response)
       this.component.props.changeQuantityOnCart(response[0])
-      if(this.component.state.quantity){
-        this.component.setState({quantity: response[0].quantity})
-      }
     })
   }
 

@@ -45,10 +45,10 @@ class CheckoutForm extends React.Component {
       <>
         <Row>
           {/* Add Conditional Rendering! */}
-          <Col style={{textAlign: 'left'}} xs={2} sm={2} md={2} lg={2}>
+          <Col style={{textAlign: 'left'}} xs={3} sm={2} md={2} lg={2}>
             Shipping Adress:
           </Col>
-          <Col xs={9} sm={9} md={9} lg={9}>
+          <Col xs={8} sm={9} md={9} lg={9}>
             <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
                 {this.state.changeShippingAddress ? <Input value={this.state.lineOne} error={this.state.emptyForm} onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}
