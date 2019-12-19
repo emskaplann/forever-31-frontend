@@ -1,9 +1,28 @@
 import React from 'react';
 import UserService from '../services/UserService.js';
 import { connect } from 'react-redux';
-import { Header, Divider, Input, Image } from 'semantic-ui-react';
+import { Header, Divider, Input, Image, Button } from 'semantic-ui-react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+
+const createOptions = () => {
+  return {
+    style: {
+      base: {
+        fontSize: '16px',
+        color: '#424770',
+        fontFamily: 'Open Sans, sans-serif',
+        letterSpacing: '0.025em',
+        '::placeholder': {
+          color: '#aab7c4',
+        },
+      },
+      invalid: {
+        color: '#c23d4b',
+      },
+    }
+  }
+};
 
 class CheckoutForm extends React.Component {
   constructor () {
@@ -45,18 +64,18 @@ class CheckoutForm extends React.Component {
       <>
         <Row>
           {/* Add Conditional Rendering! */}
-          <Col style={{textAlign: 'left'}} xs={3} sm={2} md={2} lg={2}>
+          <Col style={{color: '#6b7c93', textAlign: 'left'}} xs={3} sm={2} md={2} lg={2}>
             Shipping Adress:
           </Col>
           <Col xs={8} sm={9} md={9} lg={9}>
             <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
-                {this.state.changeShippingAddress ? <Input value={this.state.lineOne} error={this.state.emptyForm} onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}
+                 <div style={{ letterSpacing: '0.025em'}}>{this.state.changeShippingAddress ? <Input value={this.state.lineOne} error={this.state.emptyForm} onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}</div>
               </Col>
             </Row>
             <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
-                {this.state.changeShippingAddress ? <Input value={this.state.lineTwo} onChange={this.handleInputChangeLineTwo} size='mini' style={{width: '100%', marginTop: 10}} placeholder='Adress Line 2...' /> : this.props.user.address.line_2}
+                 <div style={{ letterSpacing: '0.025em'}}>{this.state.changeShippingAddress ? <Input value={this.state.lineTwo} onChange={this.handleInputChangeLineTwo} size='mini' style={{width: '100%', marginTop: 10}} placeholder='Adress Line 2...' /> : this.props.user.address.line_2}</div>
               </Col>
             </Row>
           </Col>
@@ -65,28 +84,39 @@ class CheckoutForm extends React.Component {
           </Col>
         </Row>
         <Divider />
-        <Row style={{textAlign: 'center', marginTop: 20, marginBottom: 20}}>
-          <Col sm={4}>
-            <p>Would you like to complete the purchase?</p>
+        <Row style={{textAlign: 'left', marginTop: 10, marginBottom: 20}}>
+          <Col xs={12} md={8} sm={8}>
+          <Row style={{marginBottom: 20}}>
+            <Col xs={6} sm={6} style={{marginBottom: 10}}>
+              <label style={{color: '#6b7c93', letterSpacing: '0.025em'}}>
+                Name on Card
+                <br />
+                <Input placeholder='Jack Willerson' size='mini'/>
+              </label>
+            </Col>
+            <Col xs={6} sm={6}>
+              <label style={{color: '#6b7c93', letterSpacing: '0.025em'}}>
+                Email
+                <br />
+                <Input placeholder='example@example.com' size='mini'/>
+              </label>
+            </Col>
+            <Col style={{ marginTop: 15}} xs={12} md={8} sm={10} lg={9}>
+              <CardElement {...createOptions()} onChange={(e) => this.props.handleChange(e)}/>
+            </Col>
+            <Col style={{marginTop: 8}} xs={12} md={4} lg={3} sm={2}>
+              <Button style={{ textAlign: 'center'}} fluid onClick={this.props.submit}>Pay ${this.props.total}</Button>
+            </Col>
+          </Row>
           </Col>
-          <Col sm={4}>
-            <CardElement onChange={(e) => this.props.handleChange(e)}/>
+          <Col xs={6} md={4} sm={4}>
+            <Image style={{float: 'right'}} src='/images/stripe-secure-badge.png'></Image>
           </Col>
-          <Col sm={4}>
-            <button onClick={this.props.submit}>Purchase</button>
+          <Col sm={2} md={2} xs={3} style={{fontWeight: 'bold', fontSize: 15}}>
+            Total: ${this.props.total}
           </Col>
-        </Row>
-        <Row>
-          <Col xs={6} sm={6} md={6} lg={6}>
-            <Row>
-              Total: ${this.props.total}
-            </Row>
-            <Row>
-              Item Count: {this.props.itemCount}
-            </Row>
-          </Col>
-          <Col xs={6} sm={6} md={6} lg={6}>
-            <Image src='/images/stripe-secure-badge.png'></Image>
+          <Col sm={2} md={2} xs={3} style={{fontWeight: 'bold', fontSize: 15}}>
+            Item Count: {this.props.itemCount}
           </Col>
         </Row>
       </>

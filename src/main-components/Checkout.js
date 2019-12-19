@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 // reducers for cart's total and item count
 const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
@@ -36,7 +37,7 @@ class Checkout extends React.Component {
             token: token.id
         })
       })
-      if (response.ok) console.log("Purchase Complete!")
+      swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
     } else {
       // form is empty do something!
     }
