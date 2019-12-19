@@ -37,7 +37,7 @@ class App extends React.Component {
 
   componentDidMount () {
     if(localStorage.userId){
-      this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId})
+      this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId, address: {line_1: localStorage.addressLineOne, line_2: localStorage.addressLineTwo}})
       this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
     }
   }

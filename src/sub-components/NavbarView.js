@@ -18,6 +18,8 @@ class NavbarView extends Component {
     this.props.clearCartAndWishlist()
     localStorage.token = ""
     localStorage.userId = ""
+    localStorage.addressLineOne = ""
+    localStorage.addressLineTwo = "" 
   }
 
   renderSigns = () => {

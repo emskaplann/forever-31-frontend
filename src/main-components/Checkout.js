@@ -58,7 +58,7 @@ class Checkout extends React.Component {
     else if(this.props.cart){
       return(
         <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
-          <Header as='h1' dividing>CheckOut</Header>
+          <Header as='h1' dividing>Checkout</Header>
           <Row>
             <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
               Total: ${this.props.cart.reduce(reducer, 0)}
