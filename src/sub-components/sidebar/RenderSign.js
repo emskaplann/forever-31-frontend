@@ -79,7 +79,7 @@ class RenderSign extends React.Component {
     return (
       <>
       <Header as='h2' style={{color: '#fff', marginTop: 5}}>
-        {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</span>
+        {this.state.signUp ? 'Sign Up' : 'Sign In'} or <span onClick={() => this.setState({signUp: !this.state.signUp})}><u>{!this.state.signUp ? 'Sign Up' : 'Sign In'}</u></span>
         {this.state.loading ? <Loader active inline style={{marginLeft: 10}} /> : null}
       </Header>
       <Row className='justify-content-center'>
