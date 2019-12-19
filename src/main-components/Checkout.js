@@ -3,7 +3,7 @@ import RenderProductsForCheckout from '../sub-components/RenderProductsForChecko
 import CheckoutForm from '../sub-components/CheckoutForm.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Header, Divider } from 'semantic-ui-react';
+import { Dimmer, Header, Divider, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -20,26 +20,48 @@ class Checkout extends React.Component {
     super(props);
     this.submit = this.submit.bind(this)
     this.state = {
-      complete: false,
+      paymentLoading: false,
       isFormCompleted: false,
+      isNameFormCompleted: false,
+      isEmailFormCompleted: false,
+      name: "",
+      email: ""
     }
   }
 
-  setCart = cart => this.setState({cart: cart})
-
   async submit() {
-    if(this.state.isFormCompleted){
-      let { token } = await this.props.stripe.createToken({name: "Name"});
-      let response = await fetch("http://localhost:3000/charge", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            token: token.id
-        })
+    if(this.state.isFormCompleted && this.state.isNameFormCompleted && this.state.isEmailFormCompleted){
+      swal({
+        title: "Are you sure?",
+        text: `You have totally ${this.props.cart.reduce(reducer2, 0)} item in your cart. And the total is $${this.props.cart.reduce(reducer, 0)}.`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
       })
-      swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
+      .then(async (willDelete) => {
+        if (willDelete) {
+          this.setState({paymentLoading: true})
+          let { token } = await this.props.stripe.createToken({name: "Name"});
+          let response = await fetch("http://localhost:3000/charge", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                token: token.id
+            })
+          })
+          if (response.ok) {
+            this.setState({paymentLoading: false})
+            swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
+          } else {
+            this.setState({paymentLoading: false})
+            swal("OOPS! Something Went Wrong :/", 'Something Happened With The Request, Please Try Again Later.', "error");
+          }
+        } else {
+          swal("You Cancelled Your Payment.");
+        }
+      });
     } else {
-      // form is empty do something!
+      swal("Form is Not Completed :/", `Make Sure That Name and Email Forms are Filled.`, "error");
     }
   }
 
@@ -51,6 +73,9 @@ class Checkout extends React.Component {
     }
   }
 
+  handleNameInputChange = (e) => this.setState({name: e.currentTarget.value}, this.state.name !== "" ? this.setState({isNameFormCompleted: true}) : this.setState({isNameFormCompleted: false}))
+  handleEmailInputChange = (e) => this.setState({email: e.currentTarget.value}, this.state.email !== "" ? this.setState({isEmailFormCompleted: true}) : this.setState({isEmailFormCompleted: false}))
+
 
   render(){
     if(localStorage.token === "" || localStorage.token === undefined){
@@ -59,6 +84,7 @@ class Checkout extends React.Component {
     else if(this.props.cart){
       return(
         <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
+          {this.state.paymentLoading ? <Dimmer active><Loader size='big' /></Dimmer> : console.log()}
           <Header as='h1' dividing>Checkout</Header>
           <Row>
             <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
@@ -71,7 +97,7 @@ class Checkout extends React.Component {
           <RenderProductsForCheckout/>
           <Divider />
           {/* Checkout Form */}
-          <CheckoutForm handleChange={this.handleChange} total={this.props.cart.reduce(reducer, 0)} itemCount={this.props.cart.reduce(reducer2, 0)} submit={this.submit}/>
+          <CheckoutForm isNameFormCompleted={this.state.isNameFormCompleted} isEmailFormCompleted={this.state.isEmailFormCompleted} handleChange={this.handleChange} handleName={this.handleNameInputChange} handleEmail={this.handleEmailInputChange} total={this.props.cart.reduce(reducer, 0)} itemCount={this.props.cart.reduce(reducer2, 0)} submit={this.submit}/>
         </Container>
       )
     } else {

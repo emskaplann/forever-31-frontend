@@ -91,14 +91,14 @@ class CheckoutForm extends React.Component {
               <label style={{color: '#6b7c93', letterSpacing: '0.025em'}}>
                 Name on Card
                 <br />
-                <Input placeholder='Jack Willerson' size='mini'/>
+                <Input error={!this.props.isNameFormCompleted} onChange={this.props.handleName} placeholder='Jack Willerson' size='mini'/>
               </label>
             </Col>
             <Col xs={6} sm={6}>
               <label style={{color: '#6b7c93', letterSpacing: '0.025em'}}>
                 Email
                 <br />
-                <Input placeholder='example@example.com' size='mini'/>
+                <Input error={!this.props.isEmailFormCompleted} onChange={this.props.handleEmail} placeholder='example@example.com' size='mini'/>
               </label>
             </Col>
             <Col style={{ marginTop: 15}} xs={12} md={8} sm={10} lg={9}>
