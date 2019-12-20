@@ -1,13 +1,11 @@
 import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import CheckoutForm from '../sub-components/CheckoutForm.js';
-import CartService from '../services/CartService.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Dimmer, Header, Divider, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect,  Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 // reducers for cart's total and item count
@@ -26,14 +24,16 @@ class Checkout extends React.Component {
       isFormCompleted: false,
       isNameFormCompleted: false,
       isEmailFormCompleted: false,
+      orderAmount: 0,
       name: "",
-      email: ""
+      email: "",
+      redirect: false
     }
-    this.cartService = new CartService(this)
   }
 
   async submit() {
     if(this.state.isFormCompleted && this.state.isNameFormCompleted && this.state.isEmailFormCompleted){
+      this.setState({orderAmount: this.props.cart.reduce(reducer, 0)})
       swal({
         title: "Are you sure?",
         text: `You have totally ${this.props.cart.reduce(reducer2, 0)} item in your cart. And the total is $${this.props.cart.reduce(reducer, 0)}.`,
@@ -52,19 +52,21 @@ class Checkout extends React.Component {
                 token: token.id,
                 name: this.state.name,
                 email: this.state.email,
-                amount: this.props.cart.reduce(reducer, 0) * 100,
-                items: this.props.cart.map(object => object.product.display_name).join(' -- ')
+                amount: this.props.cart.reduce(reducer, 1) * 100,
+                items: this.props.cart.map(object => object.product.id).join(' - ')
             })
           })
           // debugger
           if (response.ok) {
             this.props.cleanCart()
-            this.cartService
             this.setState({paymentLoading: false})
-            swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
+            swal("Purchase Completed!", `You made a payment total of: $${this.state.orderAmount}`, "success")
+            .then((value) => {
+              this.setState({redirect: true})
+            })
           } else {
             this.setState({paymentLoading: false})
-            swal("OOPS! Something Went Wrong :/", 'Something Causes Problem, Please Try Again Later.', "error");
+            swal("OOPS! Something Went Wrong :/", 'Something Causes Problem, Please Try Again Later.', "error")
           }
         } else {
           this.setState({paymentLoading: false})
@@ -96,6 +98,7 @@ class Checkout extends React.Component {
       return(
         <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
           {this.state.paymentLoading ? <Dimmer active><Loader size='big' /></Dimmer> : console.log()}
+          { this.state.redirect ? <Redirect to='/' /> : console.log() }
           <Header as='h1' dividing>Checkout</Header>
           <Row>
             <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
