@@ -39,7 +39,6 @@ class RenderProductsForCheckout extends React.Component {
               splittedDesc.splice(idx, count);
             }
             const newDesc = splittedDesc.join(' ')
-            debugger
             return(
               <Row key={`productCheckout-${object.product.id}`}style={{marginBottom: 20}}>
                 <Col xs={2} sm={2} md={2} lg={2}>

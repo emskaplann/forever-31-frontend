@@ -1,6 +1,7 @@
 import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import CheckoutForm from '../sub-components/CheckoutForm.js';
+import CartService from '../services/CartService.js';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -28,6 +29,7 @@ class Checkout extends React.Component {
       name: "",
       email: ""
     }
+    this.cartService = new CartService(this)
   }
 
   async submit() {
@@ -42,15 +44,22 @@ class Checkout extends React.Component {
       .then(async (willDelete) => {
         if (willDelete) {
           this.setState({paymentLoading: true})
-          let { token } = await this.props.stripe.createToken({name: "Name"});
+          let { token } = await this.props.stripe.createToken({name: this.state.name, address_line1: this.props.user.address.line_1, address_line2: this.props.user.address.line_2});
           let response = await fetch("http://localhost:3000/charge", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json", Accept: "application/json", Authorization: this.props.user.token},
             body: JSON.stringify({
-                token: token.id
+                token: token.id,
+                name: this.state.name,
+                email: this.state.email,
+                amount: this.props.cart.reduce(reducer, 0) * 100,
+                items: this.props.cart.map(object => object.product.display_name).join(' -- ')
             })
           })
+          // debugger
           if (response.ok) {
+            this.props.cleanCart()
+            this.cartService
             this.setState({paymentLoading: false})
             swal("Purchase Completed!", `You made a payment total of: $${this.props.cart.reduce(reducer, 0)}`, "success");
           } else {
@@ -58,6 +67,7 @@ class Checkout extends React.Component {
             swal("OOPS! Something Went Wrong :/", 'Something Causes Problem, Please Try Again Later.', "error");
           }
         } else {
+          this.setState({paymentLoading: false})
           swal("You Cancelled Your Payment.");
         }
       });
@@ -118,4 +128,14 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(injectStripe(Checkout));
+const mapDispatchToProps = (dispatch, mergeProps) => {
+  return {
+      cleanCart: (address) => {
+        dispatch({
+          type: 'CLEAN_CART',
+        })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectStripe(Checkout));
