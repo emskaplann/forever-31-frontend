@@ -4,6 +4,17 @@ import { Container, Row, Col, Carousel } from 'react-bootstrap';
 import { Dimmer, Header, Divider, Loader, Card, Image, Button } from 'semantic-ui-react';
 import ReactHtmlParser from 'react-html-parser';
 
+var imageExists = require('image-exists')
+
+function checkImage(bool){
+  console.log(bool)
+  if(bool){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const carouselItems = []
 
 class ProductShow extends React.Component {
@@ -16,13 +27,18 @@ class ProductShow extends React.Component {
 
   componentDidMount () {
     for (const productImages in this.props.product.images[0]) {
-      console.log(productImages)
-      if (productImages.normalize().includes('url') && !productImages.normalize().includes('detail') &&  !productImages.normalize().includes('small')){
-        carouselItems.push(
-          <Carousel.Item>
-            <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
-          </Carousel.Item>
-        )
+      if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
+        imageExists(this.props.product.images[0][productImages], (exists) => {
+          if(exists){
+            return (
+              carouselItems.push(
+                <Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
+                  <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
+                </Carousel.Item>
+              )
+            )
+          }
+        })
       } else {
 
       }
@@ -33,7 +49,7 @@ class ProductShow extends React.Component {
     const product = this.props.product
 
     return(
-      <Container style={{marginTop: 30, marginBottom: 10}}>
+      <Container style={{marginTop: 40, marginBottom: 10}}>
         <Row>
           <Col xs={12} sm={12} md={4} lg={4}>
             {/* Carousel START */}
@@ -41,7 +57,7 @@ class ProductShow extends React.Component {
                 {carouselItems}
               </Carousel>
             {/* Carousel END */}
-            <h4 style={{fontWeight: 'bold'}}>{product.display_name}</h4>
+            <h4 style={{fontWeight: 'bold', marginTop: 10}}>{product.display_name}</h4>
             <Divider />
             <Row style={{justifyContent: 'space-between'}}>
               <Col style={{justifyContent: 'flex-start'}} xs={2} sm={2} md={2} lg={2}>
