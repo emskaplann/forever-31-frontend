@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    products: state.products
-  }
-}
+import { Container, Row, Col } from 'react-bootstrap';
+import { Dimmer, Header, Divider, Loader } from 'semantic-ui-react';
 
 class ProductShow extends React.Component {
   constructor () {
@@ -17,9 +13,15 @@ class ProductShow extends React.Component {
 
   render () {
     return(
-      <>
-      </>
+      <Container>
+      </Container>
     )
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.user
   }
 }
 

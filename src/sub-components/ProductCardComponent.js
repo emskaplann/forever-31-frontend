@@ -4,6 +4,7 @@ import WishlistService from '../services/WishlistService.js';
 import CartService from '../services/CartService.js';
 import posed, { PoseGroup } from 'react-pose';
 import Alert from './Alert.js'
+import { Link } from 'react-router-dom';
 import { Card, Image, Icon, Label } from 'semantic-ui-react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -110,7 +111,9 @@ class ProductCardComponent extends React.Component {
             {isVisible && (
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
-                    <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
+                    <Link to={`/products/${this.props.product.id}`} >
+                      <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
+                    </Link>
                     {/* Product List Price Goes In This Section */}
                     <DetailsOnBox style={{position: 'absolute', top: '50%', width: '100%'}}>
                       { this.state.added.visible ? <Alert added={this.state.added} changeNeedToLogin={this.changeNeedToLogin} closeAlert={this.closeAlert}/> : null}
