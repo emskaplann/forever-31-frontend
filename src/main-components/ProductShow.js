@@ -102,9 +102,23 @@ class ProductShow extends React.Component {
               </Row>
             </Col>
           </Row>
+            <Divider horizontal>You Might Also Like</Divider>
+          <Row>
+          </Row>
         </Container>
       )
   }
+}
+
+function randomProductGenerator(products){
+  let choosedProducts = []
+  let products2 = products
+  for(let i = 0; i === 4; i++){
+    let rand = Math.floor(Math.random() * Math.floor(products2.length))
+    choosedProducts.push(products2[rand])
+    products2.splice(rand, 1)
+  }
+  return choosedProducts;
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -114,7 +128,8 @@ const mapStateToProps = (state, ownProps) => {
     user: state.user,
     cart: state.cartAndWishlist.cart,
     wishlist: state.cartAndWishlist.wishlist,
-    product: state.products.find(product => product.id == productId)
+    product: state.products.find(product => product.id == productId),
+    youMightAlsoLikeProducts: randomProductGenerator(state.products)
   }
 }
 
