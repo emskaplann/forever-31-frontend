@@ -6,13 +6,12 @@ import ReactHtmlParser from 'react-html-parser';
 
 var imageExists = require('image-exists')
 
-const carouselItems = []
 
 class ProductShow extends React.Component {
   constructor () {
     super();
     this.state = {
-      loading: 0
+      carouselItems: []
     }
   }
 
@@ -21,13 +20,10 @@ class ProductShow extends React.Component {
       if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
         imageExists(this.props.product.images[0][productImages], (exists) => {
           if(exists){
-            return (
-              carouselItems.push(
-                <Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
-                  <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
-                </Carousel.Item>
-              )
-            )
+              this.setState({carouselItems: [...this.state.carouselItems, (<Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
+                <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
+              </Carousel.Item>)]})
+
           }
         })
       }
@@ -42,7 +38,7 @@ class ProductShow extends React.Component {
             <Col xs={12} sm={12} md={4} lg={4}>
               {/* Carousel START */}
                 <Carousel>
-                  {carouselItems}
+                  {this.state.carouselItems}
                 </Carousel>
               {/* Carousel END */}
               <h4 style={{fontWeight: 'bold', marginTop: 10}}>{product.display_name}</h4>
