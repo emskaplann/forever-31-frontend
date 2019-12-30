@@ -20,7 +20,7 @@ class ProductShow extends React.Component {
       if (productImages.normalize().includes('url') && !productImages.normalize().includes('detail') &&  !productImages.normalize().includes('small')){
         carouselItems.push(
           <Carousel.Item>
-            <Image src={this.props.product.images[0][productImages]} />
+            <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
           </Carousel.Item>
         )
       } else {
@@ -37,7 +37,7 @@ class ProductShow extends React.Component {
         <Row>
           <Col xs={12} sm={12} md={4} lg={4}>
             {/* Carousel START */}
-              <Carousel style={{color: "#000000"}}>
+              <Carousel>
                 {carouselItems}
               </Carousel>
             {/* Carousel END */}
