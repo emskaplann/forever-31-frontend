@@ -32,6 +32,16 @@ class ProductShow extends React.Component {
     }
   }
 
+  handleWishlistClick = () => {
+    let wishlistProductIds = []
+    this.props.wishlist ?  wishlistProductIds = this.props.wishlist.map(object => object.product.id) : console.log()
+    if(wishlistProductIds.includes(this.props.product.id)){
+      this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, this.props.product.id)
+    } else {
+      this.wishlistService.addProductToWishlist(this.props.product.id, this.props.user.token)
+    }
+  }
+
   componentDidMount () {
     for (const productImages in this.props.product.images[0]) {
       if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
@@ -64,20 +74,17 @@ class ProductShow extends React.Component {
               {/* Carousel END */}
               <h4 style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10}}>
                 {product.display_name}
-                <Icon name='heart' color={wishlistProductIds2.includes(product.id) ? 'red' : 'white'}/>
+                <Icon name='heart' onClick={() => this.handleWishlistClick()} style={{marginLeft: 4}} color={wishlistProductIds2.includes(product.id) ? 'red' : 'grey'}/>
               </h4>
               <Divider />
               <Row style={{justifyContent: 'space-between'}}>
-                <Col style={{marginTop: 5}} xs={2} sm={2} md={2} lg={2}>
+                <Col style={{marginTop: 7}} xs={2} sm={2} md={2} lg={2}>
                   <h6 style={{fontWeight: 'bold'}}>{product.list_price}</h6>
                 </Col>
-                <Col style={{textAlign: 'center', }} xs={8} sm={8} md={8} lg={8}>
+                <Col style={{textAlign: 'center', }} xs={10} sm={10} md={10} lg={10}>
                   <Button fluid size='tiny' onClick={() => this.handleCartClick()}>
                      <Icon style={{fontSize: '1.1em'}} name='shopping cart'/>{cartProductIds.includes(product.id) ?  'Already On Cart' : 'Add To Cart'}
                    </Button>
-                </Col>
-                <Col style={{marginTop: 5}} xs={2} sm={2} md={2} lg={2}>
-                  <h6 id="h6-product" style={{fontWeight: 'bold'}}>{product.shipping_fee}</h6>
                 </Col>
               </Row>
             </Col>

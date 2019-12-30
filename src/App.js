@@ -52,11 +52,12 @@ class App extends React.Component {
   setVisible = bool => this.setState({visible: bool}, function(){
     bool ? console.log('s') : this.setState({contentId: ""})
   })
+
   render(){
     let sideBarWidth = 400
     const { visible } = this.state
-    if(this.state.windowWidth < 400){
-      sideBarWidth = this.state.windowWidth
+    if(Math.max(document.documentElement.clientWidth, window.innerWidth) < 400){
+      sideBarWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
     }
     return (
       <Route
