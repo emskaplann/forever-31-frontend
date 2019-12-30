@@ -6,22 +6,44 @@ import ReactHtmlParser from 'react-html-parser';
 import CartService from '../services/CartService.js';
 import WishlistService from '../services/WishlistService.js';
 import CartAndWishlistService from '../services/CartAndWishlistService.js';
+import ProductCardComponent from '../sub-components/ProductCardComponent.js';
 
 
 var imageExists = require('image-exists')
 
+const renderCards = (products, comp) => (
+      products.map(product => (
+      <Col xs={2} md={2} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 23 }}>
+        <ProductCardComponent key={product.id} changeCarousel={comp.changeCarousel} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
+      </Col>
+    ))
+)
 
 class ProductShow extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      carouselItems: []
+      carouselItems: [],
+      youMightAlsoLikeProducts: props.youMightAlsoLikeProducts
     }
     this.cartService = new CartService(this);
     this.wishlistService = new WishlistService(this);
     this.cartAndWishlistService = new CartAndWishlistService(this);
   }
 
+  changeCarousel = () => {
+    this.setState({carouselItems: [], youMightAlsoLikeProducts: randomProductGenerator(this.props.products, this.props.product.id)}, () => {for (const productImages in this.props.product.images[0]) {
+      if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
+        imageExists(this.props.product.images[0][productImages], (exists) => {
+          if(exists){
+              this.setState({carouselItems: [...this.state.carouselItems, (<Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
+                <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
+              </Carousel.Item>)]})
+          }
+        })
+      }
+    }})
+  }
   handleCartClick = () => {
     let cartProductIds = []
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
@@ -55,7 +77,6 @@ class ProductShow extends React.Component {
       }
     }
   }
-
 
   render () {
     let cartProductIds = []
@@ -104,19 +125,26 @@ class ProductShow extends React.Component {
           </Row>
             <Divider horizontal>You Might Also Like</Divider>
           <Row>
+            {renderCards(this.state.youMightAlsoLikeProducts, this)}
           </Row>
         </Container>
       )
   }
 }
 
-function randomProductGenerator(products){
+function randomProductGenerator(products, productId){
   let choosedProducts = []
-  let products2 = products
-  for(let i = 0; i === 4; i++){
-    let rand = Math.floor(Math.random() * Math.floor(products2.length))
-    choosedProducts.push(products2[rand])
-    products2.splice(rand, 1)
+  let ids = [products.find(product => product.id == productId).id]
+  for(let i = 0; i < 6; i++){
+    let rand = Math.floor(Math.random() * Math.floor(products.length))
+    if(ids.includes(products[rand].id)){
+      i -= 1
+    } else {
+      ids.push(products[rand].id)
+      choosedProducts.push(products[rand])
+    }
+
+    // products2.splice(rand, 1)
   }
   return choosedProducts;
 }
@@ -129,7 +157,8 @@ const mapStateToProps = (state, ownProps) => {
     cart: state.cartAndWishlist.cart,
     wishlist: state.cartAndWishlist.wishlist,
     product: state.products.find(product => product.id == productId),
-    youMightAlsoLikeProducts: randomProductGenerator(state.products)
+    products: state.products,
+    youMightAlsoLikeProducts: randomProductGenerator(state.products, productId)
   }
 }
 
