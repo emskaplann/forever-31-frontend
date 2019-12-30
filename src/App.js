@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 300, beforeChildren: true },
+  enter: { opacity: 1, delay: 500, beforeChildren: true },
   exit: { opacity: 0 }
 });
 

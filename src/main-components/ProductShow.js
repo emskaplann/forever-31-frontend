@@ -13,7 +13,7 @@ var imageExists = require('image-exists')
 
 const renderCards = (products, comp) => (
       products.map(product => (
-      <Col xs={2} md={2} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 23 }}>
+      <Col xs={6} sm={6} md={2} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 23 }}>
         <ProductCardComponent key={product.id} changeCarousel={comp.changeCarousel} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
       </Col>
     ))
