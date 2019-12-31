@@ -158,6 +158,7 @@ class ProductShow extends React.Component {
                           <td style={{border: '1px solid #ddd'}}>45-47</td>
                       </tr>
                   </tbody></table>
+                <div className="d_content" style={{marginTop: 3}}><p>- Please Indicate Your Size From Cart. Default is Medium(M).</p></div>
                 </Col>
               </Row>
             </Col>

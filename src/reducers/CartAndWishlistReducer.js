@@ -16,8 +16,11 @@ const CartAndWishlistReducer = (oldState = initialState, action) => {
     case 'ADD_PRODUCT_TO_CART':
       return {...oldState, cart: [ action.newProduct, ...oldState.cart]}
     case 'CHANGE_QUANTITY_ON_CART':
-      const newCart = oldState.cart.map(object => object.product.id === action.newProduct.product.id ? action.newProduct : object)
+      let newCart = oldState.cart.map(object => object.product.id === action.newProduct.product.id ? action.newProduct : object)
       return {...oldState, cart: [...newCart]}
+    case 'CHANGE_SIZE_FOR_PRODUCT':
+      const newCart2 = oldState.cart.map(object => object.product.id === action.newProduct.product.id ? action.newProduct : object)
+      return {...oldState, cart: [...newCart2]}
     case 'CLEAN_CART_AND_WISHLIST': // cleaning cart and wishlist
       return {};
     default:

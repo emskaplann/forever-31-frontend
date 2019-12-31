@@ -45,7 +45,7 @@ class SideBarContent extends React.Component {
               </Col>
             </Row>
             <br />
-            {this.props.cart.map(object => <RenderProduct key={object.product.id} quantity={object.quantity} product={object.product} productImages={object.product_images[0]} />)}
+            {this.props.cart.map(object => <RenderProduct key={object.product.id} quantity={object.quantity} size={object.size} product={object.product} productImages={object.product_images[0]} />)}
         </Container>
       )
     }

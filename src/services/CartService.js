@@ -42,6 +42,24 @@ class CartService {
     })
   }
 
+  changeSizeForProduct = (product, token, size) => {
+    fetch(`${this.workingURL}/carts/${product.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+        Accept: 'application/json'
+      }, body: JSON.stringify({
+          update_size: 'true',
+          size: size
+      })
+    })
+    .then(r => r.json())
+    .then(response => {
+      this.component.props.changeSizeForProduct(response[0])
+    })
+  }
+
 }
 
 export default CartService;
