@@ -110,7 +110,56 @@ class ProductShow extends React.Component {
               </Row>
             </Col>
             <Col style={{marginTop: 5}} xs={12} sm={12} md={6} lg={6}>
-              { ReactHtmlParser(product.description) }
+              <Row>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  { ReactHtmlParser(product.description) }
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={12} style={{marginBottom: 10}}>
+                  <table class="sizechart ws_100 txc b_gray">
+                      <tbody><tr style={{backgroundColor: '#000000', color: '#fff'}}>
+                          <td colspan="2" style={{border: '1px solid white'}}>Size</td>
+                          <td style={{border: '1px solid white'}}>Bust</td>
+                          <td style={{border: '1px solid white'}}>Waist</td>
+                          <td style={{border: '1px solid white'}}>Hips</td>
+                      </tr>
+                      <tr>
+                          <td style={{border: '1px solid #ddd'}}>XS</td>
+                          <td style={{border: '1px solid #ddd'}}>1</td>
+                          <td style={{border: '1px solid #ddd'}}>32</td>
+                          <td style={{border: '1px solid #ddd'}}>24-25</td>
+                          <td style={{border: '1px solid #ddd'}}>33-34</td>
+                      </tr>
+                      <tr style={{backgroundColor: '#f3f3f3'}}>
+                          <td style={{border: '1px solid #ddd'}}>S</td>
+                          <td style={{border: '1px solid #ddd'}}>3/5</td>
+                          <td style={{border: '1px solid #ddd'}}>34-35</td>
+                          <td style={{border: '1px solid #ddd'}}>26-27</td>
+                          <td style={{border: '1px solid #ddd'}}>35-36</td>
+                      </tr>
+                      <tr>
+                          <td style={{border: '1px solid #ddd'}}>M</td>
+                          <td style={{border: '1px solid #ddd'}}>7/9</td>
+                          <td style={{border: '1px solid #ddd'}}>36-37</td>
+                          <td style={{border: '1px solid #ddd'}}>28-29</td>
+                          <td style={{border: '1px solid #ddd'}}>38-40</td>
+                      </tr>
+                      <tr style={{backgroundColor: '#f3f3f3'}}>
+                          <td style={{border: '1px solid #ddd'}}>L</td>
+                          <td style={{border: '1px solid #ddd'}}>11</td>
+                          <td style={{border: '1px solid #ddd'}}>38-39</td>
+                          <td style={{border: '1px solid #ddd'}}>30-31</td>
+                          <td style={{border: '1px solid #ddd'}}>42-44</td>
+                      </tr>
+                      <tr>
+                          <td style={{border: '1px solid #ddd'}}>XL</td>
+                          <td style={{border: '1px solid #ddd'}}>13</td>
+                          <td style={{border: '1px solid #ddd'}}>40-41</td>
+                          <td style={{border: '1px solid #ddd'}}>32-33</td>
+                          <td style={{border: '1px solid #ddd'}}>45-47</td>
+                      </tr>
+                  </tbody></table>
+                </Col>
+              </Row>
             </Col>
             <Col xs={12} sm={3} md={2} lg={2}>
               <Row>
