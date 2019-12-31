@@ -110,8 +110,6 @@ class App extends React.Component {
             <Sidebar.Pusher dimmed={visible}>
               <NavbarView sendContentId={this.getContentId} openModal={this.setVisible} />
                 <Segment style={{backgroundColor: '#fcfeff'}} basic>
-                  <PoseGroup>
-                    <RouteContainer key='uniqueKey'> {/* Normally 'location.key' should replaced uniqueKey */}
                       <Switch location={location}>
                         <Route exact path='/' component={ProductIndex} key='index' />
                         <Route exact path='/products/:id' component={ProductShow} key='show' />
@@ -122,8 +120,6 @@ class App extends React.Component {
                           </Elements>
                         </StripeProvider>
                       </Switch>
-                    </RouteContainer>
-                  </PoseGroup>
                 </Segment>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
@@ -133,7 +129,7 @@ class App extends React.Component {
         <Widget
           handleNewUserMessage={this.handleNewUserMessage}
            />
-      </div>
+       </div>
     </>
     );
   }
