@@ -8,8 +8,8 @@ class WatsonService {
     fetch(`${this.workingURL}/create_watson_session`)
     .then(r => r.json())
     .then(response => {
-      this.component.props.addWatsonSession(response)
-      localStorage.watsonSessionId = response
+      this.component.props.addWatsonSession(response.session_id)
+      localStorage.watsonSessionId = response.session_id
     })
   }
 
@@ -26,7 +26,13 @@ class WatsonService {
     })
     .then(r => r.json())
     .then(response => {
-      debugger
+      // debugger
+      console.log(response)
+      if(response.output.generic[0].response_type === "text"){
+        this.component.addResponseMessage(response.output.generic[0].text)
+      } else {
+        this.component.addResponseMessage("Can you rephrase? I didn't understand...")
+      }
     })
   }
 }

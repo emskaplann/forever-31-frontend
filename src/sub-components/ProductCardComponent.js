@@ -12,20 +12,7 @@ import { connect } from 'react-redux';
 const Box = posed.div({
   hoverable: true,
   pressable: true,
-  enter: {
-    y: 0,
-    opacity: 1,
-    delay: 300,
-    transition: {
-      y: { type: 'spring', stiffness: 500, damping: 15 },
-      default: { duration: 300 }
-    }
-  },
-  exit: {
-    y: 50,
-    opacity: 0,
-    transition: { duration: 150 }
-  }, init: {
+   init: {
     scale: 1,
     boxShadow: '0px 0px 0px rgba(0,0,0,0)'
   }, hover: {

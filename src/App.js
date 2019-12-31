@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 500, beforeChildren: true },
-  exit: { opacity: 0 }
+  exit: { opacity: 1 }
 });
 
 class App extends React.Component {
@@ -36,16 +36,20 @@ class App extends React.Component {
       visible: false,
       windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
       contentId: 0,
+      isWidgetOpen: false
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
+    this.watsonService = new WatsonService(this)
+    this.addResponseMessage = addResponseMessage
   }
 
   componentDidMount () {
-    addResponseMessage('Hi there! From F31 Store!')
+    this.addResponseMessage('Hi there! From F31 Store!')
     if(localStorage.userId){
       this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId, address: {line_1: localStorage.addressLineOne, line_2: localStorage.addressLineTwo}})
       this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
     }
+    setInterval(this.watsonService.createWatsonSession, 50000)
   }
 
   getContentId = (contentId) => {
@@ -60,7 +64,21 @@ class App extends React.Component {
   })
 
   handleNewUserMessage = newMessage => {
-    //
+    this.watsonService.sendNewUserMessage(newMessage)
+  }
+
+  handleWidget = () => {
+    this.setState({isWidgetOpen: !this.state.isWidgetOpen}, () => {
+      if(this.state.isWidgetOpen){
+        if(localStorage.watsonSessionId){
+          this.props.addWatsonSession(localStorage.watsonSessionId)
+        } else {
+          this.watsonService.createWatsonSession()
+        }
+      } else {
+        localStorage.watsonSessionId = ""
+      }
+    })
   }
 
   render(){
@@ -71,10 +89,6 @@ class App extends React.Component {
     }
     return (
       <>
-      <Widget
-        handleNewUserMessage={this.handleNewUserMessage}
-
-         />
       <Route
         render={({ location }) => (
           <Sidebar.Pushable as={Segment}>
@@ -115,6 +129,11 @@ class App extends React.Component {
           </Sidebar.Pushable>
         )}
       />
+      <div onClick={() => this.handleWidget()}>
+        <Widget
+          handleNewUserMessage={this.handleNewUserMessage}
+           />
+      </div>
     </>
     );
   }
@@ -134,7 +153,7 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
       })
     }, addWatsonSession: (sessionId) => {
       dispatch({
-        type: 'ADD_CART_AND_WISHLIST',
+        type: 'ADD_WATSON_SESSION',
         sessionId: sessionId
       })
     }
