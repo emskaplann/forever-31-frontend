@@ -7,6 +7,8 @@ const userReducer = (oldState = initialState, action) => {
       return action.user;
     case 'ADD_ADDRESS': // adding user address when they change or create
       return {...oldState, address: action.address}
+    case 'ADD_WATSON_SESSION': // adding user address when they change or create
+      return {...oldState, watsonSessionId: action.sessionId}
     case 'CLEAR_USER_AUTH': // cleaning saved user token and id when they log out
       return {}
     default:

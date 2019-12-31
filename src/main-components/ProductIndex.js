@@ -1,7 +1,10 @@
 import React from 'react';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js'
 import { Container, Row, Col } from 'react-bootstrap';
+import { Widget } from 'react-chat-widget';
 import { connect } from 'react-redux';
+
+import 'react-chat-widget/lib/styles.css';
 
 const mapStateToProps = (state, ownProps) => {
   return {

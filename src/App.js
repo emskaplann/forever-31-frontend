@@ -10,7 +10,12 @@ import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
+import { Widget, addResponseMessage } from 'react-chat-widget';
+import WatsonService from './services/WatsonService.js';
 import { connect } from 'react-redux';
+
+import 'react-chat-widget/lib/styles.css';
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -36,6 +41,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    addResponseMessage('Hi there! From F31 Store!')
     if(localStorage.userId){
       this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId, address: {line_1: localStorage.addressLineOne, line_2: localStorage.addressLineTwo}})
       this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
@@ -53,6 +59,10 @@ class App extends React.Component {
     bool ? console.log('s') : this.setState({contentId: ""})
   })
 
+  handleNewUserMessage = newMessage => {
+    //
+  }
+
   render(){
     let sideBarWidth = 400
     const { visible } = this.state
@@ -60,6 +70,11 @@ class App extends React.Component {
       sideBarWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
     }
     return (
+      <>
+      <Widget
+        handleNewUserMessage={this.handleNewUserMessage}
+
+         />
       <Route
         render={({ location }) => (
           <Sidebar.Pushable as={Segment}>
@@ -100,6 +115,7 @@ class App extends React.Component {
           </Sidebar.Pushable>
         )}
       />
+    </>
     );
   }
 }
@@ -115,6 +131,11 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
       dispatch({
         type: 'ADD_CART_AND_WISHLIST',
         cartAndWishlist: cartAndWishlist
+      })
+    }, addWatsonSession: (sessionId) => {
+      dispatch({
+        type: 'ADD_CART_AND_WISHLIST',
+        sessionId: sessionId
       })
     }
   }

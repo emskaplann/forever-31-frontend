@@ -19,7 +19,8 @@ class NavbarView extends Component {
     localStorage.token = ""
     localStorage.userId = ""
     localStorage.addressLineOne = ""
-    localStorage.addressLineTwo = "" 
+    localStorage.addressLineTwo = ""
+    localStorage.watsonSessionId = ""
   }
 
   renderSigns = () => {
