@@ -45,22 +45,30 @@ class ProductShow extends React.Component {
     }})
   }
   handleCartClick = () => {
-    let cartProductIds = []
-    this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
-    if(cartProductIds.includes(this.props.product.id)){
-      this.cartAndWishlistService.discardProductFromCart(this.props.user.token, this.props.product.id)
+    if(this.props.user.token === undefined){
+      this.props.openModal(true)
     } else {
-      this.cartService.addProductToCart(this.props.product.id, this.props.user.token)
+      let cartProductIds = []
+      this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
+      if(cartProductIds.includes(this.props.product.id)){
+        this.cartAndWishlistService.discardProductFromCart(this.props.user.token, this.props.product.id)
+      } else {
+        this.cartService.addProductToCart(this.props.product.id, this.props.user.token)
+      }
     }
   }
 
   handleWishlistClick = () => {
-    let wishlistProductIds = []
-    this.props.wishlist ?  wishlistProductIds = this.props.wishlist.map(object => object.product.id) : console.log()
-    if(wishlistProductIds.includes(this.props.product.id)){
-      this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, this.props.product.id)
+    if(this.props.user.token === undefined){
+      this.props.openModal(true)
     } else {
-      this.wishlistService.addProductToWishlist(this.props.product.id, this.props.user.token)
+      let wishlistProductIds = []
+      this.props.wishlist ?  wishlistProductIds = this.props.wishlist.map(object => object.product.id) : console.log()
+      if(wishlistProductIds.includes(this.props.product.id)){
+        this.cartAndWishlistService.discardProductFromWishlist(this.props.user.token, this.props.product.id)
+      } else {
+        this.wishlistService.addProductToWishlist(this.props.product.id, this.props.user.token)
+      }
     }
   }
 
@@ -115,9 +123,9 @@ class ProductShow extends React.Component {
                   { ReactHtmlParser(product.description) }
                 </Col>
                 <Col xs={12} sm={12} md={12} lg={12} style={{marginBottom: 10}}>
-                  <table class="sizechart ws_100 txc b_gray">
+                  <table className="sizechart ws_100 txc b_gray">
                       <tbody><tr style={{backgroundColor: '#000000', color: '#fff'}}>
-                          <td colspan="2" style={{border: '1px solid white'}}>Size</td>
+                          <td colSpan="2" style={{border: '1px solid white'}}>Size</td>
                           <td style={{border: '1px solid white'}}>Bust</td>
                           <td style={{border: '1px solid white'}}>Waist</td>
                           <td style={{border: '1px solid white'}}>Hips</td>

@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   setVisible = bool => this.setState({visible: bool}, function(){
-    bool ? console.log('s') : this.setState({contentId: ""})
+    bool ? console.log() : this.setState({contentId: ""})
   })
 
   handleNewUserMessage = newMessage => {
@@ -112,7 +112,7 @@ class App extends React.Component {
                 <Segment style={{backgroundColor: '#fcfeff'}} basic>
                       <Switch location={location}>
                         <Route exact path='/' component={ProductIndex} key='index' />
-                        <Route exact path='/products/:id' component={ProductShow} key='show' />
+                        <Route exact path='/products/:id' render={(props) => <ProductShow {...props} openModal={this.setVisible} />} key='show' />
                         {/* Stripe Route */}
                         <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
                           <Elements>
