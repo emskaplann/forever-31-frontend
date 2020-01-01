@@ -34,31 +34,31 @@ class RenderProduct extends React.Component {
             </Col>
             <Col xs={7} sm={7} md={8} className='mx-auto'>
               <Row>
-                <Col sm={12} lg={12}>
+                <Col xs={12} md={12} sm={12} lg={12}>
                   <span style={{color: '#fff'}}>{product.display_name}</span>
                 </Col>
-                <Col style={{textAlign: 'left'}} sm={6} lg={6}>
+                <Col style={{fontSize: '90%', textAlign: 'left'}} xs={6} md={6} sm={6} lg={6}>
                   {product.on_sale ? (<><Icon style={{color: '#fff'}} size='small' name='tag' /><span style={{color: '#fff'}}>On Sale!</span></>) : null}
                 </Col>
-                <Col style={{textAlign: 'right'}} sm={6} lg={6}>
+                <Col style={{fontSize: '90%', textAlign: 'right'}} xs={6} md={6} sm={6} lg={6}>
                   <p style={{color: '#fff'}}>{product.list_price}</p>
                 </Col>
               </Row>
               <Row style={{marginTop: 5}}>
-                <Col xs={6} sm={6} md={6} lg={6}>
+                <Col style={{border: '1px solid red'}} xs={6} sm={6} md={6} lg={6}>
                   <Row>
-                    <Col xs={4} sm={4} md={4} lg={4}>
+                    <Col id="stupid-button" xs={4} sm={4} md={4} lg={4}>
                       <Button size='mini' active={this.props.size === 'S' ? true : false} style={{fontWeigt: 'bold', padding: '10px'}} inverted onClick={() => this.cartService.changeSizeForProduct(this.props.product, this.props.user.token, "S")}>S</Button>
                     </Col>
-                    <Col xs={4} sm={4} md={4} lg={4}>
+                    <Col id="stupid-button" xs={4} sm={4} md={4} lg={4}>
                       <Button size='mini' active={this.props.size === 'M' ? true : false} style={{fontWeigt: 'bold', padding: '10px'}} inverted onClick={() => this.cartService.changeSizeForProduct(this.props.product, this.props.user.token, "M")}>M</Button>
                     </Col>
-                    <Col xs={4} sm={4} md={4} lg={4}>
+                    <Col id="stupid-button" xs={4} sm={4} md={4} lg={4}>
                       <Button size='mini' active={this.props.size === 'L' ? true : false} style={{fontWeigt: 'bold', marginLeft: 5, padding: '10px'}} inverted onClick={() => this.cartService.changeSizeForProduct(this.props.product, this.props.user.token, "L")}>L</Button>
                     </Col>
                   </Row>
                 </Col>
-                <Col xs={5} sm={5} md={5} lg={5} style={{marginLeft: 10, color: '#fff', fontSize: 15}}>
+                <Col xs={6} sm={6} md={6} lg={6} style={{color: '#fff'}}>
                   quantity: {this.props.quantity}
                 </Col>
               </Row>
