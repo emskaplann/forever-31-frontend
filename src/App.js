@@ -33,7 +33,7 @@ class App extends React.Component {
   constructor () {
     super();
     this.state = {
-      visible: false,
+      visible: true,
       windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
       contentId: 0,
       isWidgetOpen: false

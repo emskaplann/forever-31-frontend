@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react'
 import { Row, Col, Container } from 'react-bootstrap';
 import { Icon, Divider } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -46,6 +48,11 @@ class SideBarContent extends React.Component {
             </Row>
             <br />
             {this.props.cart.map(object => <RenderProduct key={object.product.id} quantity={object.quantity} size={object.size} product={object.product} productImages={object.product_images[0]} />)}
+            <Row style={{justifyContent: 'flex-end'}}>
+              <Link to="/checkout">
+                <Header onClick={() => this.props.closeSideBar(false)} as='h4' style={{color: "#fff"}}>Proceed to Checkout</Header>
+              </Link>
+            </Row>
         </Container>
       )
     }
