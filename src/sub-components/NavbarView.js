@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Label, Search } from 'semantic-ui-react';
 import { Navbar, Nav, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.user,
+    products: state.products.map(el => {
+      return {...el, link_id: el.id}
+    }),
     cart: state.cartAndWishlist.cart,
     wishlist: state.cartAndWishlist.wishlist
   }
 }
 
+const resultRenderer = ({ display_name, link_id }) => <Link to={`/products/${link_id}`}> <Label content={display_name} /> </Link>
+resultRenderer.propTypes = {
+  display_name: PropTypes.string,
+  id: PropTypes.string,
+}
+
 class NavbarView extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      results: [],
+      value: ""
+    }
+  }
 
   logOut = () => {
     this.props.clearUserAuth()
@@ -49,6 +69,18 @@ class NavbarView extends Component {
     this.props.openModal(true)
   }
 
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+    setTimeout(() => {
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+      const isMatch = (result) => re.test(result.display_name)
+      this.setState({
+          isLoading: false,
+          results: _.filter(this.props.products, isMatch),
+      })
+    }, 300)
+  }
+
   render() {
     return (
       <>
@@ -56,6 +88,17 @@ class NavbarView extends Component {
         <Navbar.Brand href="/" className='mx-auto' style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         {/* Cart and WishList icons for opening right directioned sidebar to see Cart or WishList */}
+        <Search
+            loading={this.state.isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true,
+            })}
+            results={this.state.results}
+            value={this.state.value}
+            resultRenderer={resultRenderer}
+            {...this.props}
+          />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className='mr-auto'>
           </Nav>
