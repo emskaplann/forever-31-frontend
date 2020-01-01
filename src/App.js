@@ -67,20 +67,6 @@ class App extends React.Component {
     this.watsonService.sendNewUserMessage(newMessage)
   }
 
-  handleWidget = () => {
-    this.setState({isWidgetOpen: !this.state.isWidgetOpen}, () => {
-      if(this.state.isWidgetOpen){
-        if(localStorage.watsonSessionId){
-          this.props.addWatsonSession(localStorage.watsonSessionId)
-        } else {
-          this.watsonService.createWatsonSession()
-        }
-      } else {
-        localStorage.watsonSessionId = ""
-      }
-    })
-  }
-
   render(){
     let sideBarWidth = 400
     const { visible } = this.state
@@ -125,11 +111,9 @@ class App extends React.Component {
           </Sidebar.Pushable>
         )}
       />
-      <div onClick={() => this.handleWidget()}>
-        <Widget
-          handleNewUserMessage={this.handleNewUserMessage}
-           />
-       </div>
+      <Widget
+        handleNewUserMessage={this.handleNewUserMessage}
+        />
     </>
     );
   }

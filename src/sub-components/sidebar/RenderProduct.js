@@ -45,7 +45,7 @@ class RenderProduct extends React.Component {
                 </Col>
               </Row>
               <Row style={{marginTop: 5}}>
-                <Col style={{border: '1px solid red'}} xs={6} sm={6} md={6} lg={6}>
+                <Col xs={6} sm={6} md={6} lg={6}>
                   <Row>
                     <Col id="stupid-button" xs={4} sm={4} md={4} lg={4}>
                       <Button size='mini' active={this.props.size === 'S' ? true : false} style={{fontWeigt: 'bold', padding: '10px'}} inverted onClick={() => this.cartService.changeSizeForProduct(this.props.product, this.props.user.token, "S")}>S</Button>

@@ -4,15 +4,6 @@ class WatsonService {
     this.workingURL = 'http://localhost:3000'
   }
 
-  createWatsonSession = () => {
-    fetch(`${this.workingURL}/create_watson_session`)
-    .then(r => r.json())
-    .then(response => {
-      this.component.props.addWatsonSession(response.session_id)
-      localStorage.watsonSessionId = response.session_id
-    })
-  }
-
   sendNewUserMessage = message => {
     fetch(`${this.workingURL}/post_input_to_watson`, {
       method: 'POST',
@@ -28,10 +19,20 @@ class WatsonService {
     .then(response => {
       // debugger
       console.log(response)
-      if(response.output.generic[0].response_type === "text"){
-        this.component.addResponseMessage(response.output.generic[0].text)
+      if(response.session_id){
+        this.component.props.addWatsonSession(response.session_id)
+        localStorage.watsonSessionId = response.session_id
+        if(response.original_response.output.generic[0].response_type === "text"){
+          this.component.addResponseMessage(response.original_response.output.generic[0].text)
+        } else {
+          this.component.addResponseMessage("Can you rephrase? I didn't understand...")
+        }
       } else {
-        this.component.addResponseMessage("Can you rephrase? I didn't understand...")
+        if(response.original_response.output.generic[0].response_type === "text"){
+          this.component.addResponseMessage(response.original_response.output.generic[0].text)
+        } else {
+          this.component.addResponseMessage("Can you rephrase? I didn't understand...")
+        }
       }
     })
   }
