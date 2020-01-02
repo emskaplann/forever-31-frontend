@@ -67,7 +67,7 @@ class ProductShow extends React.Component {
     this.props.wishlist ?  wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : console.log()
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
     const product = this.props.product
-    console.log(this.props.carouselItems)
+    if(product){
       return(
         <Container style={{marginTop: 40, marginBottom: 10}}>
           <Row>
@@ -163,6 +163,9 @@ class ProductShow extends React.Component {
           </Row>
         </Container>
       )
+    } else {
+      return(<></>)
+    }
   }
 }
 
@@ -190,9 +193,14 @@ function carouselItemGenerator(product){
   return newItems;
 }
 
-function randomProductGenerator(products, productId){
+function randomProductGenerator(products, productId, product = {}){
   let choosedProducts = []
-  let ids = [products.find(product => product.id == productId).id]
+  let ids = []
+  if(product === {}){
+    ids = [products.find(product => product.id == productId).id]
+  } else {
+    ids = [product.id]
+  }
   for(let i = 0; i < 6; i++){
     let rand = Math.floor(Math.random() * Math.floor(products.length))
     if(ids.includes(products[rand].id)){
@@ -207,17 +215,42 @@ function randomProductGenerator(products, productId){
   return choosedProducts;
 }
 
-const mapStateToProps = (state, ownProps) => {
+const request = async (products, id) => {
+  const productIds =  await products.map(el => el.id)
+  if(!productIds.includes(id)){
+    const response = await fetch(`http://localhost:3000/products/${id}`)
+    const json = await response.json()
+    return json
+  } else {
+    const json = await products.find(product => product.id === id)
+    return json
+  }
+}
+
+const mapStateToProps = async (state, ownProps) => {
   // fetching the product from the state for show page
   const productId = ownProps.match.params.id
+  // let product = {}
+  // const asd = await request(state.products, productId)
+  // product = asd
+  // return {
+  //   user: state.user,
+  //   cart: state.cartAndWishlist.cart,
+  //   wishlist: state.cartAndWishlist.wishlist,
+  //   product: product,
+  //   products: state.products,
+  //   carouselItems: carouselItemGenerator(product),
+  //   youMightAlsoLikeProducts: randomProductGenerator(state.products, productId, product)
+  // }
+  let product = state.products.find(product => product.id === productId)
   return {
     user: state.user,
     cart: state.cartAndWishlist.cart,
     wishlist: state.cartAndWishlist.wishlist,
-    product: state.products.find(product => product.id == productId),
+    product: product,
     products: state.products,
-    carouselItems: carouselItemGenerator(state.products.find(product => product.id == productId)),
-    youMightAlsoLikeProducts: randomProductGenerator(state.products, productId)
+    carouselItems: carouselItemGenerator(product),
+    youMightAlsoLikeProducts: randomProductGenerator(state.products, productId, product)
   }
 }
 

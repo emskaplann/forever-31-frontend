@@ -141,19 +141,3 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-  // {renderCards(props.products.flat())} => products render .flat()
-
-  // Old Sidebar Content
-    // <Menu.Item>
-    //   <Icon name='home' />
-    //   <Link to='/checkout'>Checkout!</Link>
-    // </Menu.Item>
-    // <Menu.Item as='a'>
-    //   <Icon name='gamepad' />
-    //   Games
-    // </Menu.Item>
-    // <Menu.Item as='a'>
-    //   <Icon name='camera' />
-    //   Channels
-    // </Menu.Item>
