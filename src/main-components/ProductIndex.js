@@ -1,16 +1,14 @@
 import React from 'react';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js'
 import { Container, Row, Col } from 'react-bootstrap';
+import { Header } from 'semantic-ui-react';
 import { Widget } from 'react-chat-widget';
 import { connect } from 'react-redux';
 
+
 import 'react-chat-widget/lib/styles.css';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    products: state.products
-  }
-}
+
 
 const renderCards = products => (
       products.map(product => (
@@ -24,8 +22,15 @@ class ProductIndex extends React.Component {
   constructor () {
     super();
     this.state = {
-
+      limit: 32
     }
+  }
+
+  addMoreProducts = () => {
+      fetch(`http://localhost:3000/products?start=${this.state.limit}&limit=${this.state.limit + 32}`)
+      .then(r => r.json())
+      .then(response => this.props.addMoreProducts(response))
+      this.setState({limit: this.state.limit + 32})
   }
 
   render(){
@@ -34,10 +39,28 @@ class ProductIndex extends React.Component {
         <Row>
           {renderCards(this.props.products.flat())}
         </Row>
+        <Header as='h2' onClick={this.addMoreProducts} style={{textAlign: 'center'}}>See More...</Header>
       </Container>
     )
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    products: state.products
+  }
+}
 
-export default connect(mapStateToProps)(ProductIndex);
+const mapDispatchToProps = (dispatch, mergeProps) => {
+    return {
+      addMoreProducts: (products) => {
+        dispatch({
+          type: 'ADD_PRODUCTS',
+          products: products
+        })
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductIndex);
