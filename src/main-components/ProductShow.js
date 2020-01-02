@@ -14,7 +14,7 @@ var imageExists = require('image-exists')
 const renderCards = (products, comp) => (
       products.map(product => (
       <Col xs={6} sm={6} md={2} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 23 }}>
-        <ProductCardComponent key={product.id} changeCarousel={comp.changeCarousel} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
+        <ProductCardComponent key={product.id} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
       </Col>
     ))
 )
@@ -31,19 +31,6 @@ class ProductShow extends React.Component {
     this.cartAndWishlistService = new CartAndWishlistService(this);
   }
 
-  changeCarousel = () => {
-    this.setState({carouselItems: [], youMightAlsoLikeProducts: randomProductGenerator(this.props.products, this.props.product.id)}, () => {for (const productImages in this.props.product.images[0]) {
-      if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
-        imageExists(this.props.product.images[0][productImages], (exists) => {
-          if(exists){
-              this.setState({carouselItems: [...this.state.carouselItems, (<Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
-                <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
-              </Carousel.Item>)]})
-          }
-        })
-      }
-    }})
-  }
   handleCartClick = () => {
     if(this.props.user.token === undefined){
       this.props.openModal(true)
@@ -72,33 +59,20 @@ class ProductShow extends React.Component {
     }
   }
 
-  componentDidMount () {
-    for (const productImages in this.props.product.images[0]) {
-      if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
-        imageExists(this.props.product.images[0][productImages], (exists) => {
-          if(exists){
-              this.setState({carouselItems: [...this.state.carouselItems, (<Carousel.Item key={`carouselItem-${this.props.product.images[0][productImages]}`}>
-                <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={this.props.product.images[0][productImages]} />
-              </Carousel.Item>)]})
-          }
-        })
-      }
-    }
-  }
-
   render () {
     let cartProductIds = []
     let wishlistProductIds2 = []
     this.props.wishlist ?  wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : console.log()
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
     const product = this.props.product
+    console.log(this.props.carouselItems)
       return(
         <Container style={{marginTop: 40, marginBottom: 10}}>
           <Row>
             <Col xs={12} sm={12} md={4} lg={4}>
               {/* Carousel START */}
                 <Carousel>
-                  {this.state.carouselItems}
+                  {this.props.carouselItems}
                 </Carousel>
               {/* Carousel END */}
               <h4 style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10}}>
@@ -190,6 +164,24 @@ class ProductShow extends React.Component {
   }
 }
 
+function carouselItemGenerator(product){
+  let newItems = []
+  for (const productImages in product.images[0]) {
+    if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
+    imageExists(product.images[0][productImages], (exists) => {
+        if(exists){
+            newItems = [...newItems, (<Carousel.Item active={productImages.normalize().includes('front') ? true : false} key={`carouselItem-${product.images[0][productImages]}`}>
+                      <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={product.images[0][productImages]} />
+                    </Carousel.Item>)]
+        } else {
+          return null;
+        }
+      })
+    }
+  }
+  return newItems;
+}
+
 function randomProductGenerator(products, productId){
   let choosedProducts = []
   let ids = [products.find(product => product.id == productId).id]
@@ -216,6 +208,7 @@ const mapStateToProps = (state, ownProps) => {
     wishlist: state.cartAndWishlist.wishlist,
     product: state.products.find(product => product.id == productId),
     products: state.products,
+    carouselItems: carouselItemGenerator(state.products.find(product => product.id == productId)),
     youMightAlsoLikeProducts: randomProductGenerator(state.products, productId)
   }
 }

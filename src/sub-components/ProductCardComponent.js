@@ -99,7 +99,7 @@ class ProductCardComponent extends React.Component {
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Link to={`/products/${this.props.product.id}`} >
-                      <Image src={this.props.imgUrl} onClick={() => this.props.changeCarousel ? this.props.changeCarousel() : console.log()} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
+                      <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
                     </Link>
                     {/* Product List Price Goes In This Section */}
                     <DetailsOnBox style={{position: 'absolute', top: '50%', width: '100%'}}>
