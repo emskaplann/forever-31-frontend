@@ -47,6 +47,7 @@ class SideBarContent extends React.Component {
               </Col>
             </Row>
             <br />
+            {this.props.cart.length === 0 ? <Header as='h2' onClick={() => this.props.closeSideBar(false)} style={{color: "#fff"}}> no item ?! didn't like that... </Header> : null}
             {this.props.cart.map(object => <RenderProduct key={object.product.id} quantity={object.quantity} size={object.size} product={object.product} productImages={object.product_images[0]} />)}
             <Row style={{justifyContent: 'flex-end'}}>
               <Link to="/checkout">
@@ -73,6 +74,7 @@ class SideBarContent extends React.Component {
             </Col>
           </Row>
           <br />
+          {this.props.wishlist.length === 0 ? <Header as='h2' onClick={() => this.props.closeSideBar(false)} style={{color: "#fff"}}> who am I to judge, right? </Header> : null}
           {this.props.wishlist.map(object => <RenderProductForWishlist key={object.product.id} product={object.product} productImages={object.product_images[0]} />)}
         </Container>
       )
