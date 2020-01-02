@@ -113,6 +113,7 @@ class App extends React.Component {
       />
       <Widget
         handleNewUserMessage={this.handleNewUserMessage}
+        subtitle={"You can ask anything you want!"}
         />
     </>
     );
