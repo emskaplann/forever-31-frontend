@@ -3,6 +3,7 @@ import CartAndWishlistService from '../services/CartAndWishlistService.js';
 import WishlistService from '../services/WishlistService.js';
 import CartService from '../services/CartService.js';
 import posed, { PoseGroup } from 'react-pose';
+import ReactImageFallback from "react-image-fallback";
 import Alert from './Alert.js'
 import { Link } from 'react-router-dom';
 import { Card, Image, Icon, Label } from 'semantic-ui-react';
@@ -99,7 +100,14 @@ class ProductCardComponent extends React.Component {
                 <Box key='box' className='box' style={{position: 'relative'}}>
                   <Card>
                     <Link to={`/products/${this.props.product.id}`} >
-                      <Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />
+                      {/*<Image src={this.props.imgUrl} style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} wrapped />*/}
+                        <ReactImageFallback
+                          src={this.props.imgUrl}
+                          style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} 
+                          fallbackImage="/images/404-image-not-found-f31.jpg"
+                          initialImage="loader.gif"
+                          alt="cool image should be here"
+                          className="ui image" />
                     </Link>
                     {/* Product List Price Goes In This Section */}
                     <DetailsOnBox style={{position: 'absolute', top: '50%', width: '100%'}}>

@@ -77,7 +77,7 @@ class NavbarView extends Component {
       const isMatch = (result) => re.test(result.display_name)
       this.setState({
           isLoading: false,
-          results: _.filter(this.props.products, isMatch),
+          results: _.filter(this.props.products, isMatch).slice(0,5),
       })
     }, 300)
   }
@@ -121,6 +121,16 @@ class NavbarView extends Component {
         </Navbar.Collapse>
       </Navbar>
       <Navbar bg="light" fixed='bottom'>
+        <Nav className="mx-auto">
+          <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="fa fa-facebook">{}</a>
+          <a href="https://instagram.com/" rel="noopener noreferrer" target="_blank" className="fa fa-instagram">{}</a>
+          <a href="https://youtube.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-youtube">{}</a>
+          <a href="https://twitter.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-twitter">{}</a>
+          <a href="https://foursquare.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-foursquare">{}</a>
+          <a href="https://linkedin.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-linkedin">{}</a>
+          <a href="https://yahoo.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-yahoo">{}</a>
+          <a href="https://reddit.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-reddit">{}</a><br/><br/>
+        </Nav>
       </Navbar>
       </>
     );

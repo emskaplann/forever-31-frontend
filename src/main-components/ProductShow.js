@@ -69,7 +69,7 @@ class ProductShow extends React.Component {
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
     const product = this.props.product
       return(
-        <Container style={{marginTop: 40, marginBottom: 10}}>
+        <Container style={{marginTop: 40, marginBottom: 100}}>
           <Row>
             <Col xs={12} sm={12} md={4} lg={4}>
               {/* Carousel START */}

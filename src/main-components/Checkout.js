@@ -96,7 +96,7 @@ class Checkout extends React.Component {
     }
     else if(this.props.cart){
       return(
-        <Container style={{minHeight: '98vh', marginTop: 50}} key='checkoutContainer'>
+        <Container style={{minHeight: '98vh', marginTop: 50, marginBottom: 50}} key='checkoutContainer'>
           {this.state.paymentLoading ? <Dimmer active><Loader size='big' /></Dimmer> : console.log()}
           { this.state.redirect ? <Redirect to='/' /> : console.log() }
           <Header as='h1' dividing>Checkout</Header>
