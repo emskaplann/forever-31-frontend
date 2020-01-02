@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Label, Search } from 'semantic-ui-react';
+import { Icon, Label, Search, Header, Divider } from 'semantic-ui-react';
 import { Navbar, Nav, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const resultRenderer = ({ display_name, link_id }) => <Link to={`/products/${link_id}`}> <Label content={display_name} /> </Link>
+const resultRenderer = ({ display_name, link_id, list_price }) => <Link to={`/products/${link_id}`}> <Header as='h5' content={display_name} /> </Link>
 resultRenderer.propTypes = {
   display_name: PropTypes.string,
   id: PropTypes.string,
@@ -88,20 +88,24 @@ class NavbarView extends Component {
         <Navbar.Brand href="/" className='mx-auto' style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         {/* Cart and WishList icons for opening right directioned sidebar to see Cart or WishList */}
-        <Search
-            loading={this.state.isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, {
-              leading: true,
-            })}
-            results={this.state.results}
-            value={this.state.value}
-            resultRenderer={resultRenderer}
-            {...this.props}
-          />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className='mr-auto'>
+          <Nav className='mx-auto'>
+            <Row className='mx-auto'>
+                <Search
+                  size="mini"
+                  loading={this.state.isLoading}
+                  onResultSelect={this.handleResultSelect}
+                  onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                    leading: true,
+                  })}
+                  results={this.state.results}
+                  value={this.state.value}
+                  resultRenderer={resultRenderer}
+                  {...this.props}
+                />
+            </Row>
           </Nav>
+          <br />
           <Nav>
             <Row className='mx-auto'>
               <Nav.Item>

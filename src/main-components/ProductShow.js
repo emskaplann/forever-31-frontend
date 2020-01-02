@@ -7,6 +7,8 @@ import CartService from '../services/CartService.js';
 import WishlistService from '../services/WishlistService.js';
 import CartAndWishlistService from '../services/CartAndWishlistService.js';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js';
+import ReactImageFallback from "react-image-fallback";
+
 
 
 var imageExists = require('image-exists')
@@ -72,7 +74,7 @@ class ProductShow extends React.Component {
             <Col xs={12} sm={12} md={4} lg={4}>
               {/* Carousel START */}
                 <Carousel>
-                  {this.props.carouselItems}
+                  {this.props.carouselItems === undefined ? [] : this.props.carouselItems}
                 </Carousel>
               {/* Carousel END */}
               <h4 style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10}}>
@@ -168,15 +170,21 @@ function carouselItemGenerator(product){
   let newItems = []
   for (const productImages in product.images[0]) {
     if (productImages.normalize().includes('url') &&  !productImages.normalize().includes('small')) {
-    imageExists(product.images[0][productImages], (exists) => {
-        if(exists){
+    // imageExists(product.images[0][productImages], (exists) => {
+    // <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={product.images[0][productImages]} />
+        if(true){
             newItems = [...newItems, (<Carousel.Item active={productImages.normalize().includes('front') ? true : false} key={`carouselItem-${product.images[0][productImages]}`}>
-                      <Image style={{borderRadius: "20px", border: '2px solid #e0e1e2'}} src={product.images[0][productImages]} />
-                    </Carousel.Item>)]
+                                        <ReactImageFallback
+                                          src={product.images[0][productImages]}
+                                          fallbackImage="/images/404-image-not-found-f31.jpg"
+                                          initialImage="loader.gif"
+                                          alt="cool image should be here"
+                                          className="ui image" />
+                                      </Carousel.Item>)]
         } else {
           return null;
         }
-      })
+      // })
     }
   }
   return newItems;
