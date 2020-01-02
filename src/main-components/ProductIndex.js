@@ -27,6 +27,7 @@ class ProductIndex extends React.Component {
   }
 
   addMoreProducts = () => {
+      localStorage.limit = this.state.limit + 32
       fetch(`http://localhost:3000/products?start=${this.state.limit}&limit=${this.state.limit + 32}`)
       .then(r => r.json())
       .then(response => this.props.addMoreProducts(response))

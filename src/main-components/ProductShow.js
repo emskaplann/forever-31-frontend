@@ -25,6 +25,7 @@ class ProductShow extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      product: this.props.product ? this.props.product : {},
       carouselItems: [],
       youMightAlsoLikeProducts: props.youMightAlsoLikeProducts
     }
@@ -67,7 +68,6 @@ class ProductShow extends React.Component {
     this.props.wishlist ?  wishlistProductIds2 = this.props.wishlist.map(object => object.product.id) : console.log()
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
     const product = this.props.product
-    if(product){
       return(
         <Container style={{marginTop: 40, marginBottom: 10}}>
           <Row>
@@ -163,9 +163,6 @@ class ProductShow extends React.Component {
           </Row>
         </Container>
       )
-    } else {
-      return(<></>)
-    }
   }
 }
 
@@ -223,26 +220,13 @@ const request = async (products, id) => {
     return json
   } else {
     const json = await products.find(product => product.id === id)
-    return json
   }
 }
 
-const mapStateToProps = async (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   // fetching the product from the state for show page
   const productId = ownProps.match.params.id
-  // let product = {}
-  // const asd = await request(state.products, productId)
-  // product = asd
-  // return {
-  //   user: state.user,
-  //   cart: state.cartAndWishlist.cart,
-  //   wishlist: state.cartAndWishlist.wishlist,
-  //   product: product,
-  //   products: state.products,
-  //   carouselItems: carouselItemGenerator(product),
-  //   youMightAlsoLikeProducts: randomProductGenerator(state.products, productId, product)
-  // }
-  let product = state.products.find(product => product.id === productId)
+  let product = state.products.find(product => product.id == productId)
   return {
     user: state.user,
     cart: state.cartAndWishlist.cart,

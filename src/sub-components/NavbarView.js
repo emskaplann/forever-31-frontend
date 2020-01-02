@@ -41,6 +41,7 @@ class NavbarView extends Component {
     localStorage.addressLineOne = ""
     localStorage.addressLineTwo = ""
     localStorage.watsonSessionId = ""
+    localStorage.limit = ""
   }
 
   renderSigns = () => {
