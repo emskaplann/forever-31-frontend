@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/forever-31/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/forever-31/static/js/main.502dec2a.chunk.js",
-    "main.js.map": "/forever-31/static/js/main.502dec2a.chunk.js.map",
-    "runtime-main.js": "/forever-31/static/js/runtime-main.f31d997f.js",
-    "runtime-main.js.map": "/forever-31/static/js/runtime-main.f31d997f.js.map",
-    "static/css/2.74e16132.chunk.css": "/forever-31/static/css/2.74e16132.chunk.css",
-    "static/js/2.b92d1ed8.chunk.js": "/forever-31/static/js/2.b92d1ed8.chunk.js",
-    "static/js/2.b92d1ed8.chunk.js.map": "/forever-31/static/js/2.b92d1ed8.chunk.js.map",
-    "index.html": "/forever-31/index.html",
-    "precache-manifest.15c8d86ad9eab32f27da549a1c2aba1f.js": "/forever-31/precache-manifest.15c8d86ad9eab32f27da549a1c2aba1f.js",
-    "service-worker.js": "/forever-31/service-worker.js",
-    "static/css/2.74e16132.chunk.css.map": "/forever-31/static/css/2.74e16132.chunk.css.map",
-    "static/css/main.5ecd60fb.chunk.css.map": "/forever-31/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.b92d1ed8.chunk.js.LICENSE": "/forever-31/static/js/2.b92d1ed8.chunk.js.LICENSE"
+    "main.css": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/forever-31-frontend/static/js/main.9a22e0e9.chunk.js",
+    "main.js.map": "/forever-31-frontend/static/js/main.9a22e0e9.chunk.js.map",
+    "runtime-main.js": "/forever-31-frontend/static/js/runtime-main.bd68eb0f.js",
+    "runtime-main.js.map": "/forever-31-frontend/static/js/runtime-main.bd68eb0f.js.map",
+    "static/css/2.74e16132.chunk.css": "/forever-31-frontend/static/css/2.74e16132.chunk.css",
+    "static/js/2.b92d1ed8.chunk.js": "/forever-31-frontend/static/js/2.b92d1ed8.chunk.js",
+    "static/js/2.b92d1ed8.chunk.js.map": "/forever-31-frontend/static/js/2.b92d1ed8.chunk.js.map",
+    "index.html": "/forever-31-frontend/index.html",
+    "precache-manifest.b82d0c5457278ea900a40dc891c7ed0c.js": "/forever-31-frontend/precache-manifest.b82d0c5457278ea900a40dc891c7ed0c.js",
+    "service-worker.js": "/forever-31-frontend/service-worker.js",
+    "static/css/2.74e16132.chunk.css.map": "/forever-31-frontend/static/css/2.74e16132.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.b92d1ed8.chunk.js.LICENSE": "/forever-31-frontend/static/js/2.b92d1ed8.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.f31d997f.js",
+    "static/js/runtime-main.bd68eb0f.js",
     "static/css/2.74e16132.chunk.css",
     "static/js/2.b92d1ed8.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.502dec2a.chunk.js"
+    "static/js/main.9a22e0e9.chunk.js"
   ]
 }
