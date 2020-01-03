@@ -15,7 +15,7 @@ const store = createStore(reducer,
   )
 
 // getting first 10 product when initializing the page
-fetch(`http://localhost:3000/products?limit=${parseInt(localStorage.limit) > 20 ? localStorage.limit : "31"}`)
+fetch(`https://immense-garden-92266.herokuapp.com/products?limit=${parseInt(localStorage.limit) > 20 ? localStorage.limit : "31"}`)
 .then(r => r.json())
 .then(products => {
   store.dispatch(actionCreators.productActionCreator(products))
