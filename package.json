@@ -2,6 +2,7 @@
   "name": "forever-31-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://emskaplann.github.io/forever-31",
   "dependencies": {
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -37,7 +38,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
