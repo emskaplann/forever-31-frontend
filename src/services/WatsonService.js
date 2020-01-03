@@ -1,7 +1,8 @@
 class WatsonService {
   constructor (component) {
     this.component = component
-    this.workingURL = 'http://localhost:3000'
+    // this.workingURL = 'http://localhost:3000'
+    this.workingURL = 'https://immense-garden-92266.herokuapp.com'
   }
 
   sendNewUserMessage = message => {

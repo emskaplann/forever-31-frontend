@@ -1,8 +1,8 @@
 class CartAndWishlistService {
   constructor(component) {
     this.component = component
-    // this.workingURL = 'https://arcane-sands-50858.herokuapp.com'
-    this.workingURL = 'http://localhost:3000'
+    this.workingURL = 'https://immense-garden-92266.herokuapp.com'
+    // this.workingURL = 'http://localhost:3000'
   }
 
   fetchCartAndWishlist = (token) => {
