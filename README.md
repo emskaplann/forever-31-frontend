@@ -1,7 +1,7 @@
 # Forever 31
 This app was made by me and the main purpose was combining all my knowledge about React with Redux. Besides that I implemented Stripe and IBM Watson for several tasks. Thank you for visiting my project!
 
-Checkout the backend repo! [F31 Backend](https://github.com/rmeji1/mod4-todo-app-backend).
+Checkout the backend repo! [F31 Backend](https://github.com/emskaplann/forever-31-api).
 ## Languages and Frameworks
 These Languages and Frameworks are for Web App,
 #### Front-End
