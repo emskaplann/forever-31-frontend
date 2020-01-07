@@ -98,11 +98,11 @@ class App extends React.Component {
                 <Segment style={{backgroundColor: '#fcfeff'}} basic>
                       <Switch location={location}>
                         <Route exact path={process.env.PUBLIC_URL + '/'} component={ProductIndex} key='index' />
-                        <Route exact path='/products/:id' render={(props) => <ProductShow {...props} openModal={this.setVisible} />} key='show' />
+                        <Route exact path={process.env.PUBLIC_URL + '/products/:id'} render={(props) => <ProductShow {...props} openModal={this.setVisible} />} key='show' />
                         {/* Stripe Route */}
                         <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
                           <Elements>
-                            <Route path='/checkout' component={Checkout} key='checkout' />
+                            <Route path={process.env.PUBLIC_URL + '/checkout'} component={Checkout} key='checkout' />
                           </Elements>
                         </StripeProvider>
                       </Switch>

@@ -92,7 +92,7 @@ class Checkout extends React.Component {
 
   render(){
     if(localStorage.token === "" || localStorage.token === undefined){
-      return(<Redirect to='/' />)
+      return(<Redirect to={process.env.PUBLIC_URL + '/'} />)
     }
     else if(this.props.cart){
       return(
