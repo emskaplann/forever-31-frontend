@@ -45,7 +45,7 @@ class Checkout extends React.Component {
         if (willDelete) {
           this.setState({paymentLoading: true})
           let { token } = await this.props.stripe.createToken({name: this.state.name, address_line1: this.props.user.address.line_1, address_line2: this.props.user.address.line_2});
-          let response = await fetch("http://localhost:3000/charge", {
+          let response = await fetch("https://immense-garden-92266.herokuapp.com/charge", {
             method: "POST",
             headers: {"Content-Type": "application/json", Accept: "application/json", Authorization: this.props.user.token},
             body: JSON.stringify({
