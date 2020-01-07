@@ -92,7 +92,7 @@ class Checkout extends React.Component {
 
   render(){
     if(localStorage.token === "" || localStorage.token === undefined){
-      return(<Redirect to='/forever-31-frontend'} />)
+      return(<Redirect to='/forever-31-frontend' />)
     }
     else if(this.props.cart){
       return(
