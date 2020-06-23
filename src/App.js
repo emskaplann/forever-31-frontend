@@ -73,7 +73,7 @@ class App extends React.Component {
     if(Math.max(document.documentElement.clientWidth, window.innerWidth) < 400){
       sideBarWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
     }
-    if(this.props.products.length !== 0 || this.props.products == null || this.props == null) {
+    if(this.props.products.length !== 0 || this.props.products !== null || this.props !== null) {
       return (
         <>
         <Route
