@@ -38,7 +38,7 @@ class CheckoutForm extends React.Component {
 
   componentWillMount () {
     if(this.props.user.address.line_1 !== ""){
-      this.setState({changeShippingAddress: false, lineOne: this.props.user.address.line_1, lineTwo: this.props.user.address.line_2, emptyForm: false})
+      this.setState({changeShippingAddress: false, lineOne: this.props.user.address.line_1 !== null ? this.props.user.address.line_1 : "", lineTwo: this.props.user.address.line_2 !== null ? this.props.user.address.line_2 : "", emptyForm: false})
     } else {
       this.setState({changeShippingAddress: true, emptyForm: true})
     }
@@ -119,6 +119,7 @@ class CheckoutForm extends React.Component {
             Item Count: {this.props.itemCount}
           </Col>
         </Row>
+        <br /><br />
       </>
     )
   }
