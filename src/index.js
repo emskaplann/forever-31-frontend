@@ -19,8 +19,9 @@ fetch(`https://immense-garden-92266.herokuapp.com/products?limit=${parseInt(loca
 .then(r => r.json())
 .then(products => {
   store.dispatch(actionCreators.productActionCreator(products))
-  ReactDOM.render(<Router><Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
 })
+
+ReactDOM.render(<Router><Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
 
 // app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 //
