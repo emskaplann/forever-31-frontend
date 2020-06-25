@@ -126,6 +126,11 @@ const mapDispatchToProps = (dispatch, mergeProps) => {
         type: 'ADD_CART_AND_WISHLIST',
         cartAndWishlist: cartAndWishlist
       })
+    }, addAddress: (address) => {
+      dispatch({
+        type: 'ADD_ADDRESS',
+        address: address
+      })
     }
   }
 }
