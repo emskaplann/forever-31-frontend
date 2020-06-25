@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/forever-31-frontend/static/js/main.adb4b1f8.chunk.js",
-    "main.js.map": "/forever-31-frontend/static/js/main.adb4b1f8.chunk.js.map",
+    "main.js": "/forever-31-frontend/static/js/main.de99e2a9.chunk.js",
+    "main.js.map": "/forever-31-frontend/static/js/main.de99e2a9.chunk.js.map",
     "runtime-main.js": "/forever-31-frontend/static/js/runtime-main.a38a70bc.js",
     "runtime-main.js.map": "/forever-31-frontend/static/js/runtime-main.a38a70bc.js.map",
     "static/css/2.c3079cd3.chunk.css": "/forever-31-frontend/static/css/2.c3079cd3.chunk.css",
     "static/js/2.d05c8f00.chunk.js": "/forever-31-frontend/static/js/2.d05c8f00.chunk.js",
     "static/js/2.d05c8f00.chunk.js.map": "/forever-31-frontend/static/js/2.d05c8f00.chunk.js.map",
     "index.html": "/forever-31-frontend/index.html",
-    "precache-manifest.53494a4105d9f7b432c29bf301a5d275.js": "/forever-31-frontend/precache-manifest.53494a4105d9f7b432c29bf301a5d275.js",
+    "precache-manifest.c4b63167642dbc72b48f804a7060a017.js": "/forever-31-frontend/precache-manifest.c4b63167642dbc72b48f804a7060a017.js",
     "service-worker.js": "/forever-31-frontend/service-worker.js",
     "static/css/2.c3079cd3.chunk.css.map": "/forever-31-frontend/static/css/2.c3079cd3.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.c3079cd3.chunk.css",
     "static/js/2.d05c8f00.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.adb4b1f8.chunk.js"
+    "static/js/main.de99e2a9.chunk.js"
   ]
 }
