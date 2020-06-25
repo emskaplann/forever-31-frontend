@@ -36,7 +36,8 @@ class App extends React.Component {
       visible: false,
       windowWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
       contentId: 0,
-      isWidgetOpen: false
+      isWidgetOpen: false,
+      isLoaded: false,
     }
     this.cartAndWishlistService = new CartAndWishlistService(this)
     this.watsonService = new WatsonService(this)
@@ -67,13 +68,22 @@ class App extends React.Component {
     this.watsonService.sendNewUserMessage(newMessage)
   }
 
+  setLoader = () => this.setState({isLoaded: true})
+
+  loader() {
+    if(this.props.products.length !== 0) {
+      setTimeout(this.setLoader, 2500)
+    }
+  }
+
   render(){
+    this.loader()
     let sideBarWidth = 400
     const { visible } = this.state
     if(Math.max(document.documentElement.clientWidth, window.innerWidth) < 400){
       sideBarWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
     }
-    if(this.props.products.length !== 0) {
+    if(this.state.isLoaded) {
       return (
         <>
         <Route
