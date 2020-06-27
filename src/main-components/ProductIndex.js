@@ -40,7 +40,7 @@ class ProductIndex extends React.Component {
         <Row>
           {renderCards(this.props.products.flat())}
         </Row>
-        <Header as='h2' onClick={this.addMoreProducts} style={{textAlign: 'center', marginBottom: 100}}>See More...</Header>
+        {/* <Header as='h2' onClick={this.addMoreProducts} style={{textAlign: 'center', marginBottom: 100}}>See More...</Header> */}
       </Container>
     )
   }
