@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf4e86969e7012ce2911e2023238a217",
+    "revision": "daa9da1752a8bf785aa59861e717e8be",
     "url": "/forever-31-frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/forever-31-frontend/static/css/2.c3079cd3.chunk.css"
   },
   {
-    "revision": "f5948561e8034cc39d72",
+    "revision": "e4d298187b276af87908",
     "url": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/forever-31-frontend/static/js/2.d05c8f00.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f5948561e8034cc39d72",
-    "url": "/forever-31-frontend/static/js/main.355d490a.chunk.js"
+    "revision": "e4d298187b276af87908",
+    "url": "/forever-31-frontend/static/js/main.597c45d1.chunk.js"
   },
   {
     "revision": "572c9e6e66babfdd571a",
