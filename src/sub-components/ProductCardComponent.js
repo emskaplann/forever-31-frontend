@@ -105,7 +105,7 @@ class ProductCardComponent extends React.Component {
                           src={this.props.imgUrl}
                           style={{borderBottomLeftRadius: 10, borderBottomRightRadius: 4}} 
                           fallbackImage="/images/404-image-not-found-f31.jpg"
-                          initialImage="loader.gif"
+                          initialImage="/images/loader.gif"
                           alt="cool image should be here"
                           className="ui image" />
                     </Link>
