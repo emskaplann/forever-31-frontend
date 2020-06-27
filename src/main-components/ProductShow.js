@@ -177,8 +177,8 @@ function carouselItemGenerator(product){
                                         <ReactImageFallback
                                           src={product.images[0][productImages]}
                                           fallbackImage="/images/404-image-not-found-f31.jpg"
-                                          initialImage="loader.gif"
-                                          alt="cool image should be here"
+                                          initialImage="/images/loader.gif"
+                                          alt="Loading..."
                                           className="ui image" />
                                       </Carousel.Item>)]
         } else {
