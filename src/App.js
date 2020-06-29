@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import { Ripple } from 'react-spinners-css';
 import 'react-chat-widget/lib/styles.css';
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
     products: state.products,
@@ -144,7 +143,7 @@ class App extends React.Component {
           <span style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</span><br />
           <Ripple color={"#000000"} />
           <br />
-          <paragraph>Because of using free services this loading may take up to <strong>20 seconds.</strong> Thanks for your patience.</paragraph>
+          <span>Because of using free services this loading may take up to <strong>20 seconds.</strong> Thanks for your patience.</span>
         </div>
       );
       //render loader

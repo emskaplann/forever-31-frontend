@@ -58,7 +58,7 @@ export default function NavbarLinks() {
                 <Col>
                     <div style={{marginBottom: 50}}>
                         <h4 style={{fontWeight: "bold"}}>Fear of missing out?</h4>
-                        <h7>Be the first to know about the latest deals, style updates & more!</h7>
+                        <h6>Be the first to know about the latest deals, style updates & more!</h6>
                         <InputGroup size="sm" className="mb-1 mt-2">
                             <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                             <InputGroup.Prepend>
