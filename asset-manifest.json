@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/forever-31-frontend/static/js/main.eea795c1.chunk.js",
-    "main.js.map": "/forever-31-frontend/static/js/main.eea795c1.chunk.js.map",
+    "main.js": "/forever-31-frontend/static/js/main.53021a7a.chunk.js",
+    "main.js.map": "/forever-31-frontend/static/js/main.53021a7a.chunk.js.map",
     "runtime-main.js": "/forever-31-frontend/static/js/runtime-main.a38a70bc.js",
     "runtime-main.js.map": "/forever-31-frontend/static/js/runtime-main.a38a70bc.js.map",
-    "static/css/2.c3079cd3.chunk.css": "/forever-31-frontend/static/css/2.c3079cd3.chunk.css",
-    "static/js/2.d6275ee2.chunk.js": "/forever-31-frontend/static/js/2.d6275ee2.chunk.js",
-    "static/js/2.d6275ee2.chunk.js.map": "/forever-31-frontend/static/js/2.d6275ee2.chunk.js.map",
+    "static/css/2.69c654ce.chunk.css": "/forever-31-frontend/static/css/2.69c654ce.chunk.css",
+    "static/js/2.af7570a3.chunk.js": "/forever-31-frontend/static/js/2.af7570a3.chunk.js",
+    "static/js/2.af7570a3.chunk.js.map": "/forever-31-frontend/static/js/2.af7570a3.chunk.js.map",
     "index.html": "/forever-31-frontend/index.html",
-    "precache-manifest.42b8d469eae9ee1f049ccee1163eb67f.js": "/forever-31-frontend/precache-manifest.42b8d469eae9ee1f049ccee1163eb67f.js",
+    "precache-manifest.b40059d7f43f61e73ea1f9d486848e5a.js": "/forever-31-frontend/precache-manifest.b40059d7f43f61e73ea1f9d486848e5a.js",
     "service-worker.js": "/forever-31-frontend/service-worker.js",
-    "static/css/2.c3079cd3.chunk.css.map": "/forever-31-frontend/static/css/2.c3079cd3.chunk.css.map",
+    "static/css/2.69c654ce.chunk.css.map": "/forever-31-frontend/static/css/2.69c654ce.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.d6275ee2.chunk.js.LICENSE.txt": "/forever-31-frontend/static/js/2.d6275ee2.chunk.js.LICENSE.txt"
+    "static/js/2.af7570a3.chunk.js.LICENSE.txt": "/forever-31-frontend/static/js/2.af7570a3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a38a70bc.js",
-    "static/css/2.c3079cd3.chunk.css",
-    "static/js/2.d6275ee2.chunk.js",
+    "static/css/2.69c654ce.chunk.css",
+    "static/js/2.af7570a3.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.eea795c1.chunk.js"
+    "static/js/main.53021a7a.chunk.js"
   ]
 }
