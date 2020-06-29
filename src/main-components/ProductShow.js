@@ -158,7 +158,7 @@ class ProductShow extends React.Component {
             </Col>
           </Row>
             <Divider horizontal>You Might Also Like</Divider>
-          <Row style={{marginBottom: 150}}>
+          <Row className="margin-bt-nav">
             {renderCards(this.state.youMightAlsoLikeProducts, this)}
           </Row>
         </Container>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Icon, Label, Search, Header, Divider } from 'semantic-ui-react';
-import { Navbar, Nav, Row } from 'react-bootstrap';
+import { Navbar, Nav, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import NavbarLinks from "./NavbarLinks.js";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -121,18 +122,7 @@ class NavbarView extends Component {
         </Navbar.Collapse>
       </Navbar>
       <Navbar bg="light" fixed='bottom'>
-        <Nav className="mx-auto">
-          <Row style={{justifyContent: "center"}}>
-            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="fa fa-facebook">{}</a>
-            <a href="https://instagram.com/" rel="noopener noreferrer" target="_blank" className="fa fa-instagram">{}</a>
-            <a href="https://youtube.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-youtube">{}</a>
-            <a href="https://twitter.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-twitter">{}</a>
-            <a href="https://foursquare.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-foursquare">{}</a>
-            <a href="https://linkedin.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-linkedin">{}</a>
-            <a href="https://yahoo.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-yahoo">{}</a>
-            <a href="https://reddit.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-reddit">{}</a><br/><br/>
-          </Row>
-        </Nav>
+          <NavbarLinks style={{marginTop: 200}} />
       </Navbar>
       </>
     );

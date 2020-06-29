@@ -36,7 +36,7 @@ class ProductIndex extends React.Component {
 
   render(){
     return(
-      <Container style={{marginTop: 50, marginBottom: 100}}>
+      <Container className="margin-bt-nav2" style={{marginTop: 50}}>
         <Row>
           {renderCards(this.props.products.flat())}
         </Row>

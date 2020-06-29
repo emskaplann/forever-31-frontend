@@ -72,7 +72,7 @@ class App extends React.Component {
 
   loader() {
     if(this.props.products.length !== 0) {
-      setTimeout(this.setLoader, 1000)
+      setTimeout(this.setLoader, 500)
     }
   }
 
