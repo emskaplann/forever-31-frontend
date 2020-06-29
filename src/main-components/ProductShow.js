@@ -77,10 +77,10 @@ class ProductShow extends React.Component {
                   {this.props.carouselItems === undefined ? [] : this.props.carouselItems}
                 </Carousel>
               {/* Carousel END */}
-              <h4 style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10}}>
+              <h5 style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10, maxWidth: "750px"}}>
                 {product.display_name}
                 <Icon name='heart' onClick={() => this.handleWishlistClick()} style={{marginLeft: 4}} color={wishlistProductIds2.includes(product.id) ? 'red' : 'grey'}/>
-              </h4>
+              </h5>
               <Divider />
               <Row style={{justifyContent: 'space-between'}}>
                 <Col style={{marginTop: 7}} xs={2} sm={2} md={2} lg={2}>
@@ -158,7 +158,7 @@ class ProductShow extends React.Component {
             </Col>
           </Row>
             <Divider horizontal>You Might Also Like</Divider>
-          <Row>
+          <Row style={{marginBottom: 150}}>
             {renderCards(this.state.youMightAlsoLikeProducts, this)}
           </Row>
         </Container>
