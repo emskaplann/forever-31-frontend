@@ -64,22 +64,18 @@ class CheckoutForm extends React.Component {
       <>
         <Row>
           {/* Add Conditional Rendering! */}
-          <Col style={{color: '#6b7c93', textAlign: 'left'}} xs={3} sm={2} md={2} lg={2}>
+          <Col style={{color: '#6b7c93', textAlign: 'left'}} xs={2} sm={2} md={2} lg={2}>
             Shipping Adress:
           </Col>
-          <Col xs={8} sm={9} md={9} lg={9}>
-            <Row>
+          <Col xs={7} sm={9} md={9} lg={9} style={{justifyContent: "center"}}>
               <Col xs={10} sm={10} md={10} lg={10}>
                  <div style={{ letterSpacing: '0.025em'}}>{this.state.changeShippingAddress ? <Input value={this.state.lineOne} error={this.state.emptyForm} onChange={this.handleInputChangeLineOne} size='mini' style={{width: '100%'}} placeholder='Adress Line 1...' /> : this.props.user.address.line_1}</div>
               </Col>
-            </Row>
-            <Row>
               <Col xs={10} sm={10} md={10} lg={10}>
                  <div style={{ letterSpacing: '0.025em'}}>{this.state.changeShippingAddress ? <Input value={this.state.lineTwo} onChange={this.handleInputChangeLineTwo} size='mini' style={{width: '100%', marginTop: 10}} placeholder='Adress Line 2...' /> : this.props.user.address.line_2}</div>
               </Col>
-            </Row>
           </Col>
-          <Col style={{textAlign: 'right'}} xs={1} sm={1} md={1} lg={1}>
+          <Col style={{textAlign: 'right'}} xs={3} sm={1} md={1} lg={1}>
             {this.state.changeShippingAddress ? <><span onClick={this.openOrCloseShippingAdressForm}>Cancel</span><span onClick={this.saveNewAddress} style={{marginLeft: 4}}>Save</span></> : <span onClick={this.openOrCloseShippingAdressForm}>Change</span>}
           </Col>
         </Row>
