@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f61ee3270004869c54d9088039dae8e9",
+    "revision": "0f7846d7c9e1c39de90fc1cd3e645afd",
     "url": "/forever-31-frontend/index.html"
   },
   {
-    "revision": "248843bad86712d865a9",
+    "revision": "1302e65786fba534a31b",
     "url": "/forever-31-frontend/static/css/2.69c654ce.chunk.css"
   },
   {
-    "revision": "20c7e8118ad389d456f6",
+    "revision": "ebfdfecfa68cfaa6935e",
     "url": "/forever-31-frontend/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "248843bad86712d865a9",
-    "url": "/forever-31-frontend/static/js/2.af7570a3.chunk.js"
+    "revision": "1302e65786fba534a31b",
+    "url": "/forever-31-frontend/static/js/2.a7a65aa3.chunk.js"
   },
   {
     "revision": "419e562e29d75c02c83ae2dced0a799b",
-    "url": "/forever-31-frontend/static/js/2.af7570a3.chunk.js.LICENSE.txt"
+    "url": "/forever-31-frontend/static/js/2.a7a65aa3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "20c7e8118ad389d456f6",
-    "url": "/forever-31-frontend/static/js/main.53021a7a.chunk.js"
+    "revision": "ebfdfecfa68cfaa6935e",
+    "url": "/forever-31-frontend/static/js/main.b76e02ea.chunk.js"
   },
   {
     "revision": "572c9e6e66babfdd571a",
