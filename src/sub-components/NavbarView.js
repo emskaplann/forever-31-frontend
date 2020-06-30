@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import NavbarLinks from "./NavbarLinks.js";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -85,8 +84,6 @@ class NavbarView extends Component {
 
   render() {
     return (
-      <>
-      <h3>Hello</h3>
       <Navbar className='w-100' expand="lg" fixed="top" bg="light">
         <Navbar.Brand href="/forever-31-frontend" className='mx-auto' style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -122,10 +119,6 @@ class NavbarView extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Navbar bg="light" fixed='bottom'>
-          <NavbarLinks style={{marginTop: 200}} />
-      </Navbar>
-      </>
     );
   }
 }

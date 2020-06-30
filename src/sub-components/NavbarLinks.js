@@ -4,7 +4,7 @@ import {Row, Col, Nav, InputGroup, FormControl} from 'react-bootstrap';
 export default function NavbarLinks() {
     return(
         <>
-            <Row className="show-desktop" style={{margin: "0 auto", width: "100%"}}>
+            <Row className="show-desktop" style={{marginTop: 10, marginBottom: 2, width: "100%"}}>
                 <Col>
                     <dl>
                         <dt>Company Info</dt>
@@ -69,7 +69,7 @@ export default function NavbarLinks() {
                     </div>
                 </Col>
             </Row>
-            <Row style={{justifyContent: "center"}}>
+            <Row style={{justifyContent: "center", marginBottom: 10}}>
                 <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="fa fa-facebook">{}</a>
                 <a href="https://instagram.com/" rel="noopener noreferrer" target="_blank" className="fa fa-instagram">{}</a>
                 <a href="https://youtube.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-youtube">{}</a>
@@ -79,6 +79,7 @@ export default function NavbarLinks() {
                 <a href="https://yahoo.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-yahoo">{}</a>
                 <a href="https://reddit.com/"  rel="noopener noreferrer" target="_blank" className="fa fa-reddit">{}</a><br/><br/>
             </Row>
+            <small>© 2020 Forever31 Inc. All rights reserved.</small>
         </> 
     );
 }

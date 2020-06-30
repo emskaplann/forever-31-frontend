@@ -6,6 +6,7 @@ import ProductShow from './main-components/ProductShow.js';
 import CartAndWishlistService from './services/CartAndWishlistService.js';
 import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
+import BottomNavbar from './sub-components/BottomNavbar.js';
 import { Route, Link, Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import { Menu, Segment, Sidebar } from 'semantic-ui-react';
@@ -117,6 +118,7 @@ class App extends React.Component {
                           </StripeProvider>
                         </Switch>
                   </Segment>
+                  <BottomNavbar />
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           )}
