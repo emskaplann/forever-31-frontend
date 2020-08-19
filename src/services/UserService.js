@@ -53,8 +53,8 @@ class UserService {
         this.component.cartAndWishlistService.fetchCartAndWishlist(token)
         this.component.setState({error: '', loading: false})
         this.component.props.closeSideBar(false)
-        this.createAddressAlternative("", "", token, user_id)
-        this.component.props.addAddress({line_1: "", line_2: ""})
+        this.createAddressAlternative("81 Prospect St", "Brooklyn, NY 11201", token, user_id)
+        this.component.props.addAddress({line_1: "81 Prospect St", line_2: "81 Prospect St"})
       } else {
         this.component.setState({errors: Object.values(errors).flat().map(er => er.includes('already') ? 'username ' + er.toLowerCase() : er.toLowerCase()), loading: false})
       }
