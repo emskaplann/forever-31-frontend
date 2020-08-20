@@ -54,7 +54,7 @@ class UserService {
         this.component.setState({error: '', loading: false})
         this.component.props.closeSideBar(false)
         this.createAddressAlternative("81 Prospect St", "Brooklyn, NY 11201", token, user_id)
-        this.component.props.addAddress({line_1: "81 Prospect St", line_2: "81 Prospect St"})
+        this.component.props.addAddress({line_1: "81 Prospect St", line_2: "Brooklyn, NY 11201"})
       } else {
         this.component.setState({errors: Object.values(errors).flat().map(er => er.includes('already') ? 'username ' + er.toLowerCase() : er.toLowerCase()), loading: false})
       }
