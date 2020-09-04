@@ -1,17 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Carousel } from 'react-bootstrap';
-import { Dimmer, Header, Divider, Loader, Icon, Card, Image, Button } from 'semantic-ui-react';
+import { Divider, Icon, Button } from 'semantic-ui-react';
 import ReactHtmlParser from 'react-html-parser';
 import CartService from '../services/CartService.js';
 import WishlistService from '../services/WishlistService.js';
 import CartAndWishlistService from '../services/CartAndWishlistService.js';
 import ProductCardComponent from '../sub-components/ProductCardComponent.js';
 import ReactImageFallback from "react-image-fallback";
-
-
-
-var imageExists = require('image-exists')
 
 const renderCards = (products, comp) => (
       products.map(product => (
@@ -62,6 +58,17 @@ class ProductShow extends React.Component {
     }
   }
 
+  scrollToTop = () => this.carousel.scrollIntoView({ behavior: "smooth" });
+
+  componentDidMount() {
+    this.scrollToTop();
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps)
+    prevProps.product.id !== this.props.product.id ? this.scrollToTop() : console.log()
+  }
+
   render () {
     let cartProductIds = []
     let wishlistProductIds2 = []
@@ -69,6 +76,10 @@ class ProductShow extends React.Component {
     this.props.cart ?  cartProductIds = this.props.cart.map(object => object.product.id) : console.log()
     const product = this.props.product
       return(
+        <>
+        <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.carousel = el; }}>
+          </div>
         <Container style={{marginTop: 40, marginBottom: 100}}>
           <Row>
             <Col xs={12} sm={12} md={4} lg={4}>
@@ -162,6 +173,7 @@ class ProductShow extends React.Component {
             {renderCards(this.state.youMightAlsoLikeProducts, this)}
           </Row>
         </Container>
+        </>
       )
   }
 }
@@ -210,17 +222,6 @@ function randomProductGenerator(products, productId, product = {}){
     // products2.splice(rand, 1)
   }
   return choosedProducts;
-}
-
-const request = async (products, id) => {
-  const productIds =  await products.map(el => el.id)
-  if(!productIds.includes(id)){
-    const response = await fetch(`http://localhost:3000/products/${id}`)
-    const json = await response.json()
-    return json
-  } else {
-    const json = await products.find(product => product.id === id)
-  }
 }
 
 const mapStateToProps = (state, ownProps) => {
