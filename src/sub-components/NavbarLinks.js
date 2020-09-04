@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, Nav, InputGroup, FormControl} from 'react-bootstrap';
+import {Row, Col, InputGroup, FormControl} from 'react-bootstrap';
 
 export default function NavbarLinks() {
     return(

@@ -1,23 +1,5 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
-import posed, { PoseGroup } from 'react-pose';
-
-// const AlertCover = posed.div({
-//   enter: {
-//     y: 0,
-//     opacity: 1,
-//     delay: 300,
-//     transition: {
-//       opacity: { ease: 'easeOut', duration: 300 },
-//       default: { ease: 'linear', duration: 500 }
-//     }
-//   },
-//   exit: {
-//     y: 50,
-//     opacity: 0,
-//     transition: { duration: 500 }
-//   }
-// });
 
 export default class Alert extends React.Component {
   constructor () {

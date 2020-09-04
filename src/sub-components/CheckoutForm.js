@@ -1,9 +1,9 @@
 import React from 'react';
 import UserService from '../services/UserService.js';
 import { connect } from 'react-redux';
-import { Header, Divider, Input, Image, Button } from 'semantic-ui-react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import { Divider, Input, Image, Button } from 'semantic-ui-react';
+import { Row, Col } from 'react-bootstrap';
+import { CardElement } from 'react-stripe-elements';
 
 const createOptions = () => {
   return {

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App.js';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers/index.js';
@@ -22,7 +22,7 @@ fetch(`https://immense-garden-92266.herokuapp.com/products?limit=31`)
   store.dispatch(actionCreators.productActionCreator(products))
 })
 
-ReactDOM.render(<Router><Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
+ReactDOM.render(<Router basename="/"><Provider store={store}><App /></Provider></Router>, document.getElementById('root'));
 
 // app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 //

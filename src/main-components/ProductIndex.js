@@ -11,7 +11,6 @@ import "react-alice-carousel/lib/alice-carousel.css";
 
 
 const productCarousel = products => {
-  const handleOnDragStart = (e) => e.preventDefault()
   let transformedProducts = products.reverse().slice(0,6).map(product => (
     <Col xs={6} md={4} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 10}}>
       <ProductCardComponent key={product.id} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />
@@ -31,7 +30,6 @@ const productCarousel = products => {
 }
 
 const productCarousel2 = products => {
-  const handleOnDragStart = (e) => e.preventDefault()
   let transformedProducts = products.reverse().slice(6,12).map(product => (
     <Col xs={6} md={4} lg={2} className='mx-auto' key={`product-${product.id}`} style={{ marginBottom: 10}}>
       <ProductCardComponent key={product.id} displayName={product.display_name} product={product} imgUrl={product.images[0].front_url} />

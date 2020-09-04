@@ -6,7 +6,7 @@ import posed, { PoseGroup } from 'react-pose';
 import ReactImageFallback from "react-image-fallback";
 import Alert from './Alert.js'
 import { Link } from 'react-router-dom';
-import { Card, Image, Icon, Label } from 'semantic-ui-react';
+import { Card, Icon, Label } from 'semantic-ui-react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 

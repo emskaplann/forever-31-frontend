@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Icon, Label, Search, Header, Divider } from 'semantic-ui-react';
-import { Navbar, Nav, Row, Col } from 'react-bootstrap';
+import { Icon, Search, Header } from 'semantic-ui-react';
+import { Navbar, Nav, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';

@@ -1,7 +1,7 @@
 import React from 'react';
 import RenderProductsForCheckout from '../sub-components/RenderProductsForCheckout.js';
 import CheckoutForm from '../sub-components/CheckoutForm.js';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import { injectStripe } from 'react-stripe-elements';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Dimmer, Header, Divider, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import swal from 'sweetalert';
 const reducer = (accumulator, currentValue) => accumulator + (parseInt(currentValue.quantity) * parseInt(currentValue.product.list_price.replace('$', '')));
 const reducer2 = (accumulator, currentValue) => accumulator + (currentValue.quantity)
 // reducer for wishlist's total
-const reducer3 = (accumulator, currentValue) => accumulator + parseInt(currentValue.product.list_price.replace('$', ''));
+// const reducer3 = (accumulator, currentValue) => accumulator + parseInt(currentValue.product.list_price.replace('$', ''));
 
 
 class Checkout extends React.Component {

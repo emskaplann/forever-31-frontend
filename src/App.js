@@ -7,8 +7,7 @@ import CartAndWishlistService from './services/CartAndWishlistService.js';
 import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
 import BottomNavbar from './sub-components/BottomNavbar.js';
-import { Route, Link, Switch } from 'react-router-dom';
-import posed, { PoseGroup } from 'react-pose';
+import { Route, Switch } from 'react-router-dom';
 import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import { Widget, addResponseMessage } from 'react-chat-widget';
@@ -23,11 +22,6 @@ const mapStateToProps = (state, ownProps) => {
     user: state.user
   }
 }
-
-const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 500, beforeChildren: true },
-  exit: { opacity: 1 }
-});
 
 class App extends React.Component {
   constructor () {
@@ -108,7 +102,7 @@ class App extends React.Component {
                 <NavbarView sendContentId={this.getContentId} openModal={this.setVisible} />
                   <Segment style={{backgroundColor: '#fcfeff'}} basic>
                         <Switch location={location}>
-                          <Route exact path={process.env.PUBLIC_URL + '/'} component={ProductIndex} key='index' />
+                          <Route exact path='/' component={ProductIndex} key='index' />
                           <Route exact path='/products/:id' render={(props) => <ProductShow {...props} openModal={this.setVisible} />} key='show' />
                           {/* Stripe Route */}
                           <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">

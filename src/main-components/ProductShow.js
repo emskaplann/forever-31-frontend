@@ -206,7 +206,7 @@ function randomProductGenerator(products, productId, product = {}){
   let choosedProducts = []
   let ids = []
   if(product === {}){
-    ids = [products.find(product => product.id == productId).id]
+    ids = [products.find(product => product.id === productId).id]
   } else {
     ids = [product.id]
   }
@@ -218,7 +218,6 @@ function randomProductGenerator(products, productId, product = {}){
       ids.push(products[rand].id)
       choosedProducts.push(products[rand])
     }
-
     // products2.splice(rand, 1)
   }
   return choosedProducts;

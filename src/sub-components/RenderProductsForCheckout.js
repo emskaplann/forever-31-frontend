@@ -1,7 +1,7 @@
 import React from 'react';
 import CartAndWishlistService from '../services/CartAndWishlistService.js';
 import CartService from '../services/CartService.js';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { Card, Image, Icon, Divider } from 'semantic-ui-react';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
