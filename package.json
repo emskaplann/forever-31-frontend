@@ -15,7 +15,7 @@
     "bootstrap": "^4.5.0",
     "image-exists": "^1.1.0",
     "is-image-url": "^1.1.8",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-alice-carousel": "^1.19.3",
