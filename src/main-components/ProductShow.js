@@ -65,7 +65,6 @@ class ProductShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps)
     prevProps.product.id !== this.props.product.id ? this.scrollToTop() : console.log()
   }
 
