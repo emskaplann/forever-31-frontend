@@ -19,7 +19,6 @@ class WatsonService {
     .then(r => r.json())
     .then(response => {
       // debugger
-      console.log(response)
       if(response.session_id){
         this.component.props.addWatsonSession(response.session_id)
         localStorage.watsonSessionId = response.session_id
