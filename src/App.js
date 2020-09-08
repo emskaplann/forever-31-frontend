@@ -40,10 +40,10 @@ class App extends React.Component {
 
   componentDidMount () {
     this.addResponseMessage('Hi there! From F31 Store!')
-    if(localStorage.userId){
-      this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId, address: {line_1: localStorage.addressLineOne, line_2: localStorage.addressLineTwo}})
-      this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
-    }
+    // if(localStorage.userId){
+    //   this.props.addUserAuth({token: localStorage.token, userId: localStorage.userId, address: {line_1: localStorage.addressLineOne, line_2: localStorage.addressLineTwo}})
+    //   this.cartAndWishlistService.fetchCartAndWishlist(localStorage.token)
+    // }
     setInterval(this.watsonService.createWatsonSession, 50000)
   }
 
