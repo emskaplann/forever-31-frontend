@@ -32,7 +32,7 @@ class Checkout extends React.Component {
   }
 
   async submit() {
-    if(this.state.isFormCompleted && this.state.isNameFormCompleted && this.state.isEmailFormCompleted){
+    if(this.state.isFormCompleted && this.state.isNameFormCompleted && this.state.isEmailFormCompleted && this.props.cart.reduce(reducer2, 0) > 0){
       this.setState({orderAmount: this.props.cart.reduce(reducer, 0)})
       swal({
         title: "Are you sure?",
@@ -74,7 +74,7 @@ class Checkout extends React.Component {
         }
       });
     } else {
-      swal("Form is Not Completed :/", `Make Sure That Name and Email Forms are Filled.`, "error");
+      swal("Form is Not Completed :/", `Make sure the forms are completed and you have at least 1 item in your cart.`, "error");
     }
   }
 
