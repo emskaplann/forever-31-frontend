@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Message } from 'semantic-ui-react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Container } from 'react-bootstrap';
 import { Icon, Loader, Input, Button } from 'semantic-ui-react';
 import UserService from '../../services/UserService.js';
 import CartAndWishlistService from '../../services/CartAndWishlistService.js';
@@ -16,6 +16,7 @@ class RenderSign extends React.Component {
       passwordConfirmation: "",
       errors: [],
       loading: false,
+      loadingForTA: false,
       passwordMatch: false,
       usernames: [],
       uniqueUsername: true,
@@ -75,6 +76,16 @@ class RenderSign extends React.Component {
     }
   }
 
+  //handling test account login
+  handleTestAccountLogin = () => {
+    this.setState({loadingForTA: true})
+    const user = {
+      username: 'test_account1234',
+      password: '123456'
+    }
+    this.userService.login(user)
+  }
+
   render () {
     return (
       <>
@@ -98,17 +109,13 @@ class RenderSign extends React.Component {
         </Input>
       </Row>
       {this.renderPasswordConfirmation()}
-      <Row style={{marginTop: 5}}>
-        <Col sm={7}>
-        </Col>
-        <Col sm={4}>
-        <Button onClick={() => this.handleSubmit()} basic inverted>
-          {this.state.signUp ? 'Sign Up!' : 'Sign In!'}
-        </Button>
-        </Col>
-        <Col sm={1}>
-        </Col>
-      </Row>
+        <Container style={{marginTop: 5, width: '79%'}}>
+            <Button style={{float: 'left'}} onClick={() => this.handleTestAccountLogin()} basic inverted>{this.state.loadingForTA ? <Loader active inline size="tiny" /> : "Use a Test Account"}</Button>
+            {this.state.loading ? <Loader active inline style={{marginLeft: 10}} /> : null}
+            <Button style={{float: 'right'}} onClick={() => this.handleSubmit()} basic inverted>
+              {this.state.signUp ? 'Sign Up!' : 'Sign In!'}
+            </Button>
+        </Container>
       </>
     )
   }

@@ -20,16 +20,17 @@ class UserService {
       if (error === undefined) {
         localStorage.token = token
         localStorage.userId = user_id
+        localStorage.isF31 = true
         if(address){
           localStorage.addressLineOne = address.line_1
           localStorage.addressLineTwo = address.line_2
         }
         this.component.props.addUserAuth({token: token, userId: user_id, address: address})
         this.component.cartAndWishlistService.fetchCartAndWishlist(token)
-        this.component.setState({errors: [], loading: false})
+        this.component.setState({errors: [], loading: false, loadingForTA: false})
         this.component.props.closeSideBar(false)
       } else {
-        this.component.setState({errors: [ error ], loading: false})
+        this.component.setState({errors: [ error ], loading: false, loadingForTA: false})
       }
     })
   }
@@ -49,6 +50,7 @@ class UserService {
       if (errors === undefined) {
         localStorage.token = token
         localStorage.userId = user_id
+        localStorage.isF31 = true
         this.component.props.addUserAuth({token: token, userId: user_id})
         this.component.cartAndWishlistService.fetchCartAndWishlist(token)
         this.component.setState({error: '', loading: false})

@@ -109,7 +109,7 @@ class Checkout extends React.Component {
             </Col>
           </Row>
           <RenderProductsForCheckout/>
-          {this.props.cart.length === 0 ? <><br /><Header as='h1'>You don't have any item in your cart... <Link to='/forever-31-frontend' style={{color: '#000000'}}><u>Would you like to browse around our designs?</u></Link></Header><br /></> : console.log()}
+          {this.props.cart.length === 0 ? <><br /><Header as='h1'>You don't have any item in your cart... <Link to='/' style={{color: '#000000'}}><u>Would you like to browse around our designs?</u></Link></Header><br /></> : console.log()}
           <Divider />
           {/* Checkout Form */}
           <CheckoutForm isNameFormCompleted={this.state.isNameFormCompleted} isEmailFormCompleted={this.state.isEmailFormCompleted} handleChange={this.handleChange} handleName={this.handleNameInputChange} handleEmail={this.handleEmailInputChange} total={this.props.cart.reduce(reducer, 0)} itemCount={this.props.cart.reduce(reducer2, 0)} submit={this.submit}/>

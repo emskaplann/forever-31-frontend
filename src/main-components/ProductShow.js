@@ -225,7 +225,7 @@ function randomProductGenerator(products, productId, product = {}){
 const mapStateToProps = (state, ownProps) => {
   // fetching the product from the state for show page
   const productId = ownProps.match.params.id
-  let product = state.products.find(product => product.id == productId)
+  let product = state.products.find(product => product.id == productId) //eslint-disable-line
   return {
     user: state.user,
     cart: state.cartAndWishlist.cart,
