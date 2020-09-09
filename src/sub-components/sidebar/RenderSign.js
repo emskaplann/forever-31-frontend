@@ -111,7 +111,6 @@ class RenderSign extends React.Component {
       {this.renderPasswordConfirmation()}
         <Container style={{marginTop: 5, width: '79%'}}>
             <Button style={{float: 'left'}} onClick={() => this.handleTestAccountLogin()} basic inverted>{this.state.loadingForTA ? <Loader active inline size="tiny" /> : "Use a Test Account"}</Button>
-            {this.state.loading ? <Loader active inline style={{marginLeft: 10}} /> : null}
             <Button style={{float: 'right'}} onClick={() => this.handleSubmit()} basic inverted>
               {this.state.signUp ? 'Sign Up!' : 'Sign In!'}
             </Button>
