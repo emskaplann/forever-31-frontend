@@ -98,7 +98,7 @@ class Checkout extends React.Component {
       return(
         <Container style={{minHeight: '58vh', marginTop: 50}} key='checkoutContainer'>
           {this.state.paymentLoading ? <Dimmer active><Loader size='big' /></Dimmer> : console.log()}
-          { this.state.redirect ? <Redirect to='/forever-31-frontend' /> : console.log() }
+          { this.state.redirect ? <Redirect to='/' /> : console.log() }
           <Header as='h1' dividing>Checkout</Header>
           <Row>
             <Col style={{textAlign: 'left', fontWeight: 'bold', fontSize: '130%'}} xs={6} sm={6} md={6} lg={6}>
