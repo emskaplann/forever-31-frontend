@@ -3,7 +3,6 @@ This app was made by me and the main purpose was combining all my knowledge abou
 
 Checkout the backend repo! [F31 Backend](https://github.com/emskaplann/forever-31-api).
 ## Languages and Frameworks
-These Languages and Frameworks are for Web App,
 #### Front-End
 * [React.js](https://reactjs.org/)
 * [Redux](https://redux.js.org/)
