@@ -1,19 +1,20 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Checkout from './main-components/Checkout.js';
 import ProductIndex from './main-components/ProductIndex.js';
 import ProductShow from './main-components/ProductShow.js';
-import CartAndWishlistService from './services/CartAndWishlistService.js';
 import SideBarContent from './main-components/SideBarContent.js';
 import NavbarView from './sub-components/NavbarView.js';
 import BottomNavbar from './sub-components/BottomNavbar.js';
+import RedirectToHome from './sub-components/RedirectToHome.js';
+import CartAndWishlistService from './services/CartAndWishlistService.js';
+import WatsonService from './services/WatsonService.js';
 import { Route, Switch } from 'react-router-dom';
 import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import { Widget, addResponseMessage } from 'react-chat-widget';
-import WatsonService from './services/WatsonService.js';
 import { connect } from 'react-redux';
 import { Ripple } from 'react-spinners-css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-chat-widget/lib/styles.css';
 
 const mapStateToProps = (state, ownProps) => {
@@ -107,7 +108,8 @@ class App extends React.Component {
                           {/* Stripe Route */}
                           <StripeProvider apiKey="pk_test_YJZiIQadCitjxkefrqHysj0g00BNRtnusD">
                             <Elements>
-                              <Route path='/checkout' component={Checkout} key='checkout' />
+                              <Route exact path='/checkout' component={Checkout} key='checkout' />
+                              {/* <Route path="*" component={RedirectToHome} key='redirect' /> */}
                             </Elements>
                           </StripeProvider>
                         </Switch>
@@ -139,6 +141,8 @@ class App extends React.Component {
           <span style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</span><br />
           <Ripple color={"#000000"} />
           <br />
+          <span><u>The server I'm using for this project is down because of exceeding the free hours I had. The server will be up again on <b>1st October.</b></u></span><br /><br />
+          <a href="https://emskaplann.github.io/#/">You can go back to my portfolio site to view my other projects. Please click here to do so.</a><br /><br />
           <span>Because of using free services this loading may take up to <strong>20 seconds.</strong> Thanks for your patience.</span>
         </div>
       );
