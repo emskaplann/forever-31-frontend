@@ -141,8 +141,8 @@ class App extends React.Component {
           <span style={{fontFamily: 'Indie Flower', fontWeight: 'bold', fontSize: 20}}>Forever 31</span><br />
           <Ripple color={"#000000"} />
           <br />
-          <span><u>The server I'm using for this project is down because of exceeding the free hours I had. The server will be up again on <b>1st October.</b></u></span><br /><br />
-          <a href="https://emskaplann.github.io/#/">You can go back to my portfolio site to view my other projects. Please click here to do so.</a><br /><br />
+          {/* <span><u>The server I'm using for this project is down because of exceeding the free hours I had. The server will be up again on <b>1st October.</b></u></span><br /><br /> */}
+          {/* <a href="https://emskaplann.github.io/#/">You can go back to my portfolio site to view my other projects. Please click here to do so.</a><br /><br /> */}
           <span>Because of using free services this loading may take up to <strong>20 seconds.</strong> Thanks for your patience.</span>
         </div>
       );
